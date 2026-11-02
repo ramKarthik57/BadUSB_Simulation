@@ -16,7 +16,7 @@
   <rect x="126" y="66" width="28" height="16" rx="3" fill="#ffffff" stroke="#93c5fd" stroke-width="0.8"/>
   <text x="140" y="77.5" font-size="7.4" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Init OK</text>
   <line x1="154" y1="74" x2="162" y2="74" stroke="#2563eb" stroke-width="1.3"/>
-  <polygon points="166.0,74.0 162.0,72.0 164.4,74.0 162.0,76.0" fill="#2563eb"/>
+  <polygon points="166,74 162.0,71.4 163.0,74 162.0,76.6" fill="#2563eb"/>
 
   <!-- 2. STATE_USB_WAIT (x: 166 to 276, width: 110) -->
   <rect x="166" y="50" width="110" height="48" rx="5" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2" filter="url(#sh2)"/>
@@ -28,7 +28,7 @@
   <rect x="286" y="66" width="28" height="16" rx="3" fill="#ffffff" stroke="#93c5fd" stroke-width="0.8"/>
   <text x="300" y="77.5" font-size="7.4" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Enum</text>
   <line x1="314" y1="74" x2="322" y2="74" stroke="#2563eb" stroke-width="1.3"/>
-  <polygon points="326.0,74.0 322.0,72.0 324.4,74.0 322.0,76.0" fill="#2563eb"/>
+  <polygon points="326,74 322.0,71.4 323.0,74 322.0,76.6" fill="#2563eb"/>
 
   <!-- 3. STATE_STARTUP_PAYLOAD (x: 326 to 466, width: 140) -->
   <rect x="326" y="50" width="140" height="48" rx="5" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.3" filter="url(#sh2)"/>
@@ -40,7 +40,7 @@
   <rect x="476" y="66" width="26" height="16" rx="3" fill="#ffffff" stroke="#93c5fd" stroke-width="0.8"/>
   <text x="489" y="77.5" font-size="7.4" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Done</text>
   <line x1="502" y1="74" x2="508" y2="74" stroke="#2563eb" stroke-width="1.3"/>
-  <polygon points="512.0,74.0 508.0,72.0 510.4,74.0 508.0,76.0" fill="#2563eb"/>
+  <polygon points="512,74 508.0,71.4 509.0,74 508.0,76.6" fill="#2563eb"/>
 
   <!-- 4. STATE_IDLE (x: 512 to 602, width: 90) -->
   <rect x="512" y="50" width="90" height="48" rx="5" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2" filter="url(#sh2)"/>
@@ -52,14 +52,14 @@
   <rect x="610" y="54" width="30" height="16" rx="3" fill="#ffffff" stroke="#86efac" stroke-width="0.8"/>
   <text x="625" y="65.5" font-size="7.2" font-weight="bold" fill="#15803d" text-anchor="middle">REST</text>
   <line x1="640" y1="62" x2="646" y2="62" stroke="#16a34a" stroke-width="1.3"/>
-  <polygon points="650.0,62.0 646.0,60.0 648.4,62.0 646.0,64.0" fill="#16a34a"/>
+  <polygon points="650,62 646.0,59.4 647.0,62 646.0,64.6" fill="#16a34a"/>
 
   <!-- Reverse Arc: RUNNING -> IDLE (Scenario Complete) -->
   <line x1="650" y1="86" x2="642" y2="86" stroke="#2563eb" stroke-width="1.3"/>
   <rect x="608" y="78" width="34" height="16" rx="3" fill="#ffffff" stroke="#93c5fd" stroke-width="0.8"/>
   <text x="625" y="89.5" font-size="7.0" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Complete</text>
   <line x1="608" y1="86" x2="606" y2="86" stroke="#2563eb" stroke-width="1.3"/>
-  <polygon points="602.0,86.0 606.0,84.0 603.6,86.0 606.0,88.0" fill="#2563eb"/>
+  <polygon points="602,86 606.0,83.4 605.0,86 606.0,88.6" fill="#2563eb"/>
 
   <!-- 5. STATE_RUNNING (x: 650 to 744, width: 94) -->
   <rect x="650" y="50" width="94" height="48" rx="5" fill="#fef2f2" stroke="#ef4444" stroke-width="1.3" filter="url(#sh2)"/>
@@ -74,7 +74,7 @@
   <text x="450" y="19.5" font-size="7.0" font-weight="bold" fill="#ea580c" text-anchor="middle">USB Disconnect</text>
   <line x1="424" y1="16" x2="221" y2="16" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="4,2.5"/>
   <line x1="221" y1="16" x2="221" y2="46" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="4,2.5"/>
-  <polygon points="221.0,50.0 219.0,46.0 221.0,48.4 223.0,46.0" fill="#ea580c"/>
+  <polygon points="221,50 218.4,46.0 221,47.0 223.6,46.0" fill="#ea580c"/>
 
   <!-- ================= BOTTOM ROW: PREEMPTION, STOP & FAULT (y: 148 to 196, height: 48) ================= -->
   <!-- 8. STATE_ERROR (x: 650 to 744, width: 94) directly under RUNNING -->
@@ -87,42 +87,43 @@
   <rect x="690" y="116" width="40" height="15" rx="3" fill="#ffffff" stroke="#fda4af" stroke-width="0.8"/>
   <text x="710" y="127" font-size="7.0" font-weight="bold" fill="#be123c" text-anchor="middle">Fault</text>
   <line x1="710" y1="131" x2="710" y2="144" stroke="#be123c" stroke-width="1.3"/>
-  <polygon points="710.0,148.0 708.0,144.0 710.0,146.4 712.0,144.0" fill="#be123c"/>
+  <polygon points="710,148 707.4,144.0 710,145.0 712.6,144.0" fill="#be123c"/>
 
   <!-- 6. STATE_STOPPING (x: 488 to 602, width: 114) -->
   <rect x="488" y="148" width="114" height="48" rx="5" fill="#fff7ed" stroke="#ea580c" stroke-width="1.2" filter="url(#sh2)"/>
   <text x="545" y="167" font-size="9.4" font-weight="bold" fill="#9a3412" text-anchor="middle">STATE_STOPPING</text>
   <text x="545" y="183" font-size="7.8" fill="#c2410c" text-anchor="middle">Teardown Latch (&le; 10ms)</text>
 
-  <!-- Transition: RUNNING -> STOPPING upon Abort (Routed cleanly in gap x=626) -->
-  <line x1="650" y1="92" x2="626" y2="92" stroke="#ea580c" stroke-width="1.3"/>
-  <line x1="626" y1="92" x2="626" y2="152" stroke="#ea580c" stroke-width="1.3"/>
-  <rect x="612" y="152" width="28" height="15" rx="3" fill="#ffffff" stroke="#fdba74" stroke-width="0.8"/>
-  <text x="626" y="163" font-size="6.8" font-weight="bold" fill="#ea580c" text-anchor="middle">Abort</text>
-  <line x1="626" y1="167" x2="626" y2="172" stroke="#ea580c" stroke-width="1.3"/>
+  <!-- Transition: RUNNING -> STOPPING upon Abort (Leaves bottom of RUNNING at x=672, y=98 -> down to y=118 -> left to x=626 -> down to y=172 -> into STOPPING) -->
+  <line x1="672" y1="98" x2="672" y2="118" stroke="#ea580c" stroke-width="1.3"/>
+  <line x1="672" y1="118" x2="626" y2="118" stroke="#ea580c" stroke-width="1.3"/>
+  <line x1="626" y1="118" x2="626" y2="136" stroke="#ea580c" stroke-width="1.3"/>
+  <rect x="612" y="136" width="28" height="15" rx="3" fill="#ffffff" stroke="#fdba74" stroke-width="0.8"/>
+  <text x="626" y="147" font-size="6.8" font-weight="bold" fill="#ea580c" text-anchor="middle">Abort</text>
+  <line x1="626" y1="151" x2="626" y2="172" stroke="#ea580c" stroke-width="1.3"/>
   <line x1="626" y1="172" x2="606" y2="172" stroke="#ea580c" stroke-width="1.3"/>
-  <polygon points="602.0,172.0 606.0,170.0 603.6,172.0 606.0,174.0" fill="#ea580c"/>
+  <polygon points="602,172 606.0,169.4 605.0,172 606.0,174.6" fill="#ea580c"/>
 
-  <!-- 7. STATE_STOPPED (x: 326 to 442, width: 116) -->
-  <rect x="326" y="148" width="116" height="48" rx="5" fill="#f8fafc" stroke="#64748b" stroke-width="1.2" filter="url(#sh2)"/>
-  <text x="384" y="167" font-size="9.4" font-weight="bold" fill="#334155" text-anchor="middle">STATE_STOPPED</text>
-  <text x="384" y="183" font-size="7.8" fill="#475569" text-anchor="middle">Key Latch Cleared</text>
+  <!-- 7. STATE_STOPPED (x: 322 to 434, width: 112) -->
+  <rect x="322" y="148" width="112" height="48" rx="5" fill="#f8fafc" stroke="#64748b" stroke-width="1.2" filter="url(#sh2)"/>
+  <text x="378" y="167" font-size="9.4" font-weight="bold" fill="#334155" text-anchor="middle">STATE_STOPPED</text>
+  <text x="378" y="183" font-size="7.8" fill="#475569" text-anchor="middle">Key Latch Cleared</text>
 
-  <!-- Arrow: STOPPING -> STOPPED (releaseAll action) -->
-  <line x1="488" y1="172" x2="480" y2="172" stroke="#ea580c" stroke-width="1.3"/>
-  <rect x="446" y="164" width="34" height="16" rx="3" fill="#ffffff" stroke="#fdba74" stroke-width="0.8"/>
-  <text x="463" y="175.5" font-size="6.5" font-weight="bold" fill="#ea580c" text-anchor="middle">releaseAll</text>
-  <line x1="446" y1="172" x2="446" y2="172" stroke="#ea580c" stroke-width="1.3"/>
-  <polygon points="442.0,172.0 446.0,170.0 443.6,172.0 446.0,174.0" fill="#ea580c"/>
+  <!-- Arrow: STOPPING -> STOPPED (releaseAll action in generous 54pt gap) -->
+  <line x1="488" y1="172" x2="476" y2="172" stroke="#ea580c" stroke-width="1.3"/>
+  <rect x="442" y="164" width="34" height="16" rx="3" fill="#ffffff" stroke="#fdba74" stroke-width="0.8"/>
+  <text x="459" y="175.5" font-size="6.5" font-weight="bold" fill="#ea580c" text-anchor="middle">releaseAll</text>
+  <line x1="442" y1="172" x2="438" y2="172" stroke="#ea580c" stroke-width="1.3"/>
+  <polygon points="434,172 438.0,169.4 437.0,172 438.0,174.6" fill="#ea580c"/>
 
   <!-- Return Arc: STOPPED -> IDLE (When ready/unblocked) -->
-  <line x1="384" y1="148" x2="384" y2="124" stroke="#16a34a" stroke-width="1.3"/>
-  <line x1="384" y1="124" x2="424" y2="124" stroke="#16a34a" stroke-width="1.3"/>
+  <line x1="378" y1="148" x2="378" y2="124" stroke="#16a34a" stroke-width="1.3"/>
+  <line x1="378" y1="124" x2="424" y2="124" stroke="#16a34a" stroke-width="1.3"/>
   <rect x="424" y="116" width="46" height="16" rx="3" fill="#ffffff" stroke="#86efac" stroke-width="0.8"/>
   <text x="447" y="127.5" font-size="7.0" font-weight="bold" fill="#15803d" text-anchor="middle">Ack / Clear</text>
   <line x1="470" y1="124" x2="540" y2="124" stroke="#16a34a" stroke-width="1.3"/>
   <line x1="540" y1="124" x2="540" y2="102" stroke="#16a34a" stroke-width="1.3"/>
-  <polygon points="540.0,98.0 538.0,102.0 540.0,99.6 542.0,102.0" fill="#16a34a"/>
+  <polygon points="540,98 537.4,102.0 540,101.0 542.6,102.0" fill="#16a34a"/>
 
   <!-- Return Arc: ERROR -> USB_WAIT (Auto-recovery along bottom y=210) -->
   <line x1="697" y1="196" x2="697" y2="210" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3,2"/>
@@ -131,5 +132,5 @@
   <text x="392" y="212.5" font-size="6.8" font-weight="bold" fill="#475569" text-anchor="middle">Auto-Recover</text>
   <line x1="364" y1="210" x2="221" y2="210" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3,2"/>
   <line x1="221" y1="210" x2="221" y2="102" stroke="#64748b" stroke-width="1.2" stroke-dasharray="3,2"/>
-  <polygon points="221.0,98.0 219.0,102.0 221.0,99.6 223.0,102.0" fill="#64748b"/>
+  <polygon points="221,98 218.4,102.0 221,101.0 223.6,102.0" fill="#64748b"/>
 </svg>
