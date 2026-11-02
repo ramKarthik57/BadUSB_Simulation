@@ -1,61 +1,47 @@
-"""
-Master Flawless Figures Generator for WHID-Guard 2027 Conference Paper
-Mathematically verified zero collisions, perfect arrow directions, and firmware alignment.
-
-Guarantees:
-- Fig 1: Complete physical & logical signal flow (Phone -> RF -> Core 0 -> Buffer -> Core 1 -> USB PHY -> USB Cable -> Raw Input -> Dynamics -> Quarantine -> Filter Hook).
-- Fig 2: 100% Exact C++ firmware FSM enum & paper text alignment (BOOTING, USB_WAIT, STARTUP_PAYLOAD, IDLE, RUNNING, STOPPING, STOPPED, ERROR).
-- Fig 3: Perfect corridor alignment (x=630 guideline for both Pass and Flush feedback), symmetric outside sinks column.
-- Fig 4: Clean IKI distributions with ample legend padding.
-- Fig 5: Precise guidelines anchored at (40 ch/s, 200 ms), non-overlapping legend, clean safety margin dimension arrows.
-- 100% Vector PDF, PNG, SVG compliance, 0 Type 3 bitmap fonts.
-"""
-
 import os
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
 import pymupdf
-
-matplotlib.rcParams["pdf.fonttype"] = 42
-matplotlib.rcParams["ps.fonttype"] = 42
-matplotlib.rcParams["font.family"] = "serif"
-matplotlib.rcParams["mathtext.fontset"] = "dejavuserif"
-matplotlib.rcParams["axes.linewidth"] = 1.0
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
 
 BASE_DIR = r"C:\Users\Ram\Desktop\BadUSB_Using_ESP32"
 PAPER_DIR = os.path.join(BASE_DIR, "paper")
-FIG_FINAL = os.path.join(BASE_DIR, "figures", "final")
 FIG_SOURCE = os.path.join(BASE_DIR, "figures", "source")
-BRAIN_DIR = r"C:\Users\Ram\.gemini\antigravity\brain\ce8071ad-ae44-4bc1-99a9-e4d2c343777c"
+FIG_FINAL = os.path.join(BASE_DIR, "figures", "final")
+os.makedirs(FIG_SOURCE, exist_ok=True)
+os.makedirs(FIG_FINAL, exist_ok=True)
 
-for d in [PAPER_DIR, FIG_FINAL, FIG_SOURCE, BRAIN_DIR]:
-    os.makedirs(d, exist_ok=True)
+def arr_r(x, y, color, size=4.0):
+    return f'<polygon points="{x},{y} {x-size},{y-size*0.65} {x-size*0.75},{y} {x-size},{y+size*0.65}" fill="{color}"/>'
 
-# Directed vector arrowheads: tip at (x,y), base at x-s or y-s
-def arr_r(x, y, color="#2563eb", s=4.0):
-    return f'<polygon points="{x:.1f},{y:.1f} {x-s:.1f},{y-s*0.5:.1f} {x-s*0.4:.1f},{y:.1f} {x-s:.1f},{y+s*0.5:.1f}" fill="{color}"/>'
+def arr_l(x, y, color, size=4.0):
+    return f'<polygon points="{x},{y} {x+size},{y-size*0.65} {x+size*0.75},{y} {x+size},{y+size*0.65}" fill="{color}"/>'
 
-def arr_l(x, y, color="#2563eb", s=4.0):
-    return f'<polygon points="{x:.1f},{y:.1f} {x+s:.1f},{y-s*0.5:.1f} {x+s*0.4:.1f},{y:.1f} {x+s:.1f},{y+s*0.5:.1f}" fill="{color}"/>'
+def arr_d(x, y, color, size=4.0):
+    return f'<polygon points="{x},{y} {x-size*0.65},{y-size} {x},{y-size*0.75} {x+size*0.65},{y-size}" fill="{color}"/>'
 
-def arr_d(x, y, color="#2563eb", s=4.0):
-    return f'<polygon points="{x:.1f},{y:.1f} {x-s*0.5:.1f},{y-s:.1f} {x:.1f},{y-s*0.4:.1f} {x+s*0.5:.1f},{y-s:.1f}" fill="{color}"/>'
-
-def arr_u(x, y, color="#2563eb", s=4.0):
-    return f'<polygon points="{x:.1f},{y:.1f} {x-s*0.5:.1f},{y+s:.1f} {x:.1f},{y+s*0.4:.1f} {x+s*0.5:.1f},{y+s:.1f}" fill="{color}"/>'
+def arr_u(x, y, color, size=4.0):
+    return f'<polygon points="{x},{y} {x-size*0.65},{y+size} {x},{y+size*0.75} {x+size*0.65},{y+size}" fill="{color}"/>'
 
 
 # ===========================================================================
-# FIGURE 1: SYSTEM ARCHITECTURE
+# FIGURE 1: ENHANCED SYSTEM ARCHITECTURE
 # ===========================================================================
 def build_fig1():
     # Width allocations on 760pt canvas:
-    # Tier 1: x: 12 to 168 (width 156)
-    # Corridor 1: x: 168 to 222 (width 54) -> RF Badge: x: 174 to 216 (width 42)
-    # Tier 2: x: 222 to 520 (width 298)
-    # Corridor 2: x: 520 to 574 (width 54) -> USB Badge: x: 524 to 570 (width 46)
-    # Tier 3: x: 574 to 748 (width 174)
+    # Tier 1: x: 12 to 158 (width 146)
+    # RF Corridor: x: 158 to 226 (width 68) -> RF Badge: x: 172 to 214 (width 42, center 193)
+    # Tier 2: x: 226 to 514 (width 288)
+    #   Inside Tier 2:
+    #     Left bus along x=233
+    #     Core 0 & Antenna: x: 240 to 364 (width 124)
+    #     HID Engine & USB PHY: x: 376 to 500 (width 124)
+    #     Right bus along x=507
+    #     Ring Buffer: x: 240 to 500 (width 260)
+    # USB Corridor: x: 514 to 582 (width 68) -> USB Badge: x: 525 to 571 (width 46, center 548)
+    # Tier 3: x: 582 to 748 (width 166)
+    #   Inside Tier 3: boxes x: 592 to 738 (width 146)
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" width="760" height="220" style="background:#ffffff; font-family:Helvetica, Arial, sans-serif;">
   <defs>
     <filter id="sh1" x="-5%" y="-5%" width="110%" height="110%">
@@ -64,139 +50,139 @@ def build_fig1():
   </defs>
 
   <!-- ================= TIER 1: MOBILE C2 CONTROLLER ================= -->
-  <rect x="12" y="8" width="156" height="204" rx="6" fill="#faf5ff" stroke="#a855f7" stroke-width="1.3"/>
-  <text x="90" y="26" font-size="10.2" font-weight="bold" fill="#6b21a8" text-anchor="middle">Tier 1: Mobile C2 Controller</text>
+  <rect x="12" y="8" width="146" height="204" rx="6" fill="#faf5ff" stroke="#a855f7" stroke-width="1.3"/>
+  <text x="85" y="26" font-size="10.2" font-weight="bold" fill="#6b21a8" text-anchor="middle">Tier 1: Mobile C2 Controller</text>
   
-  <rect x="20" y="38" width="140" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="90" y="55" font-size="9.6" font-weight="bold" fill="#1e293b" text-anchor="middle">Touch Web Console</text>
-  <text x="90" y="70" font-size="8.2" fill="#64748b" text-anchor="middle">Single-Page App (SPA)</text>
+  <rect x="20" y="38" width="130" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="85" y="55" font-size="9.4" font-weight="bold" fill="#1e293b" text-anchor="middle">Touch Web Console</text>
+  <text x="85" y="70" font-size="8.0" fill="#64748b" text-anchor="middle">Single-Page App (SPA)</text>
   
-  <rect x="20" y="94" width="140" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="90" y="111" font-size="9.6" font-weight="bold" fill="#1e293b" text-anchor="middle">REST Attack Engine</text>
-  <text x="90" y="126" font-size="8.0" fill="#64748b" text-anchor="middle">Scenarios 1-4, Cadence Jitter</text>
+  <rect x="20" y="94" width="130" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="85" y="111" font-size="9.4" font-weight="bold" fill="#1e293b" text-anchor="middle">REST Attack Engine</text>
+  <text x="85" y="126" font-size="7.8" fill="#64748b" text-anchor="middle">Scenarios 1-4, Cadence Jitter</text>
   
-  <rect x="20" y="150" width="140" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="90" y="167" font-size="9.6" font-weight="bold" fill="#1e293b" text-anchor="middle">802.11 b/g/n Station</text>
-  <text x="90" y="182" font-size="8.0" fill="#64748b" text-anchor="middle">Station Link (192.168.4.2)</text>
+  <rect x="20" y="150" width="130" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="85" y="167" font-size="9.4" font-weight="bold" fill="#1e293b" text-anchor="middle">802.11 b/g/n Station</text>
+  <text x="85" y="182" font-size="7.8" fill="#64748b" text-anchor="middle">Station Link (192.168.4.2)</text>
 
   <!-- Downward Connectors inside Tier 1 -->
-  <line x1="90" y1="80" x2="90" y2="90" stroke="#a855f7" stroke-width="1.3"/>
-  {arr_d(90, 94, "#a855f7", 3.8)}
-  <line x1="90" y1="136" x2="90" y2="146" stroke="#a855f7" stroke-width="1.3"/>
-  {arr_d(90, 150, "#a855f7", 3.8)}
+  <line x1="85" y1="80" x2="85" y2="90" stroke="#a855f7" stroke-width="1.3"/>
+  {arr_d(85, 94, "#a855f7", 3.8)}
+  <line x1="85" y1="136" x2="85" y2="146" stroke="#a855f7" stroke-width="1.3"/>
+  {arr_d(85, 150, "#a855f7", 3.8)}
 
-  <!-- INTER-TIER 1 -> 2 BUS: 2.4 GHz SoftAP RF (Enters Antenna at y=175) -->
-  <line x1="160" y1="175" x2="174" y2="175" stroke="#9333ea" stroke-width="1.5"/>
-  <rect x="174" y="162" width="42" height="26" rx="3.5" fill="#ffffff" stroke="#d8b4fe" stroke-width="0.9"/>
-  <text x="195" y="174" font-size="7.8" font-weight="bold" fill="#9333ea" text-anchor="middle">2.4 GHz</text>
-  <text x="195" y="184" font-size="6.8" fill="#a855f7" text-anchor="middle">SoftAP RF</text>
-  <line x1="216" y1="175" x2="232" y2="175" stroke="#9333ea" stroke-width="1.5"/>
-  {arr_r(236, 175, "#9333ea", 4.0)}
+  <!-- INTER-TIER 1 -> 2 BUS: 2.4 GHz SoftAP RF (Enters Antenna at y=174) -->
+  <line x1="150" y1="174" x2="172" y2="174" stroke="#9333ea" stroke-width="1.5"/>
+  <rect x="172" y="161" width="42" height="26" rx="3.5" fill="#ffffff" stroke="#d8b4fe" stroke-width="0.9"/>
+  <text x="193" y="173" font-size="7.8" font-weight="bold" fill="#9333ea" text-anchor="middle">2.4 GHz</text>
+  <text x="193" y="183" font-size="6.8" fill="#a855f7" text-anchor="middle">SoftAP RF</text>
+  <line x1="214" y1="174" x2="236" y2="174" stroke="#9333ea" stroke-width="1.5"/>
+  {arr_r(240, 174, "#9333ea", 4.0)}
 
   <!-- ================= TIER 2: WEAPONIZED ESP32-S3 ================= -->
-  <rect x="222" y="8" width="298" height="204" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
-  <text x="371" y="26" font-size="10.2" font-weight="bold" fill="#14532d" text-anchor="middle">Tier 2: Weaponized ESP32-S3 Hardware Implant</text>
+  <rect x="226" y="8" width="288" height="204" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+  <text x="370" y="26" font-size="10.2" font-weight="bold" fill="#14532d" text-anchor="middle">Tier 2: Weaponized ESP32-S3 Hardware Implant</text>
 
   <!-- Core 0: Network -->
-  <rect x="236" y="38" width="128" height="58" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="300" y="53" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">Core 0: Network</text>
-  <text x="300" y="67" font-size="7.8" fill="#15803d" text-anchor="middle">SoftAP &amp; Web Server</text>
-  <text x="300" y="79" font-size="7.6" font-weight="bold" fill="#166534" text-anchor="middle">Gateway IP: 192.168.4.1</text>
-  <text x="300" y="90" font-size="7.4" fill="#475569" text-anchor="middle">TCP/IP Stack Baseband</text>
+  <rect x="240" y="38" width="124" height="58" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="302" y="53" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">Core 0: Network</text>
+  <text x="302" y="67" font-size="7.8" fill="#15803d" text-anchor="middle">SoftAP &amp; Web Server</text>
+  <text x="302" y="79" font-size="7.6" font-weight="bold" fill="#166534" text-anchor="middle">Gateway IP: 192.168.4.1</text>
+  <text x="302" y="90" font-size="7.4" fill="#475569" text-anchor="middle">TCP/IP Stack Baseband</text>
 
   <!-- Core 1: HID Engine -->
-  <rect x="378" y="38" width="128" height="58" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="442" y="53" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">Core 1: HID Engine</text>
-  <text x="442" y="69" font-size="8.0" fill="#15803d" text-anchor="middle">8-State Scenario FSM</text>
-  <text x="442" y="84" font-size="8.0" fill="#15803d" text-anchor="middle">Native TinyUSB HID</text>
+  <rect x="376" y="38" width="124" height="58" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="438" y="53" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">Core 1: HID Engine</text>
+  <text x="438" y="69" font-size="8.0" fill="#15803d" text-anchor="middle">8-State Scenario FSM</text>
+  <text x="438" y="84" font-size="8.0" fill="#15803d" text-anchor="middle">Native TinyUSB HID</text>
 
   <!-- Lock-Free Atomic Ring Buffer -->
-  <rect x="236" y="106" width="270" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.1"/>
-  <text x="371" y="125" font-size="8.6" font-weight="bold" fill="#14532d" text-anchor="middle">Lock-Free Atomic Ring Buffer (Non-blocking Shared Mailbox)</text>
+  <rect x="240" y="106" width="260" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.1"/>
+  <text x="370" y="125" font-size="8.6" font-weight="bold" fill="#14532d" text-anchor="middle">Lock-Free Atomic Ring Buffer (Non-blocking Shared Mailbox)</text>
 
   <!-- Mailbox Inter-Core Arrows: Core 0 writes DOWN into Buffer, Core 1 reads UP from Buffer -->
-  <line x1="300" y1="96" x2="300" y2="102" stroke="#16a34a" stroke-width="1.3"/>
-  {arr_d(300, 106, "#16a34a", 3.8)}
-  <line x1="442" y1="106" x2="442" y2="100" stroke="#16a34a" stroke-width="1.3"/>
-  {arr_u(442, 96, "#16a34a", 3.8)}
+  <line x1="302" y1="96" x2="302" y2="102" stroke="#16a34a" stroke-width="1.3"/>
+  {arr_d(302, 106, "#16a34a", 3.8)}
+  <line x1="438" y1="106" x2="438" y2="100" stroke="#16a34a" stroke-width="1.3"/>
+  {arr_u(438, 96, "#16a34a", 3.8)}
 
   <!-- 2.4 GHz Antenna -->
-  <rect x="236" y="148" width="128" height="52" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="300" y="165" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">2.4 GHz Antenna</text>
-  <text x="300" y="179" font-size="7.8" fill="#15803d" text-anchor="middle">SoftAP Transceiver</text>
-  <text x="300" y="192" font-size="7.6" fill="#475569" text-anchor="middle">Station Beacon Link</text>
+  <rect x="240" y="148" width="124" height="52" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="302" y="165" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">2.4 GHz Antenna</text>
+  <text x="302" y="179" font-size="7.8" fill="#15803d" text-anchor="middle">SoftAP Transceiver</text>
+  <text x="302" y="192" font-size="7.6" fill="#475569" text-anchor="middle">Station Beacon Link</text>
 
   <!-- Native USB OTG PHY -->
-  <rect x="378" y="148" width="128" height="52" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1.1" filter="url(#sh1)"/>
-  <text x="442" y="165" font-size="9.4" font-weight="bold" fill="#9a3412" text-anchor="middle">Native USB OTG PHY</text>
-  <text x="442" y="179" font-size="7.8" font-weight="bold" fill="#c2410c" text-anchor="middle">GPIO 19/20 (D+/D-)</text>
-  <text x="442" y="192" font-size="7.4" fill="#ea580c" text-anchor="middle">Hardware BOOT Latch</text>
+  <rect x="376" y="148" width="124" height="52" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1.1" filter="url(#sh1)"/>
+  <text x="438" y="165" font-size="9.4" font-weight="bold" fill="#9a3412" text-anchor="middle">Native USB OTG PHY</text>
+  <text x="438" y="179" font-size="7.8" font-weight="bold" fill="#c2410c" text-anchor="middle">GPIO 19/20 (D+/D-)</text>
+  <text x="438" y="192" font-size="7.4" fill="#ea580c" text-anchor="middle">Hardware BOOT Latch</text>
 
-  <!-- Left Bus: Antenna passes received RF frames UP into Core 0 Network Baseband along x=229 -->
-  <line x1="236" y1="160" x2="229" y2="160" stroke="#16a34a" stroke-width="1.2"/>
-  <line x1="229" y1="160" x2="229" y2="67" stroke="#16a34a" stroke-width="1.2"/>
-  <line x1="229" y1="67" x2="232" y2="67" stroke="#16a34a" stroke-width="1.2"/>
-  {arr_r(236, 67, "#16a34a", 3.8)}
+  <!-- Left Bus: Antenna passes received RF frames UP into Core 0 Network along x=233 -->
+  <line x1="240" y1="158" x2="233" y2="158" stroke="#16a34a" stroke-width="1.2"/>
+  <line x1="233" y1="158" x2="233" y2="67" stroke="#16a34a" stroke-width="1.2"/>
+  <line x1="233" y1="67" x2="236" y2="67" stroke="#16a34a" stroke-width="1.2"/>
+  {arr_r(240, 67, "#16a34a", 3.8)}
 
-  <!-- Right Bus: Core 1 dispatches synthesized HID keystrokes DOWN to Native USB PHY along x=513 -->
-  <line x1="506" y1="67" x2="513" y2="67" stroke="#ea580c" stroke-width="1.2"/>
-  <line x1="513" y1="67" x2="513" y2="160" stroke="#ea580c" stroke-width="1.2"/>
-  <line x1="513" y1="160" x2="510" y2="160" stroke="#ea580c" stroke-width="1.2"/>
-  {arr_l(506, 160, "#ea580c", 3.8)}
+  <!-- Right Bus: Core 1 dispatches synthesized HID keystrokes DOWN to Native USB PHY along x=507 -->
+  <line x1="500" y1="67" x2="507" y2="67" stroke="#ea580c" stroke-width="1.2"/>
+  <line x1="507" y1="67" x2="507" y2="158" stroke="#ea580c" stroke-width="1.2"/>
+  <line x1="507" y1="158" x2="504" y2="158" stroke="#ea580c" stroke-width="1.2"/>
+  {arr_l(500, 158, "#ea580c", 3.8)}
 
   <!-- INTER-TIER 2 -> 3 BUS: USB 2.0 Cable Line (Rightward from USB PHY to Host Raw Input) -->
-  <line x1="506" y1="184" x2="524" y2="184" stroke="#1d4ed8" stroke-width="1.5"/>
-  <rect x="524" y="171" width="46" height="26" rx="3.5" fill="#ffffff" stroke="#93c5fd" stroke-width="0.9"/>
-  <text x="547" y="183" font-size="7.8" font-weight="bold" fill="#1d4ed8" text-anchor="middle">USB 2.0</text>
-  <text x="547" y="193" font-size="6.8" fill="#2563eb" text-anchor="middle">12 Mbps HID</text>
-  <line x1="570" y1="184" x2="580" y2="184" stroke="#1d4ed8" stroke-width="1.5"/>
-  {arr_r(584, 184, "#1d4ed8", 4.0)}
+  <line x1="500" y1="184" x2="525" y2="184" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="525" y="171" width="46" height="26" rx="3.5" fill="#ffffff" stroke="#93c5fd" stroke-width="0.9"/>
+  <text x="548" y="183" font-size="7.8" font-weight="bold" fill="#1d4ed8" text-anchor="middle">USB 2.0</text>
+  <text x="548" y="193" font-size="6.8" fill="#2563eb" text-anchor="middle">12 Mbps HID</text>
+  <line x1="571" y1="184" x2="588" y2="184" stroke="#1d4ed8" stroke-width="1.5"/>
+  {arr_r(592, 184, "#1d4ed8", 4.0)}
 
   <!-- ================= TIER 3: WINDOWS HOST (WHID-GUARD) ================= -->
-  <rect x="574" y="8" width="174" height="204" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.3"/>
-  <text x="661" y="26" font-size="10.0" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Tier 3: Windows Host (WHID-Guard)</text>
+  <rect x="582" y="8" width="166" height="204" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.3"/>
+  <text x="665" y="26" font-size="10.0" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Tier 3: Windows Host (WHID-Guard)</text>
 
   <!-- Box 1: Selective Filter Hook (WH_KEYBOARD_LL) -->
-  <rect x="584" y="38" width="154" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="661" y="51" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Hook</text>
-  <text x="661" y="64" font-size="7.4" fill="#1d4ed8" text-anchor="middle">WH_KEYBOARD_LL ([PASS] / [DROP])</text>
+  <rect x="592" y="38" width="146" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="665" y="51" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Hook</text>
+  <text x="665" y="64" font-size="7.4" fill="#1d4ed8" text-anchor="middle">WH_KEYBOARD_LL ([PASS] / [DROP])</text>
 
   <!-- Arrow 1: Upward from Box 2 to Box 1 in generous 12pt gap -->
-  <line x1="661" y1="84" x2="661" y2="76" stroke="#2563eb" stroke-width="1.3"/>
-  {arr_u(661, 72, "#2563eb", 3.8)}
+  <line x1="665" y1="84" x2="665" y2="76" stroke="#2563eb" stroke-width="1.3"/>
+  {arr_u(665, 72, "#2563eb", 3.8)}
 
   <!-- Box 2: Quarantine Table & Policy Gate -->
-  <rect x="584" y="84" width="154" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="661" y="97" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Quarantine Table &amp; Policy Gate</text>
-  <text x="661" y="110" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Isolates Rogue h_rogue (15s Reset)</text>
+  <rect x="592" y="84" width="146" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="665" y="97" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Quarantine Table &amp; Policy Gate</text>
+  <text x="665" y="110" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Isolates Rogue h_rogue (15s Reset)</text>
 
   <!-- Arrow 2: Upward from Box 3 to Box 2 in generous 12pt gap -->
-  <line x1="661" y1="130" x2="661" y2="122" stroke="#2563eb" stroke-width="1.3"/>
-  {arr_u(661, 118, "#2563eb", 3.8)}
+  <line x1="665" y1="130" x2="665" y2="122" stroke="#2563eb" stroke-width="1.3"/>
+  {arr_u(665, 118, "#2563eb", 3.8)}
 
-  <!-- Box 3: Behavioral Dynamics Engine -->
-  <rect x="584" y="130" width="154" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="661" y="143" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Behavioral Dynamics Engine (W=5)</text>
-  <text x="661" y="156" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Evaluates &#956; &lt; 25ms &#8744; CV &lt; 0.15</text>
+  <!-- Box 3: Behavioral Dynamics Engine (W=5) -->
+  <rect x="592" y="130" width="146" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="665" y="143" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Behavioral Dynamics Engine (W=5)</text>
+  <text x="665" y="156" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Evaluates &#956; &lt; 25ms &#8744; CV &lt; 0.15</text>
 
   <!-- Arrow 3: Upward from Box 4 to Box 3 in generous 12pt gap -->
-  <line x1="661" y1="176" x2="661" y2="168" stroke="#2563eb" stroke-width="1.3"/>
-  {arr_u(661, 164, "#2563eb", 3.8)}
+  <line x1="665" y1="176" x2="665" y2="168" stroke="#2563eb" stroke-width="1.3"/>
+  {arr_u(665, 164, "#2563eb", 3.8)}
 
-  <!-- Box 4: Raw Input Monitor (USB Cable enters here!) -->
-  <rect x="584" y="176" width="154" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="661" y="189" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Raw Input Monitor (WM_INPUT)</text>
-  <text x="661" y="202" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Pre-Hook Device Attribution (h_dev)</text>
+  <!-- Box 4: Raw Input Monitor (WM_INPUT) -->
+  <rect x="592" y="176" width="146" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="665" y="189" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Raw Input Monitor (WM_INPUT)</text>
+  <text x="665" y="202" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Pre-Hook Device Attribution (h_dev)</text>
 </svg>"""
     return svg
 
 
 # ===========================================================================
-# FIGURE 2: SCENARIO FSM (EXACT C++ FIRMWARE STATES & CLEAR ROUTING)
+# FIGURE 2: ENHANCED ADVERSARIAL FSM
 # ===========================================================================
 def build_fig2():
-    # 8 Exact Firmware States:
-    # 1: STATE_BOOTING, 2: STATE_USB_WAIT, 3: STATE_STARTUP_PAYLOAD, 4: STATE_IDLE, 5: STATE_RUNNING
+    # Firmware states (8 deterministic states):
+    # 1: STATE_BOOTING, 2: STATE_USB_WAIT, 3: STATE_STARTUP_PAYLOAD, 4: STATE_IDLE, 5: STATE_RUNNING,
     # 6: STATE_STOPPING, 7: STATE_STOPPED, 8: STATE_ERROR
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" width="760" height="220" style="background:#ffffff; font-family:Helvetica, Arial, sans-serif;">
   <defs>
@@ -294,30 +280,31 @@ def build_fig2():
   <text x="545" y="167" font-size="9.4" font-weight="bold" fill="#9a3412" text-anchor="middle">STATE_STOPPING</text>
   <text x="545" y="183" font-size="7.8" fill="#c2410c" text-anchor="middle">Teardown Latch (&le; 10ms)</text>
 
-  <!-- Transition: RUNNING -> STOPPING upon Abort (Routed cleanly in gap x=626) -->
-  <line x1="650" y1="92" x2="626" y2="92" stroke="#ea580c" stroke-width="1.3"/>
-  <line x1="626" y1="92" x2="626" y2="152" stroke="#ea580c" stroke-width="1.3"/>
-  <rect x="612" y="152" width="28" height="15" rx="3" fill="#ffffff" stroke="#fdba74" stroke-width="0.8"/>
-  <text x="626" y="163" font-size="6.8" font-weight="bold" fill="#ea580c" text-anchor="middle">Abort</text>
-  <line x1="626" y1="167" x2="626" y2="172" stroke="#ea580c" stroke-width="1.3"/>
+  <!-- Transition: RUNNING -> STOPPING upon Abort (Leaves bottom of RUNNING at x=672, y=98 -> down to y=118 -> left to x=626 -> down to y=172 -> into STOPPING) -->
+  <line x1="672" y1="98" x2="672" y2="118" stroke="#ea580c" stroke-width="1.3"/>
+  <line x1="672" y1="118" x2="626" y2="118" stroke="#ea580c" stroke-width="1.3"/>
+  <line x1="626" y1="118" x2="626" y2="136" stroke="#ea580c" stroke-width="1.3"/>
+  <rect x="612" y="136" width="28" height="15" rx="3" fill="#ffffff" stroke="#fdba74" stroke-width="0.8"/>
+  <text x="626" y="147" font-size="6.8" font-weight="bold" fill="#ea580c" text-anchor="middle">Abort</text>
+  <line x1="626" y1="151" x2="626" y2="172" stroke="#ea580c" stroke-width="1.3"/>
   <line x1="626" y1="172" x2="606" y2="172" stroke="#ea580c" stroke-width="1.3"/>
   {arr_l(602, 172, "#ea580c", 4.0)}
 
-  <!-- 7. STATE_STOPPED (x: 326 to 442, width: 116) -->
-  <rect x="326" y="148" width="116" height="48" rx="5" fill="#f8fafc" stroke="#64748b" stroke-width="1.2" filter="url(#sh2)"/>
-  <text x="384" y="167" font-size="9.4" font-weight="bold" fill="#334155" text-anchor="middle">STATE_STOPPED</text>
-  <text x="384" y="183" font-size="7.8" fill="#475569" text-anchor="middle">Key Latch Cleared</text>
+  <!-- 7. STATE_STOPPED (x: 322 to 434, width: 112) -->
+  <rect x="322" y="148" width="112" height="48" rx="5" fill="#f8fafc" stroke="#64748b" stroke-width="1.2" filter="url(#sh2)"/>
+  <text x="378" y="167" font-size="9.4" font-weight="bold" fill="#334155" text-anchor="middle">STATE_STOPPED</text>
+  <text x="378" y="183" font-size="7.8" fill="#475569" text-anchor="middle">Key Latch Cleared</text>
 
-  <!-- Arrow: STOPPING -> STOPPED (releaseAll action) -->
-  <line x1="488" y1="172" x2="480" y2="172" stroke="#ea580c" stroke-width="1.3"/>
-  <rect x="446" y="164" width="34" height="16" rx="3" fill="#ffffff" stroke="#fdba74" stroke-width="0.8"/>
-  <text x="463" y="175.5" font-size="6.5" font-weight="bold" fill="#ea580c" text-anchor="middle">releaseAll</text>
-  <line x1="446" y1="172" x2="446" y2="172" stroke="#ea580c" stroke-width="1.3"/>
-  {arr_l(442, 172, "#ea580c", 4.0)}
+  <!-- Arrow: STOPPING -> STOPPED (releaseAll action in generous 54pt gap) -->
+  <line x1="488" y1="172" x2="476" y2="172" stroke="#ea580c" stroke-width="1.3"/>
+  <rect x="442" y="164" width="34" height="16" rx="3" fill="#ffffff" stroke="#fdba74" stroke-width="0.8"/>
+  <text x="459" y="175.5" font-size="6.5" font-weight="bold" fill="#ea580c" text-anchor="middle">releaseAll</text>
+  <line x1="442" y1="172" x2="438" y2="172" stroke="#ea580c" stroke-width="1.3"/>
+  {arr_l(434, 172, "#ea580c", 4.0)}
 
   <!-- Return Arc: STOPPED -> IDLE (When ready/unblocked) -->
-  <line x1="384" y1="148" x2="384" y2="124" stroke="#16a34a" stroke-width="1.3"/>
-  <line x1="384" y1="124" x2="424" y2="124" stroke="#16a34a" stroke-width="1.3"/>
+  <line x1="378" y1="148" x2="378" y2="124" stroke="#16a34a" stroke-width="1.3"/>
+  <line x1="378" y1="124" x2="424" y2="124" stroke="#16a34a" stroke-width="1.3"/>
   <rect x="424" y="116" width="46" height="16" rx="3" fill="#ffffff" stroke="#86efac" stroke-width="0.8"/>
   <text x="447" y="127.5" font-size="7.0" font-weight="bold" fill="#15803d" text-anchor="middle">Ack / Clear</text>
   <line x1="470" y1="124" x2="540" y2="124" stroke="#16a34a" stroke-width="1.3"/>
@@ -337,19 +324,15 @@ def build_fig2():
 
 
 # ===========================================================================
-# FIGURE 3: SELECTIVE DEFENSE ARCHITECTURE (UNIFIED x=630 CORRIDOR)
+# FIGURE 3: ENHANCED SELECTIVE DEFENSE ARCHITECTURE
 # ===========================================================================
 def build_fig3():
     # Width allocations on 760pt canvas:
     # Left inputs: x: 12 to 124 (width 112)
     # USB Root Hub bar: x: 136 to 162 (width 26)
     # Host Daemon Container: x: 174 to 610 (width 436)
-    # Inside Host Daemon:
-    #   Column 1: Hook / Raw Input: x: 186 to 304 (width 118)
-    #   Column 2: Buffer / Dynamics: x: 326 to 444 (width 118)
-    #   Column 3: Decision Column: x: 494 to 598 (width 104)
-    # Corridor between Host Daemon and Sinks: x: 610 to 646 (width 36pt, axis x=630)
-    # Output Sinks Column (outside Daemon): x: 646 to 748 (width 102)
+    # Sinks column: x: 646 to 748 (width 102)
+    # Corridor axis x=630
     svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" width="760" height="220" style="background:#ffffff; font-family:Helvetica, Arial, sans-serif;">
   <defs>
     <filter id="sh3" x="-5%" y="-5%" width="110%" height="110%">
@@ -436,18 +419,18 @@ def build_fig3():
 
   <!-- ================= DECISION & POLICY COLUMN (x: 494 to 598, width 104) ================= -->
   <!-- 1. Selective Filter Gate -->
-  <rect x="494" y="38" width="104" height="44" rx="5" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2" filter="url(#sh3)"/>
-  <text x="546" y="55" font-size="9.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Gate</text>
-  <text x="546" y="70" font-size="7.6" fill="#1d4ed8" text-anchor="middle">Inspects h_origin &#8712; Q_quar</text>
+  <rect x="494" y="36" width="104" height="42" rx="5" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2" filter="url(#sh3)"/>
+  <text x="546" y="53" font-size="9.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Gate</text>
+  <text x="546" y="68" font-size="7.6" fill="#1d4ed8" text-anchor="middle">Inspects h_origin &#8712; Q_quar</text>
+
+  <!-- Upward Gate Query Connector: Quarantine Table blacklists into Gate in clean 14pt gap -->
+  <line x1="546" y1="92" x2="546" y2="82" stroke="#ef4444" stroke-width="1.3"/>
+  {arr_u(546, 78, "#ef4444", 3.8)}
 
   <!-- 2. Quarantine Table (Blacklist) -->
-  <rect x="494" y="90" width="104" height="30" rx="4" fill="#fef2f2" stroke="#ef4444" stroke-width="1.1" filter="url(#sh3)"/>
-  <text x="546" y="104" font-size="8.8" font-weight="bold" fill="#991b1b" text-anchor="middle">Quarantine Table</text>
-  <text x="546" y="115" font-size="7.2" fill="#b91c1c" text-anchor="middle">Isolates Handle h_rogue</text>
-
-  <!-- Upward Gate Query Connector: Quarantine Table blacklists into Gate -->
-  <line x1="546" y1="90" x2="546" y2="86" stroke="#ef4444" stroke-width="1.3"/>
-  {arr_u(546, 82, "#ef4444", 3.8)}
+  <rect x="494" y="92" width="104" height="30" rx="4" fill="#fef2f2" stroke="#ef4444" stroke-width="1.1" filter="url(#sh3)"/>
+  <text x="546" y="106" font-size="8.8" font-weight="bold" fill="#991b1b" text-anchor="middle">Quarantine Table</text>
+  <text x="546" y="117" font-size="7.2" fill="#b91c1c" text-anchor="middle">Isolates Handle h_rogue</text>
 
   <!-- 3. Decision Boundary -->
   <rect x="494" y="150" width="104" height="32" rx="4" fill="#faf5ff" stroke="#a855f7" stroke-width="1.1" filter="url(#sh3)"/>
@@ -455,11 +438,11 @@ def build_fig3():
   <text x="546" y="176" font-size="7.4" fill="#7c3aed" text-anchor="middle">&#956; &lt; 25ms &#8744; CV &lt; 0.15</text>
 
   <!-- Upward Lockdown Link with Lockdown Badge: Decision Boundary triggers Quarantine Table! -->
-  <line x1="546" y1="150" x2="546" y2="142" stroke="#dc2626" stroke-width="1.3"/>
-  <rect x="512" y="128" width="68" height="14" rx="3" fill="#ffffff" stroke="#fca5a5" stroke-width="0.8"/>
-  <text x="546" y="138.5" font-size="7.2" font-weight="bold" fill="#b91c1c" text-anchor="middle">Lockdown (&#954; &#8805; 8)</text>
-  <line x1="546" y1="128" x2="546" y2="124" stroke="#dc2626" stroke-width="1.3"/>
-  {arr_u(546, 120, "#dc2626", 3.8)}
+  <line x1="546" y1="150" x2="546" y2="144" stroke="#dc2626" stroke-width="1.3"/>
+  <rect x="512" y="130" width="68" height="14" rx="3" fill="#ffffff" stroke="#fca5a5" stroke-width="0.8"/>
+  <text x="546" y="140.5" font-size="7.2" font-weight="bold" fill="#b91c1c" text-anchor="middle">Lockdown (&#954; &#8805; 8)</text>
+  <line x1="546" y1="130" x2="546" y2="126" stroke="#dc2626" stroke-width="1.3"/>
+  {arr_u(546, 122, "#dc2626", 3.8)}
 
   <!-- 4. 15s Watchdog (Auto-Reset) -->
   <rect x="494" y="190" width="104" height="16" rx="3" fill="#fff7ed" stroke="#ea580c" stroke-width="0.9"/>
@@ -508,206 +491,167 @@ def build_fig3():
   <line x1="630" y1="182" x2="630" y2="167" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
   <rect x="617" y="152" width="26" height="15" rx="3" fill="#ffffff" stroke="#fed7aa" stroke-width="0.8"/>
   <text x="630" y="163" font-size="6.8" font-weight="bold" fill="#ea580c" text-anchor="middle">Flush</text>
-  <line x1="630" y1="152" x2="630" y2="105" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
-  <line x1="630" y1="105" x2="602" y2="105" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
-  {arr_l(598, 105, "#ea580c", 4.0)}
+  <line x1="630" y1="152" x2="630" y2="107" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
+  <line x1="630" y1="107" x2="602" y2="107" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
+  {arr_l(598, 107, "#ea580c", 4.0)}
 </svg>"""
     return svg
 
 
 # ===========================================================================
-# FIGURE 4: IKI DISTRIBUTION
+# FIGURE 4: IKI DISTRIBUTION (PERFECT VECTOR MATPLOTLIB)
 # ===========================================================================
 def build_fig4():
+    plt.rcParams.update({
+        "font.family": "serif",
+        "font.serif": ["Times New Roman", "DejaVu Serif"],
+        "mathtext.fontset": "cm",
+        "figure.autolayout": False,
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+    })
     fig, ax = plt.subplots(figsize=(3.45, 2.35), dpi=300)
-    fig.subplots_adjust(left=0.18, right=0.96, top=0.91, bottom=0.20)
-
+    fig.subplots_adjust(left=0.18, right=0.96, bottom=0.20, top=0.96)
     np.random.seed(42)
 
-    # 1. Standard BadUSB: N=500, mu=10.01, sigma=0.78
-    badusb_deltas = np.random.normal(10.01, 0.78, 500)
-    badusb_deltas = np.clip(badusb_deltas, 8.0, 13.0)
+    # Human typing (log-normal, mu=144.18, sigma=91.98)
+    human_mu = np.log(144.18**2 / np.sqrt(91.98**2 + 144.18**2))
+    human_sigma = np.sqrt(np.log(1 + (91.98**2 / 144.18**2)))
+    human_data = np.random.lognormal(human_mu, human_sigma, 500)
+    human_data = human_data[human_data < 450]
 
-    # 2. Evasion BadUSB: N=500, base=80, jitter=U(0,40), pauses U(150,300) on 15% delims
-    base_jitter = 80.0 + np.random.uniform(0, 40.0, 425)
-    delims = np.random.uniform(150.0, 300.0, 75)
-    evasion_deltas = np.concatenate([base_jitter, delims])
-    np.random.shuffle(evasion_deltas)
+    # Standard BadUSB: deterministic 10ms with microjitter
+    badusb_data = np.random.normal(10.01, 0.78, 500)
 
-    # 3. Human Operator: N=500, lognormal distribution matching mu=144.18, sigma=91.98
-    sigma_log = np.sqrt(np.log(1 + (91.98 / 144.18)**2))
-    mean_log = np.log(144.18) - (sigma_log**2) / 2
-    human_deltas = np.random.lognormal(mean_log, sigma_log, 500)
-    human_deltas = np.clip(human_deltas, 40.0, 440.0)
+    # Adversarial evasion: randomized 80-120ms with bursts
+    evasion_base = np.random.uniform(80, 120, 450)
+    evasion_delims = np.random.uniform(150, 300, 50)
+    evasion_data = np.concatenate([evasion_base, evasion_delims])
 
     bins = np.linspace(0, 450, 46)
+    ax.hist(badusb_data, bins=bins, color="#dc2626", alpha=0.85, label=r"Standard BadUSB ($\mu = 10.0\ \mathrm{ms}$)", edgecolor="#991b1b", linewidth=0.5)
+    ax.hist(evasion_data, bins=bins, color="#2563eb", alpha=0.65, label=r"Adversarial Evasion ($\mu = 119.3\ \mathrm{ms}$)", edgecolor="#1d4ed8", linewidth=0.5)
+    ax.hist(human_data, bins=bins, color="#475569", alpha=0.45, label=r"Human Baseline ($\mu = 144.2\ \mathrm{ms}$)", edgecolor="#334155", linewidth=0.5)
 
-    C_BADUSB = "#DC2626"
-    C_EVASION = "#2563EB"
-    C_HUMAN = "#475569"
-    C_GRID = "#E2E8F0"
+    ax.axvline(25, color="#991b1b", linestyle="--", linewidth=1.8, label=r"Speed/Jitter ($\mu \le 25\ \mathrm{ms}\ \lor\ \mathrm{CV}_{\mathrm{IKI}} < 0.15$)")
+    ax.axvline(75, color="#1e3a8a", linestyle=":", linewidth=2.0, label=r"Human Bound ($\mu \ge 75\ \mathrm{ms}$)")
 
-    ax.hist(badusb_deltas, bins=bins, color=C_BADUSB, alpha=0.85, edgecolor="#991B1B", linewidth=0.8,
-            label=r"Standard BadUSB ($\mu = 10.0$ ms)", zorder=3)
-    ax.hist(evasion_deltas, bins=bins, color=C_EVASION, alpha=0.70, edgecolor="#1D4ED8", linewidth=0.8,
-            label=r"Adversarial Evasion ($\mu = 119.3$ ms)", zorder=2)
-    ax.hist(human_deltas, bins=bins, color=C_HUMAN, alpha=0.55, edgecolor="#1E293B", linewidth=0.8,
-            label=r"Human Baseline ($\mu = 144.2$ ms)", zorder=1)
-
-    ax.axvline(25.0, color="#991B1B", linestyle="--", linewidth=1.8, zorder=4,
-               label=r"Speed/Jitter ($\mu \leq 25\,$ms $\vee$ $\mathrm{CV}_{\mathrm{IKI}} < 0.15$)")
-    ax.axvline(75.0, color="#334155", linestyle=":", linewidth=1.8, zorder=4,
-               label=r"Human Bound ($\mu \geq 75$ ms)")
-
-    ax.grid(True, linestyle="--", alpha=0.5, color=C_GRID)
-
-    ax.set_xlabel(r"Inter-Key Interval $\Delta t$ (ms)", fontsize=9.6, fontweight="bold", labelpad=3)
-    ax.set_ylabel("Empirical Frequency", fontsize=9.6, fontweight="bold", labelpad=3)
-
-    ax.tick_params(axis="both", which="major", labelsize=8.8, pad=3)
+    ax.set_xlabel(r"\textbf{Inter-Key Interval} $\Delta t$ \textbf{(ms)}", fontsize=10.5, labelpad=4)
+    ax.set_ylabel(r"\textbf{Empirical Frequency}", fontsize=10.5, labelpad=4)
     ax.set_xlim(0, 450)
     ax.set_ylim(0, 520)
 
-    legend = ax.legend(loc="upper right", frameon=True, fancybox=True, edgecolor="#CBD5E1",
-                       framealpha=0.96, fontsize=6.8, handlelength=1.2, labelspacing=0.28,
-                       borderpad=0.50)
-    legend.get_frame().set_linewidth(0.8)
-    legend.set_zorder(10)
+    ax.grid(True, linestyle="--", alpha=0.35, color="#94a3b8")
+    ax.tick_params(axis="both", which="major", labelsize=9.5, width=1.0, length=4)
+    for spine in ax.spines.values():
+        spine.set_linewidth(1.1)
+        spine.set_color("#0f172a")
 
-    pdf_p = os.path.join(PAPER_DIR, "fig_iki_distribution.pdf")
-    png_p = os.path.join(PAPER_DIR, "fig_iki_distribution.png")
-    pdf_f = os.path.join(FIG_FINAL, "fig4_iki_distribution.pdf")
-    png_f = os.path.join(FIG_FINAL, "fig4_iki_distribution.png")
+    ax.legend(loc="upper right", fontsize=7.2, framealpha=0.92, facecolor="#ffffff", edgecolor="#cbd5e1", borderpad=0.50, labelspacing=0.35)
 
-    fig.savefig(pdf_p)
-    fig.savefig(png_p, dpi=300)
-    fig.savefig(pdf_f)
-    fig.savefig(png_f, dpi=300)
+    pdf_out = os.path.join(PAPER_DIR, "fig_iki_distribution.pdf")
+    png_out = os.path.join(PAPER_DIR, "fig_iki_distribution.png")
+    fig.savefig(pdf_out, format="pdf")
+    fig.savefig(png_out, format="png", dpi=300)
     plt.close(fig)
     print("Fig 4 generated.")
 
 
 # ===========================================================================
-# FIGURE 5: DETECTION LATENCY
+# FIGURE 5: DETECTION LATENCY & SAFETY MARGIN (PERFECT VECTOR MATPLOTLIB)
 # ===========================================================================
 def build_fig5():
+    plt.rcParams.update({
+        "font.family": "serif",
+        "font.serif": ["Times New Roman", "DejaVu Serif"],
+        "mathtext.fontset": "cm",
+        "figure.autolayout": False,
+        "pdf.fonttype": 42,
+        "ps.fonttype": 42,
+    })
     fig, ax1 = plt.subplots(figsize=(3.45, 2.38), dpi=300)
-    fig.subplots_adjust(left=0.18, right=0.82, top=0.88, bottom=0.19)
+    fig.subplots_adjust(left=0.17, right=0.81, bottom=0.20, top=0.96)
 
-    rates = np.array([40.0, 50.0, 60.0, 66.7, 75.0, 85.0, 100.0])
-    chars_allowed = np.array([8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0])
-    wall_clock_ms = 8.0 * (1000.0 / rates)
+    rates = np.array([40, 50, 60, 67, 75, 85, 100])
+    trigger_latency = np.array([8, 8, 8, 8, 8, 8, 8])
+    execution_horizon = np.array([14, 14, 14, 14, 14, 14, 14])
+    reaction_time_ms = (8.0 / rates) * 1000.0
 
-    fine_rates = np.linspace(40.0, 106.0, 200)
-    fine_ms = 8.0 * (1000.0 / fine_rates)
+    ax1.axhspan(8, 14, color="#f1f5f9", alpha=0.85, zorder=1)
+    l1 = ax1.plot(rates, trigger_latency, "o-", color="#0f172a", linewidth=2.0, markersize=5.5, label=r"Trigger ($\kappa = 8$)", zorder=4)
+    l2 = ax1.plot(rates, execution_horizon, "--", color="#b91c1c", linewidth=1.8, label=r"Horizon ($L_{\mathrm{exec}} = 14$)", zorder=4)
 
-    C_NAVY = "#0F172A"
-    C_BLUE = "#1D4ED8"
-    C_RED = "#B91C1C"
-    C_GRID = "#E2E8F0"
-    C_BUFFER = "#F1F5F9"
-
-    # 1. Safety Buffer
-    ax1.fill_between([40.0, 106.0], 8.0, 14.0, color=C_BUFFER, alpha=1.0, zorder=1)
-
-    # 2. Execution Horizon
-    line_exec = ax1.axhline(14.0, color=C_RED, linestyle="--", linewidth=1.5, zorder=2,
-                            label=r"Horizon ($L_{\mathrm{exec}} = 14$)")
-
-    # 3. Trigger Line
-    line_lat, = ax1.plot([40.0, 106.0], [8.0, 8.0], color=C_NAVY, linewidth=2.2, zorder=3,
-                         label=r"Trigger ($\kappa = 8$)")
-    ax1.plot(rates, chars_allowed, marker="o", markersize=5.0, color=C_NAVY,
-             linestyle="None", zorder=4)
-
-    # Left Y-Axis
-    ax1.set_xlabel(r"Burst Rate $R_{\mathrm{burst}}$ (chars/s)",
-                   fontsize=9.6, fontweight="bold", labelpad=3)
-    ax1.set_ylabel("Quarantine Latency (Chars)",
-                   fontsize=9.6, fontweight="bold", color=C_NAVY, labelpad=3)
-    ax1.set_xlim(38.0, 106.0)
-    ax1.set_ylim(0.0, 22.0)
+    ax1.set_xlabel(r"\textbf{Burst Rate} $R_{\mathrm{burst}}$ \textbf{(chars/s)}", fontsize=10.2, labelpad=4)
+    ax1.set_ylabel(r"\textbf{Quarantine Latency (Chars)}", fontsize=10.0, labelpad=4)
+    ax1.set_xlim(37, 107)
+    ax1.set_ylim(0, 23)
     ax1.set_yticks([0, 4, 8, 12, 16, 20])
-    ax1.set_xticks([40, 60, 80, 100])
-    ax1.tick_params(axis="y", labelcolor=C_NAVY, labelsize=8.8, pad=3)
-    ax1.tick_params(axis="x", labelsize=8.8, pad=3)
-    ax1.grid(True, linestyle="--", alpha=0.5, color=C_GRID)
 
-    # Right Y-Axis
     ax2 = ax1.twinx()
-    ax2.set_xlim(38.0, 106.0)
-    line_time, = ax2.plot(fine_rates, fine_ms, color=C_BLUE, linewidth=2.0, linestyle="-.", zorder=3,
-                          label=r"Reaction Time ($t_{\mathrm{quar}}$)")
-    ax2.plot(rates, wall_clock_ms, marker="s", markersize=4.8, color=C_BLUE,
-             linestyle="None", zorder=4)
-
-    ax2.set_ylabel("Reaction Time (ms)",
-                   fontsize=9.6, fontweight="bold", color=C_BLUE, labelpad=4)
-    ax2.set_ylim(0.0, 275.0)
+    l3 = ax2.plot(rates, reaction_time_ms, "s-.", color="#1d4ed8", linewidth=2.0, markersize=5.5, label=r"Reaction Time ($t_{\mathrm{quar}}$)", zorder=4)
+    ax2.set_ylabel(r"\textbf{Reaction Time (ms)}", fontsize=10.0, color="#1d4ed8", labelpad=5)
+    ax2.set_ylim(0, 287.5)
     ax2.set_yticks([0, 50, 100, 150, 200, 250])
-    ax2.tick_params(axis="y", labelcolor=C_BLUE, labelsize=8.8, pad=3)
+    ax2.tick_params(axis="y", labelcolor="#1d4ed8", labelsize=9.2, width=1.0, length=4)
 
-    # Coordinate Guidelines anchored at (40.0, 200.0)
-    ax2.plot([40.0, 40.0], [0.0, 200.0], color="#059669", linestyle=":", linewidth=1.4, zorder=5)
-    ax2.plot([40.0, 106.0], [200.0, 200.0], color="#059669", linestyle=":", linewidth=1.4, zorder=5)
-    ax2.plot(40.0, 200.0, marker="o", markersize=6.0, color="#059669", zorder=6)
-
-    # Detection Floor Callout Box (Headroom safely within plot area)
-    ax2.annotate("Detection Floor\n" + r"$t_{\mathrm{quar}} = 200\,\mathrm{ms}$" + "\n(40 ch/s, 25 ms)",
-                 xy=(40.0, 200.0), xycoords="data",
-                 xytext=(41.0, 226.0), textcoords="data",
-                 fontsize=5.6, fontweight="bold", color="#059669",
-                 ha="left", va="center", zorder=8, linespacing=1.65,
-                 bbox=dict(boxstyle="round,pad=0.35", facecolor="white", edgecolor="#10b981", lw=0.8, alpha=1.0),
-                 arrowprops=dict(arrowstyle="->", color="#059669", lw=1.0, shrinkA=1, shrinkB=3))
-
-    # Dimension Arrow for Safety Margin at x = 90.0:
-    # Arrow 1: pointing UP to Horizon at 14.0
-    ax1.annotate("", xy=(90.0, 13.8), xytext=(90.0, 12.5),
-                 arrowprops=dict(arrowstyle="->", color="#334155", lw=1.1), zorder=5)
-    # Arrow 2: pointing DOWN to Trigger at 8.0
-    ax1.annotate("", xy=(90.0, 8.2), xytext=(90.0, 9.5),
-                 arrowprops=dict(arrowstyle="->", color="#334155", lw=1.1), zorder=5)
-    # White Pill with generous padding
-    ax1.text(90.0, 11.0, r"$\Delta = 6$ Margin",
-             fontsize=7.2, fontweight="bold", color="#1E293B",
-             ha="center", va="center", zorder=7,
-             bbox=dict(boxstyle="round,pad=0.45", facecolor="white", edgecolor="#CBD5E1", lw=0.6, alpha=1.0))
-
-    # Min. Latency Floor Callout annotation at 100 ch/s
-    ax2.annotate("Min. Latency Floor = 80.1 ms\n" + r"($R = 100$ ch/s, $\kappa = 8$)",
-                 xy=(100.0, 80.08), xycoords="data",
-                 xytext=(76.0, 38.0), textcoords="data",
-                 fontsize=5.8, fontweight="bold", color=C_BLUE,
-                 ha="center", va="center", zorder=7, linespacing=1.60,
-                 bbox=dict(boxstyle="round,pad=0.35", facecolor="white", edgecolor="#93C5FD", lw=0.8, alpha=1.0),
-                 arrowprops=dict(arrowstyle="->", color=C_BLUE, lw=1.0, shrinkA=2, shrinkB=4))
-
-    # Compact Legend placed strictly in upper region (borderpad=0.45 guarantees >=1.5pt padding)
-    lines = [line_lat, line_exec, line_time]
+    lines = l1 + l2 + l3
     labels = [l.get_label() for l in lines]
-    legend = ax1.legend(lines, labels, loc="upper right", frameon=True, fancybox=True,
-                        facecolor="white", edgecolor="#CBD5E1", framealpha=1.0, fontsize=6.3,
-                        handlelength=1.0, labelspacing=0.20, borderpad=0.45)
-    legend.get_frame().set_linewidth(0.8)
-    legend.set_zorder(12)
+    ax1.legend(lines, labels, loc="upper right", fontsize=6.8, framealpha=1.0, facecolor="#ffffff", edgecolor="#cbd5e1", borderpad=0.45, labelspacing=0.32)
 
-    pdf_p = os.path.join(PAPER_DIR, "fig_detection_latency.pdf")
-    png_p = os.path.join(PAPER_DIR, "fig_detection_latency.png")
-    pdf_f = os.path.join(FIG_FINAL, "fig5_detection_latency.pdf")
-    png_f = os.path.join(FIG_FINAL, "fig5_detection_latency.png")
+    # Detection floor guideline anchored at (40 ch/s, 200 ms)
+    ax1.axvline(40, color="#047857", linestyle=":", linewidth=1.3, ymax=16.0/23.0, zorder=2)
+    ax2.axhline(200, color="#047857", linestyle=":", linewidth=1.3, xmin=0.043, xmax=0.957, zorder=2)
+    ax1.plot(40, 16, marker="o", color="#047857", markersize=6.0, zorder=5)
 
-    fig.savefig(pdf_p)
-    fig.savefig(png_p, dpi=300)
-    fig.savefig(pdf_f)
-    fig.savefig(png_f, dpi=300)
+    # Detection floor callout at xytext=(41.0, 226.0)
+    ax2.annotate(
+        r"\textbf{Detection Floor}" "\n" r"$t_{\mathrm{quar}} = 200\ \mathrm{ms}$" "\n" r"\textbf{(40 ch/s, 25 ms)}",
+        xy=(40.0, 200.0), xycoords="data",
+        xytext=(41.0, 226.0), textcoords="data",
+        fontsize=6.5, color="#065f46", fontweight="bold",
+        bbox=dict(boxstyle="round,pad=0.35", facecolor="#ecfdf5", edgecolor="#10b981", lw=0.9),
+        zorder=6
+    )
+
+    # Minimum latency floor callout
+    ax2.annotate(
+        r"\textbf{Min. Latency Floor = 80.1 ms}" "\n" r"\textbf{($R = 100\ \mathrm{ch/s},\ \kappa = 8$)}",
+        xy=(100.0, 80.1), xycoords="data",
+        xytext=(53.0, 40.0), textcoords="data",
+        arrowprops=dict(arrowstyle="->", color="#1d4ed8", lw=1.1, connectionstyle="arc3,rad=-0.12"),
+        fontsize=6.4, color="#1e40af", fontweight="bold",
+        bbox=dict(boxstyle="round,pad=0.35", facecolor="#eff6ff", edgecolor="#93c5fd", lw=0.9),
+        zorder=6
+    )
+
+    # Delta = 6 Margin Pill
+    ax1.text(
+        78.0, 11.0,
+        r"$\mathbf{\Delta = 6\ Margin}$",
+        ha="center", va="center", fontsize=7.2, color="#0f172a", fontweight="bold",
+        bbox=dict(boxstyle="round,pad=0.35", facecolor="#ffffff", edgecolor="#cbd5e1", lw=0.8, alpha=0.95),
+        zorder=5
+    )
+    ax1.annotate("", xy=(78.0, 13.8), xytext=(78.0, 12.3), arrowprops=dict(arrowstyle="->", color="#0f172a", lw=1.1))
+    ax1.annotate("", xy=(78.0, 8.2), xytext=(78.0, 9.7), arrowprops=dict(arrowstyle="->", color="#0f172a", lw=1.1))
+
+    ax1.grid(True, linestyle="--", alpha=0.35, color="#94a3b8")
+    ax1.tick_params(axis="both", which="major", labelsize=9.2, width=1.0, length=4)
+    for spine in ax1.spines.values():
+        spine.set_linewidth(1.1)
+        spine.set_color("#0f172a")
+    for spine in ax2.spines.values():
+        spine.set_linewidth(1.1)
+        spine.set_color("#0f172a")
+
+    pdf_out = os.path.join(PAPER_DIR, "fig_detection_latency.pdf")
+    png_out = os.path.join(PAPER_DIR, "fig_detection_latency.png")
+    fig.savefig(pdf_out, format="pdf")
+    fig.savefig(png_out, format="png", dpi=300)
     plt.close(fig)
     print("Fig 5 generated.")
 
 
-# ===========================================================================
-# EXPORT SVGS TO VECTOR PDF & PNG VIA PYMUPDF
-# ===========================================================================
 def export_svgs():
     configs = [
         ("fig1_system_architecture", build_fig1(), "system_architecture"),
@@ -739,9 +683,12 @@ def export_svgs():
         pix.save(png_dest2)
         print(f"Exported {fname} -> PDF & PNG.")
 
-if __name__ == "__main__":
-    print("Generating master flawless figures...")
+def main():
+    print("Generating refined flawless figures...")
     export_svgs()
     build_fig4()
     build_fig5()
-    print("All 5 figures generated successfully!")
+    print("All 5 refined figures generated successfully!")
+
+if __name__ == "__main__":
+    main()

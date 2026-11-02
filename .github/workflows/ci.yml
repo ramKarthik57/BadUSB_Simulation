@@ -31,4 +31,4 @@ jobs:
 
       - name: Execute Automated Test Suite
         run: |
-          pytest -v
+          python -m pytest -v
