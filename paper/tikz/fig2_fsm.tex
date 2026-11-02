@@ -1,0 +1,154 @@
+\documentclass[tikz,border=4pt]{standalone}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.misc,calc,fit,backgrounds}
+\usepackage{amsmath,amssymb}
+
+\begin{document}
+\sffamily
+\begin{tikzpicture}[
+    >=Stealth,
+    node distance=1.6cm and 1.8cm,
+    font=\small,
+    state/.style={
+        rectangle,
+        rounded corners=5pt,
+        draw=blue!70!black,
+        line width=1.1pt,
+        fill=blue!4!white,
+        minimum width=2.4cm,
+        minimum height=1.1cm,
+        inner sep=4pt,
+        align=center,
+        font=\sffamily\small
+    },
+    idle_state/.style={
+        rectangle,
+        rounded corners=5pt,
+        draw=blue!85!black,
+        double,
+        double distance=1.2pt,
+        line width=1.1pt,
+        fill=blue!8!white,
+        minimum width=2.5cm,
+        minimum height=1.15cm,
+        inner sep=4pt,
+        align=center,
+        font=\sffamily\small
+    },
+    run_state/.style={
+        rectangle,
+        rounded corners=5pt,
+        draw=green!60!black,
+        line width=1.2pt,
+        fill=green!5!white,
+        minimum width=2.5cm,
+        minimum height=1.1cm,
+        inner sep=4pt,
+        align=center,
+        font=\sffamily\small
+    },
+    stop_state/.style={
+        rectangle,
+        rounded corners=5pt,
+        draw=orange!80!black,
+        line width=1.1pt,
+        fill=orange!6!white,
+        minimum width=2.4cm,
+        minimum height=1.1cm,
+        inner sep=4pt,
+        align=center,
+        font=\sffamily\small
+    },
+    err_state/.style={
+        rectangle,
+        rounded corners=5pt,
+        draw=red!75!black,
+        line width=1.1pt,
+        fill=red!5!white,
+        minimum width=2.4cm,
+        minimum height=1.1cm,
+        inner sep=4pt,
+        align=center,
+        font=\sffamily\small
+    },
+    trans/.style={
+        ->,
+        line width=0.9pt,
+        draw=gray!80!black
+    },
+    trans_highlight/.style={
+        ->,
+        line width=1.0pt,
+        draw=blue!80!black
+    },
+    trans_abort/.style={
+        ->,
+        line width=1.0pt,
+        draw=red!80!black
+    },
+    trans_recover/.style={
+        ->,
+        line width=0.9pt,
+        dashed,
+        draw=gray!70!black
+    },
+    lbl/.style={
+        font=\sffamily\scriptsize,
+        fill=white,
+        inner sep=1.5pt,
+        align=center,
+        text=gray!90!black
+    },
+    lbl_abort/.style={
+        font=\sffamily\scriptsize\bfseries,
+        fill=white,
+        inner sep=1.5pt,
+        align=center,
+        text=red!80!black
+    }
+]
+
+% Initial pseudo-node
+\node[circle, fill=black, inner sep=2.5pt] (start) at (-1.5, 0) {};
+
+% Top Row: Main linear progression to IDLE
+\node[state] (boot) at (0.8, 0) {\textbf{STATE\_BOOTING}\[1pt]\scriptsize Hardware \& USB Init};
+\node[state] (usbwait) [right=1.2cm of boot] {\textbf{STATE\_USB\_WAIT}\[1pt]\scriptsize Host Enum $\Delta t \ge 3.5$\,s};
+\node[state] (startup) [right=1.2cm of usbwait] {\textbf{STATE\_STARTUP}\[1pt]\scriptsize Scenario 1 Injection};
+\node[idle_state] (idle) [right=1.2cm of startup] {\textbf{STATE\_IDLE}\[1pt]\scriptsize Quiescent / Listening};
+
+% Active Execution state
+\node[run_state] (running) [right=1.6cm of idle] {\textbf{STATE\_RUNNING}\[1pt]\scriptsize Payload Execution\[-1pt]\tiny Slicing $\delta t_k = 10$\,ms};
+
+% Preemption / Teardown states (Lower Right)
+\node[stop_state] (stopping) at ([yshift=-2.2cm]running.center) {\textbf{STATE\_STOPPING}\[1pt]\scriptsize Preempt Request\[-1pt]\tiny Mailbox $\phi_{\text{stop}}=1$};
+\node[stop_state] (stopped) at ([yshift=-2.2cm]idle.center) {\textbf{STATE\_STOPPED}\[1pt]\scriptsize Atomic Teardown\[-1pt]\tiny \texttt{releaseAll()} Keys/Mouse};
+
+% Error / Recovery state (Lower Left)
+\node[err_state] (error) at ([yshift=-2.2cm]usbwait.center) {\textbf{STATE\_ERROR}\[1pt]\scriptsize Watchdog / Fault\[-1pt]\tiny Auto-Diagnostics};
+
+% Transitions: Initialization flow
+\draw[trans] (start) -- node[above, lbl] {Power-on / Reset} (boot);
+\draw[trans] (boot) -- node[above, lbl] {TinyUSB ready} (usbwait);
+\draw[trans] (usbwait) -- node[above, lbl] {$\tau_{\text{boot}} \ge 3,500$\,ms} (startup);
+\draw[trans] (startup) -- node[above, lbl] {Completed} (idle);
+
+% Operational loop: IDLE <-> RUNNING
+\draw[trans_highlight] ([yshift=3pt]idle.east) -- node[above, lbl, text=blue!80!black] {\textbf{Trigger: C2 REST / BOOT}} ([yshift=3pt]running.west);
+\draw[trans] ([yshift=-3pt]running.west) -- node[below, lbl] {Scenario End} ([yshift=-3pt]idle.east);
+
+% In-flight cooperative loop on RUNNING
+\draw[trans] (running.north) .. controls +(up:0.7cm) and +(right:0.7cm) .. node[above right, lbl] {Quantum step\$\delta t_k = 10$\,ms} (running.east);
+
+% Preemption flow: RUNNING -> STOPPING -> STOPPED -> IDLE
+\draw[trans_abort] (running.south) -- node[right, lbl_abort] {Abort Trigger\($\phi_{\text{stop}}=1$)} (stopping.north);
+\draw[trans_abort] (stopping.west) -- node[above, lbl_abort] {$\le 10$\,ms Latency} (stopped.east);
+\draw[trans_highlight] (stopped.north) -- node[left, lbl] {Cleanup done} (idle.south);
+
+% Error transitions
+\draw[trans_recover] (usbwait.south) -- node[left, lbl] {Bus Timeout} (error.north);
+\draw[trans_recover] (error.north east) -- node[below left, lbl] {Recovery / Reset} (idle.south west);
+\draw[trans_recover] (running.south west) to[out=210, in=-30] node[below, lbl] {Hardware fault / WDT} (error.south east);
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,67 @@
+digraph FSM {
+    rankdir=LR;
+    nodesep=0.45;
+    ranksep=0.65;
+    splines=spline;
+    bgcolor="transparent";
+    
+    node [
+        fontname="Helvetica",
+        fontsize=8.5,
+        shape=rect,
+        style="filled,rounded",
+        fillcolor="#F8FAFC",
+        color="#334155",
+        penwidth=1.2,
+        margin="0.14,0.10"
+    ];
+
+    edge [
+        fontname="Helvetica",
+        fontsize=7.5,
+        color="#475569",
+        fontcolor="#0F172A",
+        penwidth=1.1,
+        arrowsize=0.75
+    ];
+
+    // Initial pseudo-state
+    start [shape=circle, style=filled, fillcolor="#0F172A", width=0.18, height=0.18, label="", color="#0F172A"];
+
+    // Main States
+    booting   [label=<<B>STATE_BOOTING</B><BR/><FONT POINT-SIZE="7" COLOR="#475569">Power-On Reset<BR/>TinyUSB Core Init</FONT>>, color="#1E3A8A", fillcolor="#EFF6FF"];
+    usb_wait  [label=<<B>STATE_USB_WAIT</B><BR/><FONT POINT-SIZE="7" COLOR="#475569">Bus Enumeration<BR/>&tau;<SUB>boot</SUB> &ge; 3,500 ms</FONT>>, color="#1E3A8A", fillcolor="#EFF6FF"];
+    startup   [label=<<B>STATE_STARTUP</B><BR/><FONT POINT-SIZE="7" COLOR="#475569">Scenario 1 Payload<BR/>Baseline Dispatch</FONT>>, color="#1E3A8A", fillcolor="#EFF6FF"];
+    idle      [label=<<B>STATE_IDLE</B><BR/><FONT POINT-SIZE="7" COLOR="#1E3A8A">Quiescent &amp; Listening<BR/>FreeRTOS Spinlock</FONT>>, shape=rect, peripheries=2, color="#1D4ED8", fillcolor="#DBEAFE", penwidth=1.4];
+    running   [label=<<B>STATE_RUNNING</B><BR/><FONT POINT-SIZE="7" COLOR="#065F46">Payload Execution<BR/>Quantum &delta;t<SUB>k</SUB> = 10 ms</FONT>>, color="#059669", fillcolor="#ECFDF5", penwidth=1.3];
+    stopping  [label=<<B>STATE_STOPPING</B><BR/><FONT POINT-SIZE="7" COLOR="#991B1B">Preempt Requested<BR/>Mailbox &phi;<SUB>stop</SUB> = 1</FONT>>, color="#DC2626", fillcolor="#FEF2F2", penwidth=1.2];
+    stopped   [label=<<B>STATE_STOPPED</B><BR/><FONT POINT-SIZE="7" COLOR="#991B1B">Atomic Teardown<BR/>releaseAll() &le; 10 ms</FONT>>, color="#DC2626", fillcolor="#FEF2F2", penwidth=1.2];
+    error     [label=<<B>STATE_ERROR</B><BR/><FONT POINT-SIZE="7" COLOR="#92400E">Fault / Bus Reset<BR/>Watchdog Trip</FONT>>, color="#D97706", fillcolor="#FFFBEB", style="filled,rounded,dashed", penwidth=1.2];
+
+    // Transitions: Boot & Sequence
+    start -> booting;
+    booting -> usb_wait [label="TinyUSB Stack Up"];
+    usb_wait -> startup [label="&Delta;t &ge; 3.5 s Stabilized"];
+    startup -> idle [label="Scenario 1 Complete"];
+
+    // Operational Execution Loop
+    idle -> running [label="REST API / BOOT Pin", color="#1D4ED8", fontcolor="#1D4ED8", penwidth=1.3];
+    running -> idle [label="Payload End", color="#059669", fontcolor="#065F46"];
+
+    // Cooperative Slicing Self-Loop
+    running -> running [label="Quantum Step\n(10 ms Slices)", color="#059669", fontcolor="#065F46"];
+
+    // Preemption & Teardown Branch
+    running -> stopping [label="Abort Trigger (&phi;<SUB>stop</SUB>=1)", color="#DC2626", fontcolor="#991B1B", penwidth=1.3];
+    stopping -> stopped [label="Keys / Mouse Released", color="#DC2626", fontcolor="#991B1B"];
+    stopped -> idle [label="Reset / Quiesce", color="#1E3A8A", fontcolor="#1E3A8A", constraint=false];
+
+    // Error & Fault Recovery
+    usb_wait -> error [label="Descriptor Timeout", style=dashed, color="#D97706", fontcolor="#92400E"];
+    running -> error [label="Hardware Bus Fault", style=dashed, color="#D97706", fontcolor="#92400E"];
+    error -> idle [label="Recovery / Re-enumeration", style=dashed, color="#1D4ED8", fontcolor="#1D4ED8"];
+
+    // Ranks for clean layout
+    { rank=same; start; booting; usb_wait; startup; idle; running; }
+    { rank=same; error; stopped; stopping; }
+}

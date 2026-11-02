@@ -1,0 +1,58 @@
+<mxfile host="Electron" modified="2026-11-02T10:50:00.000Z" agent="PipeJack Diagram Engine" version="24.0.0">
+  <diagram id="fig1" name="Fig1_System_Architecture">
+    <mxGraphModel dx="760" dy="180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="760" pageHeight="180" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <!-- Tier 1 -->
+        <mxCell id="t1" value="Tier 1: Mobile C2 Controller" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#faf5ff;strokeColor=#a855f7;strokeWidth=1.2;fontStyle=1;fontColor=#6b21a8;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="14" y="8" width="172" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="t1_b1" value="Touch Web Console&#xa;&lt;font color='#64748b' style='font-size:7.5px'&gt;Single-Page App (SPA)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c084fc;fontStyle=1;fontSize=9;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="24" y="34" width="152" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="t1_b2" value="REST Attack Engine&#xa;&lt;font color='#64748b' style='font-size:7.5px'&gt;Scenarios 1–4, Cadence Jitter&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c084fc;fontStyle=1;fontSize=9;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="24" y="78" width="152" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="t1_b3" value="802.11 b/g/n Station&#xa;&lt;font color='#64748b' style='font-size:7.5px'&gt;Station Link (192.168.4.2)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#c084fc;fontStyle=1;fontSize=9;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="24" y="122" width="152" height="34" as="geometry" />
+        </mxCell>
+        <!-- Tier 2 -->
+        <mxCell id="t2" value="Tier 2: Weaponized ESP32-S3 Hardware Implant" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0fdf4;strokeColor=#22c55e;strokeWidth=1.2;fontStyle=1;fontColor=#15803d;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="246" y="8" width="268" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="t2_c0" value="Core 0: Network&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;SoftAP &amp; Web Server&#xa;Gateway IP: 192.168.4.1&#xa;TCP/IP Baseband&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4ade80;fontStyle=1;fontSize=8.8;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="256" y="27" width="118" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="t2_c1" value="Core 1: HID Engine&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;8-State Scenario FSM&#xa;Native TinyUSB HID&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4ade80;fontStyle=1;fontSize=8.8;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="386" y="27" width="118" height="49" as="geometry" />
+        </mxCell>
+        <mxCell id="t2_mb" value="Lock-Free Atomic Ring Buffer (Non-blocking Shared Mailbox)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontStyle=1;fontSize=7.4;fontColor=#14532d;" vertex="1" parent="1">
+          <mxGeometry x="256" y="80" width="248" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="t2_ant" value="2.4 GHz Antenna&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;SoftAP Transceiver&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#4ade80;fontStyle=1;fontSize=8.8;fontColor=#1e293b;" vertex="1" parent="1">
+          <mxGeometry x="256" y="116" width="118" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="t2_usb" value="Native USB OTG PHY&#xa;&lt;font color='#ea580c' style='font-size:7.2px'&gt;GPIO 19/20 (D+/D-)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#ea580c;fontStyle=1;fontSize=8.8;fontColor=#9a3412;" vertex="1" parent="1">
+          <mxGeometry x="386" y="116" width="118" height="38" as="geometry" />
+        </mxCell>
+        <!-- Tier 3 -->
+        <mxCell id="t3" value="Tier 3: Windows Host (WHID-Guard)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;strokeWidth=1.2;fontStyle=1;fontColor=#1d4ed8;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="574" y="8" width="172" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="t3_b1" value="Selective Filter Hook (WH_KEYBOARD_LL)&#xa;&lt;font color='#1d4ed8' style='font-size:6.8px'&gt;[PASS] Operator / [DROP] Rogue&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.0;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="584" y="32" width="152" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="t3_b2" value="Quarantine Table &amp; Policy Gate&#xa;&lt;font color='#64748b' style='font-size:6.8px'&gt;Isolates Rogue h_rogue (15s Reset)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.2;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="584" y="66" width="152" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="t3_b3" value="Behavioral Dynamics Engine (W=5)&#xa;&lt;font color='#64748b' style='font-size:6.8px'&gt;mu &lt; 25ms or CV &lt; 0.15&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.2;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="584" y="100" width="152" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="t3_b4" value="Raw Input Monitor (WM_INPUT)&#xa;&lt;font color='#64748b' style='font-size:6.8px'&gt;Pre-Hook Device Attribution (h_dev)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.2;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="584" y="134" width="152" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

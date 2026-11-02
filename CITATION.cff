@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you utilize this hardware platform, defense framework, or empirical dataset in your academic research, please cite it as below."
+authors:
+  - family-names: "G"
+    given-names: "Ram Karthik"
+    affiliation: "Department of Cybersecurity, Amrita Vishwa Vidyapeetham, Chennai, India"
+  - family-names: "V"
+    given-names: "Harini"
+    affiliation: "Department of Cybersecurity, Amrita Vishwa Vidyapeetham, Chennai, India"
+title: "WHID-Guard: Per-Device Behavioral Keystroke Dynamics and Selective Defense Against Hardware-Emulated USB Keystroke Injection"
+version: 2.1.0
+date-released: 2026-11-01
+url: "https://github.com/ramKarthik57/BadUSB_Simulation"
+repository-code: "https://github.com/ramKarthik57/BadUSB_Simulation"
+keywords:
+  - badusb
+  - keystroke-injection
+  - keystroke-dynamics
+  - hardware-security
+  - esp32-s3
+  - usb-hid
+  - win32-raw-input
+  - behavioral-biometrics

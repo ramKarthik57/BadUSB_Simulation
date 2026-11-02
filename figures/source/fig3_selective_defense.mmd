@@ -1,0 +1,22 @@
+graph LR
+    subgraph USB_Bus["USB Physical Layer"]
+        KB["Physical Keyboard (h_legit)"] --> HUB["USB Root Hub"]
+        ESP["Rogue ESP32-S3 (h_rogue)"] --> HUB
+    end
+
+    subgraph Host_Daemon["Host OS Defense Daemon (WHID-Guard Framework)"]
+        HUB --> HOOK["Selective Filter Hook (WH_KEYBOARD_LL)"]
+        HUB --> RAW["Raw Input Pre-Filter (WM_INPUT, RIDEV_INPUTSINK)"]
+
+        HOOK -->|"Scancode Stream"| GATE["Selective Filter Gate"]
+        RAW --> DYN["Dynamics Engine (W = 5)"]
+        DYN --> DEC["Decision Boundary (μ < 25ms ∨ CV < 0.15)"]
+        DEC -->|"Lockdown (κ ≥ 8)"| QUAR["Quarantine Table (Blacklist)"]
+        QUAR -->|"Filter Origin"| GATE
+        WDT["15s Watchdog (Auto-Reset)"] -.->|"Trigger Flush"| OVR["Global Pipeline Flush & Gate Override"]
+        OVR -.->|"Flush Q_quar & Restore Gate"| QUAR
+    end
+
+    GATE -->|"Match: h_origin ∈ Q_quar"| DROP["[DROP EVENT] Suppress Scancode"]
+    GATE -->|"Match: h_origin ∉ Q_quar"| PASS["[PASS EVENT] Allow Keystroke"]
+    PASS --> WIN["Active Foreground Window"]

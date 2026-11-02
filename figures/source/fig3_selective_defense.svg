@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 220" width="760" height="220" style="background:#ffffff; font-family:Helvetica, Arial, sans-serif;">
+  <defs>
+    <filter id="sh3" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.5" flood-opacity="0.05"/>
+    </filter>
+  </defs>
+
+  <!-- ================= HOST DAEMON CONTAINER ================= -->
+  <rect x="174" y="8" width="436" height="204" rx="6" fill="#f8fafc" stroke="#64748b" stroke-width="1.3"/>
+  <text x="184" y="25" font-size="10.2" font-weight="bold" fill="#1e293b" text-anchor="start">Host OS Defense Daemon (WHID-Guard Framework)</text>
+
+  <!-- ================= HARDWARE INPUT SOURCES ================= -->
+  <!-- Physical Keyboard (Genuine) -->
+  <rect x="12" y="40" width="112" height="46" rx="5" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2" filter="url(#sh3)"/>
+  <text x="68" y="59" font-size="9.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Physical Keyboard</text>
+  <text x="68" y="74" font-size="8.0" fill="#2563eb" text-anchor="middle">Genuine HID (h_legit)</text>
+
+  <!-- Rogue Hardware (ESP32-S3) -->
+  <rect x="12" y="142" width="112" height="46" rx="5" fill="#fef2f2" stroke="#ef4444" stroke-width="1.2" filter="url(#sh3)"/>
+  <text x="68" y="161" font-size="9.6" font-weight="bold" fill="#991b1b" text-anchor="middle">Rogue ESP32-S3</text>
+  <text x="68" y="176" font-size="8.0" fill="#b91c1c" text-anchor="middle">BadUSB (h_rogue)</text>
+
+  <!-- USB Root Hub -->
+  <rect x="136" y="32" width="26" height="166" rx="4" fill="#f1f5f9" stroke="#475569" stroke-width="1.1"/>
+  <text x="149" y="115" font-size="9.2" font-weight="bold" fill="#334155" text-anchor="middle" transform="rotate(-90 149 115)">USB Root Hub</text>
+
+  <!-- Input Lines: Hardware to Hub -->
+  <line x1="124" y1="63" x2="132" y2="63" stroke="#2563eb" stroke-width="1.4"/>
+  <polygon points="136.0,63.0 132.2,61.1 134.5,63.0 132.2,64.9" fill="#2563eb"/>
+  <line x1="124" y1="165" x2="132" y2="165" stroke="#ef4444" stroke-width="1.4"/>
+  <polygon points="136.0,165.0 132.2,163.1 134.5,165.0 132.2,166.9" fill="#ef4444"/>
+
+  <!-- Hub branching into Host OS Daemon -->
+  <line x1="162" y1="115" x2="172" y2="115" stroke="#2563eb" stroke-width="1.4"/>
+  <line x1="172" y1="115" x2="172" y2="63" stroke="#2563eb" stroke-width="1.4"/>
+  <line x1="172" y1="63" x2="182" y2="63" stroke="#2563eb" stroke-width="1.4"/>
+  <polygon points="186.0,63.0 182.2,61.1 184.5,63.0 182.2,64.9" fill="#2563eb"/>
+
+  <line x1="172" y1="115" x2="172" y2="165" stroke="#2563eb" stroke-width="1.4"/>
+  <line x1="172" y1="165" x2="182" y2="165" stroke="#2563eb" stroke-width="1.4"/>
+  <polygon points="186.0,165.0 182.2,163.1 184.5,165.0 182.2,166.9" fill="#2563eb"/>
+
+  <!-- ================= UPPER PIPELINE: INTERCEPTION ================= -->
+  <!-- Selective Filter Hook -->
+  <rect x="186" y="40" width="118" height="46" rx="5" fill="#ffffff" stroke="#3b82f6" stroke-width="1.1" filter="url(#sh3)"/>
+  <text x="245" y="59" font-size="9.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Hook</text>
+  <text x="245" y="73" font-size="7.8" fill="#2563eb" text-anchor="middle">(WH_KEYBOARD_LL Hook)</text>
+
+  <!-- Pre-Dispatch Buffer -->
+  <rect x="326" y="40" width="118" height="46" rx="5" fill="#ffffff" stroke="#3b82f6" stroke-width="1.1" filter="url(#sh3)"/>
+  <text x="385" y="59" font-size="9.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Pre-Dispatch Buffer</text>
+  <text x="385" y="73" font-size="7.8" fill="#2563eb" text-anchor="middle">FIFO Delay Queue (W=5)</text>
+
+  <!-- Arrow: Hook -> Pre-Dispatch Buffer -->
+  <line x1="304" y1="63" x2="322" y2="63" stroke="#2563eb" stroke-width="1.3"/>
+  <polygon points="326.0,63.0 322.2,61.1 324.5,63.0 322.2,64.9" fill="#2563eb"/>
+
+  <!-- Clean Stream Link with Stream Badge: Pre-Dispatch Buffer -> Selective Filter Gate -->
+  <line x1="444" y1="63" x2="455" y2="63" stroke="#2563eb" stroke-width="1.3"/>
+  <rect x="455" y="55" width="28" height="16" rx="3" fill="#ffffff" stroke="#93c5fd" stroke-width="0.8"/>
+  <text x="469" y="66.5" font-size="7.2" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Stream</text>
+  <line x1="483" y1="63" x2="490" y2="63" stroke="#2563eb" stroke-width="1.3"/>
+  <polygon points="494.0,63.0 490.2,61.1 492.5,63.0 490.2,64.9" fill="#2563eb"/>
+
+  <!-- ================= LOWER PIPELINE: ATTRIBUTION & DYNAMICS ================= -->
+  <!-- Raw Input Pre-Filter -->
+  <rect x="186" y="142" width="118" height="46" rx="5" fill="#ffffff" stroke="#3b82f6" stroke-width="1.1" filter="url(#sh3)"/>
+  <text x="245" y="160" font-size="9.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Raw Input Pre-Filter</text>
+  <text x="245" y="174" font-size="7.6" fill="#2563eb" text-anchor="middle">WM_INPUT (RIDEV_INPUTSINK)</text>
+
+  <!-- Dynamics Engine -->
+  <rect x="326" y="138" width="118" height="54" rx="5" fill="#ffffff" stroke="#3b82f6" stroke-width="1.1" filter="url(#sh3)"/>
+  <text x="385" y="155" font-size="9.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Dynamics Engine</text>
+  <text x="385" y="169" font-size="7.8" fill="#2563eb" text-anchor="middle">Sliding Window (W = 5)</text>
+  <text x="385" y="181" font-size="7.6" fill="#1d4ed8" text-anchor="middle">Evaluates &#956;_IKI &amp; CV_IKI</text>
+
+  <!-- Arrow: Raw Input -> Dynamics Engine -->
+  <line x1="304" y1="165" x2="322" y2="165" stroke="#2563eb" stroke-width="1.3"/>
+  <polygon points="326.0,165.0 322.2,163.1 324.5,165.0 322.2,166.9" fill="#2563eb"/>
+
+  <!-- Connector: Dynamics Engine -> Decision Boundary -->
+  <line x1="444" y1="165" x2="490" y2="165" stroke="#7c3aed" stroke-width="1.3"/>
+  <polygon points="494.0,165.0 490.2,163.1 492.5,165.0 490.2,166.9" fill="#7c3aed"/>
+
+  <!-- ================= DECISION & POLICY COLUMN (x: 494 to 598, width 104) ================= -->
+  <!-- 1. Selective Filter Gate -->
+  <rect x="494" y="38" width="104" height="44" rx="5" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2" filter="url(#sh3)"/>
+  <text x="546" y="55" font-size="9.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Gate</text>
+  <text x="546" y="70" font-size="7.6" fill="#1d4ed8" text-anchor="middle">Inspects h_origin &#8712; Q_quar</text>
+
+  <!-- 2. Quarantine Table (Blacklist) -->
+  <rect x="494" y="90" width="104" height="30" rx="4" fill="#fef2f2" stroke="#ef4444" stroke-width="1.1" filter="url(#sh3)"/>
+  <text x="546" y="104" font-size="8.8" font-weight="bold" fill="#991b1b" text-anchor="middle">Quarantine Table</text>
+  <text x="546" y="115" font-size="7.2" fill="#b91c1c" text-anchor="middle">Isolates Handle h_rogue</text>
+
+  <!-- Upward Gate Query Connector: Quarantine Table blacklists into Gate -->
+  <line x1="546" y1="90" x2="546" y2="86" stroke="#ef4444" stroke-width="1.3"/>
+  <polygon points="546.0,82.0 544.1,85.8 546.0,83.5 547.9,85.8" fill="#ef4444"/>
+
+  <!-- 3. Decision Boundary -->
+  <rect x="494" y="150" width="104" height="32" rx="4" fill="#faf5ff" stroke="#a855f7" stroke-width="1.1" filter="url(#sh3)"/>
+  <text x="546" y="164" font-size="9.0" font-weight="bold" fill="#6b21a8" text-anchor="middle">Decision Boundary</text>
+  <text x="546" y="176" font-size="7.4" fill="#7c3aed" text-anchor="middle">&#956; &lt; 25ms &#8744; CV &lt; 0.15</text>
+
+  <!-- Upward Lockdown Link with Lockdown Badge: Decision Boundary triggers Quarantine Table! -->
+  <line x1="546" y1="150" x2="546" y2="142" stroke="#dc2626" stroke-width="1.3"/>
+  <rect x="512" y="128" width="68" height="14" rx="3" fill="#ffffff" stroke="#fca5a5" stroke-width="0.8"/>
+  <text x="546" y="138.5" font-size="7.2" font-weight="bold" fill="#b91c1c" text-anchor="middle">Lockdown (&#954; &#8805; 8)</text>
+  <line x1="546" y1="128" x2="546" y2="124" stroke="#dc2626" stroke-width="1.3"/>
+  <polygon points="546.0,120.0 544.1,123.8 546.0,121.5 547.9,123.8" fill="#dc2626"/>
+
+  <!-- 4. 15s Watchdog (Auto-Reset) -->
+  <rect x="494" y="190" width="104" height="16" rx="3" fill="#fff7ed" stroke="#ea580c" stroke-width="0.9"/>
+  <text x="546" y="201.5" font-size="7.6" font-weight="bold" fill="#9a3412" text-anchor="middle">15s Watchdog (Auto-Reset)</text>
+
+  <!-- ================= OUTPUT SINKS (Right column outside Daemon: x: 646 to 748, width 102) ================= -->
+  <!-- [DROP EVENT] -->
+  <rect x="646" y="34" width="102" height="32" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="1.2"/>
+  <text x="697" y="48" font-size="9.4" font-weight="bold" fill="#991b1b" text-anchor="middle">[DROP EVENT]</text>
+  <text x="697" y="60" font-size="7.8" fill="#b91c1c" text-anchor="middle">Suppress Scancode</text>
+
+  <!-- [PASS EVENT] -->
+  <rect x="646" y="74" width="102" height="32" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2"/>
+  <text x="697" y="88" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">[PASS EVENT]</text>
+  <text x="697" y="100" font-size="7.8" fill="#15803d" text-anchor="middle">Allow Keystroke</text>
+
+  <!-- Target: Active Window -->
+  <rect x="646" y="114" width="102" height="32" rx="4" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.0"/>
+  <text x="697" y="128" font-size="9.2" font-weight="bold" fill="#334155" text-anchor="middle">Active Window</text>
+  <text x="697" y="140" font-size="7.6" fill="#64748b" text-anchor="middle">Foreground Target</text>
+
+  <!-- Link: PASS EVENT -> Active Window -->
+  <line x1="697" y1="106" x2="697" y2="110" stroke="#16a34a" stroke-width="1.3"/>
+  <polygon points="697.0,114.0 695.1,110.2 697.0,112.5 698.9,110.2" fill="#16a34a"/>
+
+  <!-- Output Lines from Gate -->
+  <line x1="598" y1="50" x2="642" y2="50" stroke="#dc2626" stroke-width="1.4"/>
+  <polygon points="646.0,50.0 642.0,48.0 644.4,50.0 642.0,52.0" fill="#dc2626"/>
+  <line x1="598" y1="70" x2="626" y2="70" stroke="#16a34a" stroke-width="1.4"/>
+  <line x1="626" y1="70" x2="626" y2="90" stroke="#16a34a" stroke-width="1.4"/>
+  <line x1="626" y1="90" x2="642" y2="90" stroke="#16a34a" stroke-width="1.4"/>
+  <polygon points="646.0,90.0 642.0,88.0 644.4,90.0 642.0,92.0" fill="#16a34a"/>
+
+  <!-- Global Pipeline Flush & Gate Override (Symmetric in outside column!) -->
+  <rect x="646" y="170" width="102" height="38" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1.2"/>
+  <text x="697" y="185" font-size="8.8" font-weight="bold" fill="#9a3412" text-anchor="middle">Global Pipeline Flush</text>
+  <text x="697" y="198" font-size="8.0" font-weight="bold" fill="#c2410c" text-anchor="middle">&amp; Gate Override</text>
+
+  <!-- Trigger Link: 15s Watchdog -> Global Flush -->
+  <line x1="598" y1="198" x2="642" y2="198" stroke="#ea580c" stroke-width="1.4"/>
+  <polygon points="646.0,198.0 642.0,196.0 644.4,198.0 642.0,200.0" fill="#ea580c"/>
+
+  <!-- Feedback Line: Flush to Quarantine Table along corridor x=628 -->
+  <line x1="646" y1="182" x2="628" y2="182" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
+  <line x1="628" y1="182" x2="628" y2="167" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
+  <rect x="615" y="152" width="26" height="15" rx="3" fill="#ffffff" stroke="#fed7aa" stroke-width="0.8"/>
+  <text x="628" y="163" font-size="6.8" font-weight="bold" fill="#ea580c" text-anchor="middle">Flush</text>
+  <line x1="628" y1="152" x2="628" y2="105" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
+  <line x1="628" y1="105" x2="602" y2="105" stroke="#ea580c" stroke-width="1.3" stroke-dasharray="3,2"/>
+  <polygon points="598.0,105.0 602.0,103.0 599.6,105.0 602.0,107.0" fill="#ea580c"/>
+</svg>

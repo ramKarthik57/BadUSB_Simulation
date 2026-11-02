@@ -1,0 +1,46 @@
+<mxfile host="Electron" modified="2026-11-02T10:50:00.000Z" agent="PipeJack Diagram Engine" version="24.0.0">
+  <diagram id="fig3" name="Fig3_Selective_Defense">
+    <mxGraphModel dx="760" dy="180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="760" pageHeight="180" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kb" value="Physical Keyboard&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;Genuine HID (h_legit)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.8;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="12" y="32" width="108" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="esp" value="Rogue ESP32-S3&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;BadUSB (h_rogue)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef2f2;strokeColor=#ef4444;fontStyle=1;fontSize=8.8;fontColor=#991b1b;" vertex="1" parent="1">
+          <mxGeometry x="12" y="112" width="108" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="hub" value="USB Root Hub" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f1f5f9;strokeColor=#64748b;fontStyle=1;fontSize=8.5;fontColor=#334155;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="138" y="24" width="24" height="134" as="geometry" />
+        </mxCell>
+        <mxCell id="host" value="Host OS Defense Daemon (WHID-Guard Framework)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8fafc;strokeColor=#94a3b8;strokeWidth=1.0;strokeDashed=1;fontStyle=1;fontColor=#475569;verticalAlign=top;spacingTop=4;align=left;spacingLeft=10;" vertex="1" parent="1">
+          <mxGeometry x="180" y="8" width="448" height="166" as="geometry" />
+        </mxCell>
+        <mxCell id="hook" value="Selective Filter Hook&#xa;&lt;font color='#64748b' style='font-size:7.0px'&gt;(WH_KEYBOARD_LL Hook)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.0;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="194" y="32" width="118" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="raw" value="Raw Input Pre-Filter&#xa;&lt;font color='#64748b' style='font-size:6.8px'&gt;WM_INPUT (RIDEV_INPUTSINK)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.0;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="194" y="112" width="118" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="dyn" value="Dynamics Engine&#xa;&lt;font color='#64748b' style='font-size:7.0px'&gt;Sliding Window (W = 5)&#xa;mu_IKI &amp; CV_IKI&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.8;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="338" y="108" width="118" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="gate" value="Selective Filter Gate&#xa;&lt;font color='#1e3a8a' style='font-size:7.0px'&gt;Inspects h_origin in Q_quar&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontStyle=1;fontSize=8.8;fontColor=#1e40af;" vertex="1" parent="1">
+          <mxGeometry x="480" y="28" width="138" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="quar" value="Quarantine Table (Blacklist)&#xa;&lt;font color='#b91c1c' style='font-size:6.8px'&gt;Isolates Handle h_rogue&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef2f2;strokeColor=#ef4444;fontStyle=1;fontSize=8.2;fontColor=#991b1b;" vertex="1" parent="1">
+          <mxGeometry x="480" y="72" width="138" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="dec" value="Decision Boundary&#xa;&lt;font color='#7e22ce' style='font-size:7.0px'&gt;mu &lt; 25ms or CV &lt; 0.15&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#faf5ff;strokeColor=#a855f7;fontStyle=1;fontSize=8.5;fontColor=#6b21a8;" vertex="1" parent="1">
+          <mxGeometry x="480" y="110" width="138" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="wdt" value="15s Watchdog (Auto-Reset)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#ea580c;strokeDashed=1;fontStyle=1;fontSize=7.2;fontColor=#9a3412;" vertex="1" parent="1">
+          <mxGeometry x="480" y="150" width="138" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="ovr" value="Global Pipeline Flush&#xa;&lt;font color='#c2410c' style='font-size:6.8px'&gt;&amp; Gate Override&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#ea580c;fontStyle=1;fontSize=7.2;fontColor=#9a3412;" vertex="1" parent="1">
+          <mxGeometry x="646" y="142" width="96" height="26" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

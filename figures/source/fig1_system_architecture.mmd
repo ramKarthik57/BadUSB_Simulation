@@ -1,0 +1,21 @@
+graph LR
+    subgraph T1["Tier 1: Mobile C2 Controller"]
+        c2_web["Touch Web Console (SPA)"] --> c2_api["REST Attack Engine (Scenarios 1-4)"]
+        c2_api --> c2_wifi["802.11 b/g/n Client (192.168.4.1)"]
+    end
+
+    subgraph T2["Tier 2: Weaponized ESP32-S3 Hardware Implant"]
+        core0["Core 0: Network (SoftAP, HTTP Server)"] <--> ipc["FreeRTOS Spinlock Mailbox"]
+        core1["Core 1: HID Engine (8-State Scenario FSM)"] <--> ipc
+        ant_hw["2.4 GHz Antenna"] <--> ipc
+        ipc --> usb_hw["Native USB OTG PHY (GPIO 19/20)"]
+    end
+
+    subgraph T3["Tier 3: Windows Host Workstation (WHID-Guard)"]
+        h_raw["Raw Input Monitor (WM_INPUT)"] --> h_eng["Behavioral Dynamics Engine (W=10)"]
+        h_eng --> h_qtab["Quarantine Table & Policy Gate"]
+        h_qtab --> h_gate["Selective Filter Gate (WH_KEYBOARD_LL)"]
+    end
+
+    c2_wifi -. "2.4 GHz SoftAP" .-> ant_hw
+    usb_hw == "USB 2.0 Bus (12 Mbps)" ==> h_raw

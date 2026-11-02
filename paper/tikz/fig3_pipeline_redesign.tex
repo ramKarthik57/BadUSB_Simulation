@@ -1,0 +1,281 @@
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage[scaled=0.88]{helvet}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.misc,calc,fit,backgrounds}
+
+\begin{document}
+\sffamily
+\begin{tikzpicture}[
+    >=Stealth,
+    font=\small,
+    % Device blocks
+    dev_rogue/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=red!75!black,
+        line width=1.0pt,
+        fill=red!5!white,
+        minimum width=2.4cm,
+        minimum height=0.90cm,
+        inner sep=2pt,
+        align=center
+    },
+    dev_legit/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=blue!70!black,
+        line width=1.0pt,
+        fill=blue!4!white,
+        minimum width=2.4cm,
+        minimum height=0.90cm,
+        inner sep=2pt,
+        align=center
+    },
+    % Module block
+    mod_block/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=blue!80!black,
+        line width=0.9pt,
+        fill=white,
+        minimum width=2.4cm,
+        minimum height=0.95cm,
+        inner sep=2pt,
+        align=center
+    },
+    % Engine block
+    eng_block/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=blue!90!black,
+        line width=1.0pt,
+        fill=blue!5!white,
+        minimum width=2.6cm,
+        minimum height=0.95cm,
+        inner sep=2pt,
+        align=center
+    },
+    % Decision Box
+    decision_box/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=purple!80!black,
+        line width=1.0pt,
+        fill=purple!5!white,
+        minimum width=2.6cm,
+        minimum height=0.95cm,
+        inner sep=2pt,
+        align=center
+    },
+    % Gate switch
+    gate_block/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=black!80,
+        line width=1.1pt,
+        fill=gray!8!white,
+        minimum width=2.5cm,
+        minimum height=0.95cm,
+        inner sep=2pt,
+        align=center
+    },
+    % Action pills
+    pill_drop/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=red!80!black,
+        line width=1.0pt,
+        fill=red!10!white,
+        minimum width=2.2cm,
+        minimum height=0.70cm,
+        inner sep=2pt,
+        align=center,
+        font=\sffamily\scriptsize\bfseries,
+        text=red!85!black
+    },
+    pill_pass/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=green!65!black,
+        line width=1.0pt,
+        fill=green!10!white,
+        minimum width=2.2cm,
+        minimum height=0.70cm,
+        inner sep=2pt,
+        align=center,
+        font=\sffamily\scriptsize\bfseries,
+        text=green!70!black
+    },
+    % Watchdog
+    wdt_block/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=orange!85!black,
+        line width=0.9pt,
+        dashed,
+        fill=orange!6!white,
+        minimum width=2.4cm,
+        minimum height=0.70cm,
+        inner sep=2pt,
+        align=center
+    },
+    % Badges
+    badge/.style={
+        font=\sffamily\scriptsize,
+        fill=white,
+        draw=gray!35,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.8pt,
+        align=center,
+        text=black!90
+    },
+    badge_red/.style={
+        font=\sffamily\scriptsize\bfseries,
+        fill=white,
+        draw=red!40,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.8pt,
+        align=center,
+        text=red!80!black
+    },
+    badge_green/.style={
+        font=\sffamily\scriptsize\bfseries,
+        fill=white,
+        draw=green!40,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.8pt,
+        align=center,
+        text=green!70!black
+    },
+    badge_amber/.style={
+        font=\sffamily\scriptsize,
+        fill=white,
+        draw=orange!40,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.8pt,
+        align=center,
+        text=orange!85!black
+    }
+]
+
+% ==============================================================================
+% Column 1: Physical Peripherals (x = 1.2)
+% ==============================================================================
+\node[dev_legit] (kb_legit) at (1.2, 1.2) {
+    \textbf{\footnotesize Physical Keyboard}\\[1pt]
+    \scriptsize Genuine HID ($h_{\text{legit}}$)
+};
+
+\node[dev_rogue] (badusb) at (1.2, -1.2) {
+    \textbf{\footnotesize Rogue ESP32-S3}\\[1pt]
+    \scriptsize BadUSB Implant ($h_{\text{rogue}}$)
+};
+
+% Column 2: Host USB Bus (x = 3.6)
+\node[rectangle, draw=gray!70, fill=gray!15, line width=0.9pt, minimum width=0.55cm, minimum height=3.2cm, rounded corners=2pt, align=center] (bus) at (3.6, 0.0) {
+    \rotatebox{90}{\textbf{\footnotesize USB Root Hub}}
+};
+
+\draw[->, line width=0.9pt, draw=blue!70!black] (kb_legit.east) -- node[above=2pt, badge] {Human Cadence} (bus.135);
+\draw[->, line width=0.9pt, draw=red!75!black]  (badusb.east)   -- node[below=2pt, badge_red] {Machine Burst} (bus.225);
+
+% ==============================================================================
+% Column 3: Parallel Ingestion Channels (x = 6.4)
+% ==============================================================================
+% Channel A: Low-Level Hook (Top Pipeline)
+\node[mod_block] (hook) at (6.4, 1.2) {
+    \textbf{\footnotesize Low-Level Hook}\\[1pt]
+    \scriptsize \texttt{WH\_KEYBOARD\_LL} Filter
+};
+
+% Channel B: Raw Input Telemetry (Bottom Pipeline)
+\node[mod_block] (rawinput) at (6.4, -1.2) {
+    \textbf{\footnotesize Raw Input Sink}\\[1pt]
+    \scriptsize \texttt{WM\_INPUT} ($h_{\text{dev}}$, VID/PID)
+};
+
+\draw[->, line width=0.9pt, draw=blue!80!black] (bus.45) -- (hook.west);
+\draw[->, line width=0.9pt, draw=blue!80!black] (bus.315) -- (rawinput.west);
+
+% ==============================================================================
+% Column 4: Dynamics & Evaluation (x = 10.4)
+% ==============================================================================
+% Top: Selective Device Gate
+\node[gate_block] (gate) at (10.4, 1.2) {
+    \textbf{\footnotesize Selective Filter Gate}\\[1pt]
+    \scriptsize Match $h_{\text{origin}} \in \mathcal{Q}_{\text{quarantine}}$
+};
+\draw[->, line width=0.9pt, draw=black!80] (hook.east) -- node[above=2pt, badge] {Scancodes} (gate.west);
+
+% Bottom: Behavioral Dynamics Engine
+\node[eng_block] (engine) at (10.4, -1.2) {
+    \textbf{\footnotesize Dynamics Engine}\\[1pt]
+    \scriptsize Sliding Window ($W=10$)\\[1pt]
+    \scriptsize Metrics: $\mu_{\text{IKI}}, CV_{\text{IKI}}$
+};
+\draw[->, line width=0.9pt, draw=blue!80!black] (rawinput.east) -- node[above=2pt, badge] {Per-Device} (engine.west);
+
+% ==============================================================================
+% Column 5: Decision Boundary & Quarantine Blacklist (x = 14.6)
+% ==============================================================================
+% Top: Quarantine Table Blacklist
+\node[rectangle, rounded corners=3pt, draw=red!75!black, line width=1.0pt, fill=red!4!white, minimum width=2.6cm, minimum height=0.95cm, align=center] (qset) at (14.6, 1.2) {
+    \textbf{\footnotesize Quarantine Table}\\[1pt]
+    \scriptsize Blacklist: Suppress $h_{\text{rogue}}$
+};
+
+% Bottom: Decision Boundary
+\node[decision_box] (decision_box) at (14.6, -1.2) {
+    \textbf{\footnotesize Decision Boundary}\\[1pt]
+    \scriptsize $\mu < 25$\,ms $\lor$ $CV < 0.15$
+};
+\draw[->, line width=0.9pt, draw=purple!80!black] (engine.east) -- (decision_box.west);
+
+% Vertical Quarantine update from Decision Box to Q-Set
+\draw[->, line width=1.0pt, draw=red!80!black] (decision_box.north) -- node[right=3pt, badge_red] {Anomaly ($\kappa \ge 8$)\\[1pt]Lockdown} (qset.south);
+
+% Feeding Q-Set into Gate (Control Signal)
+\draw[->, line width=1.0pt, draw=red!80!black] (qset.west) -- node[above=2pt, badge_red] {Filter Rule} (gate.east);
+
+% Watchdog Timer (Below Decision Box)
+\node[wdt_block] (wdt) at (14.6, -2.4) {
+    \textbf{\footnotesize 15s Watchdog Timer}\\[1pt]
+    \scriptsize Auto-Release on Idle
+};
+\draw[->, line width=0.8pt, dashed, draw=orange!85!black] (wdt.north) -- (decision_box.south);
+\draw[->, line width=0.8pt, dashed, draw=orange!85!black] (wdt.east) to[out=0, in=-30] node[pos=0.5, right=2pt, badge_amber] {Auto-Clear} (qset.east);
+
+% ==============================================================================
+% Column 6: Dual Enforcement Outputs (x = 18.2)
+% ==============================================================================
+\node[pill_drop] (drop_out) at (18.2, 1.7) {\textbf{[DROP EVENT]}\\[1pt]\scriptsize Discard};
+\node[pill_pass] (pass_out) at (18.2, 0.7) {\textbf{[PASS EVENT]}\\[1pt]\scriptsize Allow};
+
+% Routing from Gate to Outputs
+\draw[->, line width=1.0pt, draw=red!80!black] (gate.north) -- ++(0, 0.5) -| node[pos=0.6, above=2pt, badge_red] {Rogue ($h \in \mathcal{Q}$)} (drop_out.west);
+\draw[->, line width=1.0pt, draw=green!65!black] (gate.south) -- ++(0, -0.5) -| node[pos=0.6, below=2pt, badge_green] {Human ($h \notin \mathcal{Q}$)} (pass_out.west);
+
+% Active Application Window
+\node[rectangle, rounded corners=3pt, draw=gray!70, fill=gray!5, minimum width=2.2cm, minimum height=0.65cm, align=center] (target_app) at (18.2, -0.3) {
+    \textbf{\footnotesize Active Window}\\[1pt]
+    \scriptsize Foreground Target
+};
+
+\draw[->, line width=0.8pt, draw=green!70!black] (pass_out.south) -- (target_app.north);
+
+% Background Container
+\begin{scope}[on background layer]
+    \node[rectangle, draw=gray!40, dashed, fill=gray!2, line width=0.8pt, rounded corners=5pt,
+          fit=(hook) (rawinput) (engine) (decision_box) (gate) (qset) (wdt) (drop_out) (pass_out) (target_app),
+          inner sep=6pt] (host_bg) {};
+    \node[anchor=north west, font=\sffamily\bfseries\scriptsize, text=gray!70!black] at (host_bg.north west) {\,Host OS Defense Daemon (WHID-Guard)};
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

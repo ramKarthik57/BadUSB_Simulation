@@ -1,0 +1,173 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage{amsmath,amssymb}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric}
+
+\begin{document}
+\begin{tikzpicture}[
+    >=Latex,
+    % Standard Operating State
+    st_norm/.style={
+        rectangle,
+        rounded corners=3.5pt,
+        draw=blue!80!black,
+        line width=0.85pt,
+        fill=blue!6!white,
+        minimum width=2.7cm,
+        minimum height=0.95cm,
+        inner sep=3pt,
+        align=center
+    },
+    % Idle Quiescent State
+    st_idle/.style={
+        rectangle,
+        rounded corners=3.5pt,
+        draw=blue!90!black,
+        line width=1.1pt,
+        fill=blue!12!white,
+        minimum width=2.7cm,
+        minimum height=0.95cm,
+        inner sep=3pt,
+        align=center
+    },
+    % Active Execution State
+    st_run/.style={
+        rectangle,
+        rounded corners=3.5pt,
+        draw=green!70!black,
+        line width=1.1pt,
+        fill=green!10!white,
+        minimum width=2.7cm,
+        minimum height=1.05cm,
+        inner sep=3pt,
+        align=center
+    },
+    % Stopping / Stopped States
+    st_stop/.style={
+        rectangle,
+        rounded corners=3.5pt,
+        draw=red!80!black,
+        line width=0.85pt,
+        fill=red!8!white,
+        minimum width=2.7cm,
+        minimum height=0.95cm,
+        inner sep=3pt,
+        align=center
+    },
+    % Error State
+    st_err/.style={
+        rectangle,
+        rounded corners=3.5pt,
+        draw=orange!85!black,
+        line width=0.85pt,
+        fill=orange!8!white,
+        minimum width=2.7cm,
+        minimum height=0.95cm,
+        inner sep=3pt,
+        align=center
+    },
+    % Minimal clean badges
+    badge/.style={
+        font=\sffamily\scriptsize,
+        fill=white,
+        draw=gray!35,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.4pt,
+        align=center,
+        text=black!90
+    },
+    badge_blue/.style={
+        font=\sffamily\scriptsize\bfseries,
+        fill=white,
+        draw=blue!40,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.4pt,
+        align=center,
+        text=blue!85!black
+    },
+    badge_red/.style={
+        font=\sffamily\scriptsize\bfseries,
+        fill=white,
+        draw=red!40,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.4pt,
+        align=center,
+        text=red!80!black
+    },
+    badge_amber/.style={
+        font=\sffamily\scriptsize,
+        fill=white,
+        draw=orange!40,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.4pt,
+        align=center,
+        text=orange!85!black
+    }
+]
+
+% Start Token
+\node[circle, fill=black!85, inner sep=2.5pt] (start) at (0.0, 1.6) {};
+
+% ==============================================================================
+% TOP ROW: Main Initialization & Execution Pipeline (y = 1.6)
+% ==============================================================================
+\node[st_norm] (boot)    at (1.9, 1.6)  {\textbf{\footnotesize STATE\_BOOTING}\\[2pt]\scriptsize Power-On \& USB Init};
+\node[st_norm] (usbwait) at (5.8, 1.6)  {\textbf{\footnotesize STATE\_USB\_WAIT}\\[2pt]\scriptsize Host Enum $\Delta t \ge 3.5$\,s};
+\node[st_norm] (startup) at (9.8, 1.6)  {\textbf{\footnotesize STATE\_STARTUP\_}\\[0pt]\textbf{\footnotesize PAYLOAD}\\[2pt]\scriptsize Scenario 1 Injection};
+\node[st_idle] (idle)    at (13.7, 1.6) {\textbf{\footnotesize STATE\_IDLE}\\[2pt]\scriptsize Quiescent / Listening};
+\node[st_run]  (running) at (18.1, 1.6) {\textbf{\footnotesize STATE\_RUNNING}\\[2pt]\scriptsize Payload Execution\\[1pt]\scriptsize Quantum $\delta t = 10$\,ms};
+
+% ==============================================================================
+% BOTTOM ROW: Fault Recovery & Preemption Teardown Loop (y = -1.6)
+% ==============================================================================
+\node[st_err]  (error)    at (5.8, -1.6)  {\textbf{\footnotesize STATE\_ERROR}\\[2pt]\scriptsize Watchdog / Bus Fault};
+\node[st_stop] (stopped)  at (13.7, -1.6) {\textbf{\footnotesize STATE\_STOPPED}\\[2pt]\scriptsize Atomic Teardown\\[1pt]\scriptsize \texttt{releaseAll()} Latches};
+\node[st_stop] (stopping) at (18.1, -1.6) {\textbf{\footnotesize STATE\_STOPPING}\\[2pt]\scriptsize Preempt Request\\[1pt]\scriptsize Mailbox $\phi_{\text{stop}}=1$};
+
+% ==============================================================================
+% TRANSITIONS - 100% ORTHOGONAL, ZERO DIAGONALS
+% ==============================================================================
+
+% 1. Start -> Booting
+\draw[->, line width=0.9pt, draw=black!80] (start) -- (boot);
+
+% 2. Booting -> USB Wait
+\draw[->, line width=0.9pt, draw=blue!70!black] (boot) -- node[above=2pt, badge] {Init OK} (usbwait);
+
+% 3. USB Wait -> Startup
+\draw[->, line width=0.9pt, draw=blue!70!black] (usbwait) -- node[above=2pt, badge] {Enum OK} (startup);
+
+% 4. Startup -> Idle
+\draw[->, line width=0.9pt, draw=blue!70!black] (startup) -- node[above=2pt, badge] {Done} (idle);
+
+% 5. Idle -> Running (Trigger)
+\draw[->, line width=1.0pt, draw=blue!85!black] ([yshift=8pt]idle.east) -- node[above=2pt, badge_blue] {C2 REST / Pin} ([yshift=8pt]running.west);
+
+% 6. Running -> Idle (Normal Completion)
+\draw[->, line width=0.9pt, draw=green!65!black] ([yshift=-8pt]running.west) -- node[below=2pt, badge] {Completed} ([yshift=-8pt]idle.east);
+
+% 7. Cooperative Quantum Slicing Self-Loop on RUNNING
+\draw[->, line width=0.85pt, draw=green!60!black] (running.north) .. controls +(up:0.60cm) and +(right:0.60cm) .. node[above right=1pt, badge] {$\delta t = 10$\,ms} (running.east);
+
+% 8. Running -> Stopping (Preempt / Abort) - Straight Vertical Down!
+\draw[->, line width=1.0pt, draw=red!80!black] (running.south) -- node[right=3pt, badge_red] {Abort ($\phi_{\text{stop}}=1$)} (stopping.north);
+
+% 9. Stopping -> Stopped (Atomic Teardown) - Straight Horizontal Left!
+\draw[->, line width=1.0pt, draw=red!80!black] (stopping.west) -- node[above=2pt, badge_red] {$\le 10$\,ms Kill} (stopped.east);
+
+% 10. Stopped -> Idle (Return to Quiescent) - Straight Vertical Up!
+\draw[->, line width=1.0pt, draw=blue!80!black] (stopped.north) -- node[left=3pt, badge] {Latches Cleared} (idle.south);
+
+% 11. USB Wait -> Error (Timeout Fault) - Straight Vertical Down!
+\draw[->, line width=0.9pt, dashed, draw=orange!85!black] (usbwait.south) -- node[right=3pt, badge_amber] {Enum Timeout} (error.north);
+
+% 12. Error -> Booting (WDT Reset Recovery) - Orthogonal Corner!
+\draw[->, line width=0.9pt, dashed, draw=orange!85!black] (error.west) -| node[pos=0.25, below=2pt, badge_amber] {WDT Reboot} (boot.south);
+
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" width="760" height="180" style="background:#ffffff; font-family:Helvetica, Arial, sans-serif;">
+  <!-- TIER 1: MOBILE C2 CONTROLLER (x: 14 to 186, width: 172) -->
+  <rect x="14" y="8" width="172" height="164" rx="5" fill="#faf5ff" stroke="#a855f7" stroke-width="1.2"/>
+  <text x="100" y="24" font-size="9.8" font-weight="bold" fill="#6b21a8" text-anchor="middle">Tier 1: Mobile C2 Controller</text>
+  
+  <rect x="24" y="34" width="152" height="34" rx="3.5" fill="#ffffff" stroke="#c084fc" stroke-width="0.9"/>
+  <text x="100" y="48" font-size="8.8" font-weight="bold" fill="#1e293b" text-anchor="middle">Touch Web Console</text>
+  <text x="100" y="60" font-size="7.4" fill="#64748b" text-anchor="middle">Single-Page App (SPA)</text>
+  
+  <rect x="24" y="78" width="152" height="34" rx="3.5" fill="#ffffff" stroke="#c084fc" stroke-width="0.9"/>
+  <text x="100" y="92" font-size="8.8" font-weight="bold" fill="#1e293b" text-anchor="middle">REST Attack Engine</text>
+  <text x="100" y="104" font-size="7.4" fill="#64748b" text-anchor="middle">Scenarios 1-4, Cadence Jitter</text>
+  
+  <rect x="24" y="122" width="152" height="34" rx="3.5" fill="#ffffff" stroke="#c084fc" stroke-width="0.9"/>
+  <text x="100" y="136" font-size="8.8" font-weight="bold" fill="#1e293b" text-anchor="middle">802.11 b/g/n Station</text>
+  <text x="100" y="148" font-size="7.4" fill="#64748b" text-anchor="middle">Station Link (192.168.4.2)</text>
+
+  <!-- Connectors in Tier 1 -->
+  <line x1="100" y1="68" x2="100" y2="76" stroke="#a855f7" stroke-width="1.2"/>
+  <polygon points="100,77 97.0,72.0 100,73.5 103.0,72.0" fill="#a855f7"/>
+  
+  <line x1="100" y1="112" x2="100" y2="120" stroke="#a855f7" stroke-width="1.2"/>
+  <polygon points="100,121 97.0,116.0 100,117.5 103.0,116.0" fill="#a855f7"/>
+
+  <!-- INTER-TIER 1 -> 2: 2.4 GHz SoftAP RF Link -->
+  <line x1="176" y1="140" x2="252" y2="140" stroke="#9333ea" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <polygon points="255,140 249.5,136.7 251.2,140 249.5,143.3" fill="#9333ea"/>
+  <rect x="190" y="116" width="52" height="20" rx="2.5" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.6"/>
+  <text x="216" y="125" font-size="6.8" font-weight="bold" fill="#7e22ce" text-anchor="middle">2.4 GHz</text>
+  <text x="216" y="133" font-size="6.0" fill="#475569" text-anchor="middle">SoftAP RF</text>
+
+  <!-- TIER 2: WEAPONIZED ESP32-S3 (x: 242 to 518, width: 276) -->
+  <rect x="242" y="8" width="276" height="164" rx="5" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.2"/>
+  <text x="380" y="22" font-size="9.8" font-weight="bold" fill="#15803d" text-anchor="middle">Tier 2: Weaponized ESP32-S3 Hardware Implant</text>
+
+  <!-- Core 0: Network with Gateway IP: 192.168.4.1 -->
+  <rect x="256" y="26" width="118" height="48" rx="3.5" fill="#ffffff" stroke="#4ade80" stroke-width="0.9"/>
+  <text x="315" y="38" font-size="7.6" font-weight="bold" fill="#1e293b" text-anchor="middle">Core 0: Network</text>
+  <text x="315" y="49" font-size="6.5" fill="#64748b" text-anchor="middle">SoftAP &amp; Web Server</text>
+  <text x="315" y="59" font-size="6.3" font-weight="bold" fill="#15803d" text-anchor="middle">Gateway IP: 192.168.4.1</text>
+  <text x="315" y="69" font-size="6.2" fill="#64748b" text-anchor="middle">TCP/IP Stack Baseband</text>
+
+  <!-- Core 1: HID Engine -->
+  <rect x="386" y="26" width="118" height="48" rx="3.5" fill="#ffffff" stroke="#4ade80" stroke-width="0.9"/>
+  <text x="445" y="41" font-size="7.8" font-weight="bold" fill="#1e293b" text-anchor="middle">Core 1: HID Engine</text>
+  <text x="445" y="54" font-size="6.8" fill="#64748b" text-anchor="middle">8-State Scenario FSM</text>
+  <text x="445" y="66" font-size="6.8" fill="#64748b" text-anchor="middle">Native TinyUSB HID</text>
+
+  <!-- Inter-Core Mailbox: Lock-Free Atomic Ring Buffer -->
+  <rect x="256" y="82" width="248" height="22" rx="3.5" fill="#dcfce7" stroke="#16a34a" stroke-width="0.9"/>
+  <text x="380" y="96" font-size="7.3" font-weight="bold" fill="#14532d" text-anchor="middle">Lock-Free Atomic Ring Buffer (Non-blocking Shared Mailbox)</text>
+
+  <!-- Physical Peripherals at Bottom -->
+  <rect x="256" y="114" width="118" height="38" rx="3.5" fill="#ffffff" stroke="#4ade80" stroke-width="0.9"/>
+  <text x="315" y="128" font-size="8.6" font-weight="bold" fill="#1e293b" text-anchor="middle">2.4 GHz Antenna</text>
+  <text x="315" y="139" font-size="7.0" fill="#64748b" text-anchor="middle">SoftAP Transceiver</text>
+  <text x="315" y="148" font-size="6.8" fill="#64748b" text-anchor="middle">Station Beacon Link</text>
+
+  <rect x="386" y="114" width="118" height="38" rx="3.5" fill="#fff7ed" stroke="#ea580c" stroke-width="0.9"/>
+  <text x="445" y="128" font-size="8.6" font-weight="bold" fill="#9a3412" text-anchor="middle">Native USB OTG PHY</text>
+  <text x="445" y="139" font-size="7.0" fill="#ea580c" text-anchor="middle">GPIO 19/20 (D+/D-)</text>
+  <text x="445" y="148" font-size="6.8" fill="#ea580c" text-anchor="middle">Hardware BOOT Latch</text>
+
+  <!-- Tier 2 Connectors -->
+  <line x1="335" y1="74" x2="335" y2="80" stroke="#16a34a" stroke-width="1.2"/>
+  <polygon points="335,81 332.6,77.0 335,78.2 337.4,77.0" fill="#16a34a"/>
+
+  <line x1="425" y1="82" x2="425" y2="76" stroke="#16a34a" stroke-width="1.2"/>
+  <polygon points="425,75 422.6,79.0 425,77.8 427.4,79.0" fill="#16a34a"/>
+
+  <!-- Internal Buses -->
+  <path d="M 256,128 L 248,128 L 248,50 L 254,50" fill="none" stroke="#16a34a" stroke-width="1.2"/>
+  <polygon points="255,50 251.0,47.6 252.2,50 251.0,52.4" fill="#16a34a"/>
+
+  <path d="M 504,50 L 512,50 L 512,128 L 506,128" fill="none" stroke="#ea580c" stroke-width="1.2"/>
+  <polygon points="505,128 509.0,125.6 507.8,128 509.0,130.4" fill="#ea580c"/>
+
+  <!-- INTER-TIER 2 -> 3: USB 2.0 Bus -->
+  <line x1="504" y1="140" x2="580" y2="140" stroke="#2563eb" stroke-width="1.5"/>
+  <polygon points="583,140 577.5,136.7 579.1,140 577.5,143.3" fill="#2563eb"/>
+  <rect x="522" y="116" width="48" height="20" rx="2.5" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.6"/>
+  <text x="546" y="125" font-size="6.8" font-weight="bold" fill="#1d4ed8" text-anchor="middle">USB 2.0</text>
+  <text x="546" y="133" font-size="6.0" fill="#475569" text-anchor="middle">12 Mbps HID</text>
+
+  <!-- TIER 3: WINDOWS HOST (x: 574 to 746, width: 172) -->
+  <rect x="574" y="8" width="172" height="164" rx="5" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.2"/>
+  <text x="660" y="24" font-size="9.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Tier 3: Windows Host (WHID-Guard)</text>
+
+  <!-- Box 1: Selective Filter Hook (Properly padded text inside box) -->
+  <rect x="584" y="32" width="152" height="26" rx="3.5" fill="#ffffff" stroke="#3b82f6" stroke-width="0.9"/>
+  <text x="660" y="43" font-size="7.8" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Hook</text>
+  <text x="660" y="53" font-size="6.6" fill="#1d4ed8" text-anchor="middle">WH_KEYBOARD_LL ([PASS] / [DROP])</text>
+
+  <!-- Box 2: Quarantine Table & Policy Gate -->
+  <rect x="584" y="66" width="152" height="26" rx="3.5" fill="#ffffff" stroke="#3b82f6" stroke-width="0.9"/>
+  <text x="660" y="78" font-size="8.0" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Quarantine Table &amp; Policy Gate</text>
+  <text x="660" y="87" font-size="6.8" fill="#64748b" text-anchor="middle">Isolates Rogue h_rogue (15s Auto-Reset)</text>
+
+  <!-- Box 3: Behavioral Dynamics Engine -->
+  <rect x="584" y="100" width="152" height="26" rx="3.5" fill="#ffffff" stroke="#3b82f6" stroke-width="0.9"/>
+  <text x="660" y="112" font-size="8.0" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Behavioral Dynamics Engine (W=5)</text>
+  <text x="660" y="121" font-size="6.8" fill="#64748b" text-anchor="middle">Evaluates μ &lt; 25ms ∨ CV &lt; 0.15</text>
+
+  <!-- Box 4: Raw Input Monitor -->
+  <rect x="584" y="134" width="152" height="26" rx="3.5" fill="#ffffff" stroke="#3b82f6" stroke-width="0.9"/>
+  <text x="660" y="146" font-size="8.0" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Raw Input Monitor (WM_INPUT)</text>
+  <text x="660" y="155" font-size="6.8" fill="#64748b" text-anchor="middle">Pre-Hook Device Attribution (h_dev)</text>
+
+  <!-- Connectors in Tier 3 -->
+  <line x1="660" y1="134" x2="660" y2="128" stroke="#3b82f6" stroke-width="1.2"/>
+  <polygon points="660,127 657.0,132.0 660,130.5 663.0,132.0" fill="#3b82f6"/>
+
+  <line x1="660" y1="100" x2="660" y2="94" stroke="#3b82f6" stroke-width="1.2"/>
+  <polygon points="660,93 657.0,98.0 660,96.5 663.0,98.0" fill="#3b82f6"/>
+
+  <line x1="660" y1="66" x2="660" y2="60" stroke="#3b82f6" stroke-width="1.2"/>
+  <polygon points="660,59 657.0,64.0 660,62.5 663.0,64.0" fill="#3b82f6"/>
+</svg>

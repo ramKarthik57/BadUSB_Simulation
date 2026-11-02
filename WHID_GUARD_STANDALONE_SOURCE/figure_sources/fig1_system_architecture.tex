@@ -1,0 +1,163 @@
+\documentclass[tikz,border=5pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,backgrounds,calc}
+
+\begin{document}
+\begin{tikzpicture}[
+    >=Latex,
+    % Outer Container Styles
+    tier_box/.style={
+        rectangle,
+        rounded corners=4pt,
+        draw=#1!70!black,
+        line width=0.85pt,
+        fill=#1!3!white,
+        inner sep=5pt
+    },
+    % Module Card Styles
+    card/.style={
+        rectangle,
+        rounded corners=3pt,
+        draw=#1!75!black,
+        line width=0.75pt,
+        fill=white,
+        inner sep=2.5pt,
+        align=center
+    },
+    % Badges
+    badge/.style={
+        font=\sffamily\scriptsize,
+        fill=white,
+        draw=gray!35,
+        line width=0.4pt,
+        rounded corners=2pt,
+        inner sep=1.4pt,
+        align=center,
+        text=black!90
+    }
+]
+
+% ==============================================================================
+% TIER 1: Attack Controller (Center x = 1.9, width = 3.4 cm)
+% ==============================================================================
+\node[font=\sffamily\bfseries\footnotesize, text=purple!85!black] (t1_title) at (1.9, 2.25) {Tier 1: Mobile C2 Controller};
+
+\node[card=purple, minimum width=3.3cm, minimum height=0.72cm] (c2_web) at (1.9, 1.30) {
+    \textbf{\footnotesize Touch Web Console}\\[1pt]
+    \scriptsize Single-Page App (SPA)
+};
+
+\node[card=purple, minimum width=3.3cm, minimum height=0.72cm] (c2_api) at (1.9, 0.15) {
+    \textbf{\footnotesize REST Attack Engine}\\[1pt]
+    \scriptsize Scenarios 1--4, Cadence Jitter
+};
+
+\node[card=purple, minimum width=3.3cm, minimum height=0.72cm] (c2_wifi) at (1.9, -1.00) {
+    \textbf{\footnotesize 802.11 b/g/n Client}\\[1pt]
+    \scriptsize Station Link ($192.168.4.1$)
+};
+
+\draw[->, line width=0.8pt, draw=purple!75!black] (c2_web) -- (c2_api);
+\draw[->, line width=0.8pt, draw=purple!75!black] (c2_api) -- (c2_wifi);
+
+\begin{scope}[on background layer]
+    \node[tier_box=purple, fit=(t1_title) (c2_web) (c2_api) (c2_wifi)] (tier1_bg) {};
+\end{scope}
+
+% ==============================================================================
+% TIER 2: Weaponized ESP32-S3 Hardware Implant (Center x = 8.6, width = 6.0 cm)
+% ==============================================================================
+\node[font=\sffamily\bfseries\footnotesize, text=green!55!black] (t2_title) at (8.6, 2.25) {Tier 2: Weaponized ESP32-S3 Hardware Implant};
+
+% Core 0 & Core 1
+\node[card=green, minimum width=2.6cm, minimum height=0.85cm] (core0) at (7.2, 1.25) {
+    \textbf{\footnotesize Core 0: Network}\\[1pt]
+    \scriptsize SoftAP AP, HTTP Server\\[1pt]
+    \scriptsize TCP/IP Baseband Stack
+};
+
+\node[card=green, minimum width=2.6cm, minimum height=0.85cm] (core1) at (10.0, 1.25) {
+    \textbf{\footnotesize Core 1: HID Engine}\\[1pt]
+    \scriptsize 8-State Scenario FSM\\[1pt]
+    \scriptsize Native TinyUSB HID
+};
+
+\draw[<->, line width=0.8pt, draw=green!60!black] (core0) -- (core1);
+
+% Inter-Core Spinlock Mailbox
+\node[card=green, fill=green!6!white, minimum width=5.4cm, minimum height=0.55cm] (ipc) at (8.6, 0.15) {
+    \textbf{\footnotesize FreeRTOS Spinlock Mailbox} (\texttt{portMUX\_TYPE}, Ring Buffer)
+};
+
+\draw[<->, line width=0.8pt, draw=green!60!black] (core0.south) -- (core0.south |- ipc.north);
+\draw[<->, line width=0.8pt, draw=green!60!black] (core1.south) -- (core1.south |- ipc.north);
+
+% Hardware layer
+\node[card=green, fill=green!8!white, minimum width=2.6cm, minimum height=0.70cm] (ant_hw) at (7.2, -1.00) {
+    \textbf{\footnotesize 2.4 GHz Antenna}\\[1pt]
+    \scriptsize SoftAP RF Transceiver
+};
+
+\node[card=orange, fill=orange!8!white, minimum width=2.6cm, minimum height=0.70cm] (usb_hw) at (10.0, -1.00) {
+    \textbf{\footnotesize Native USB OTG PHY}\\[1pt]
+    \scriptsize GPIO 19/20 \& BOOT Pin
+};
+
+\draw[<->, line width=0.8pt, draw=green!60!black] (ant_hw.north) -- (ant_hw.north |- ipc.south);
+\draw[->, line width=0.8pt, draw=orange!80!black] (ipc.south -| usb_hw.north) -- (usb_hw.north);
+
+\begin{scope}[on background layer]
+    \node[tier_box=green, fit=(t2_title) (core0) (core1) (ipc) (ant_hw) (usb_hw)] (soc_bg) {};
+\end{scope}
+
+% ==============================================================================
+% TIER 3: Host Defense Workstation (Center x = 15.6, width = 4.6 cm)
+% ==============================================================================
+\node[font=\sffamily\bfseries\footnotesize, text=blue!85!black] (t3_title) at (15.6, 2.25) {Tier 3: Windows Host Workstation (WHID-Guard)};
+
+\node[card=red, fill=red!4!white, minimum width=4.5cm, minimum height=0.68cm] (host_gate) at (15.6, 1.45) {
+    \textbf{\footnotesize Selective Filter Gate (\texttt{WH\_KEYBOARD\_LL})}\\[1pt]
+    \scriptsize \textbf{[PASS]} Operator Keys / \textbf{[DROP]} Rogue BadUSB
+};
+
+\node[card=red, fill=red!3!white, minimum width=4.5cm, minimum height=0.62cm] (host_qtab) at (15.6, 0.60) {
+    \textbf{\footnotesize Quarantine Table \& Policy Gate}\\[1pt]
+    \scriptsize Isolates Rogue Handle $h_{\text{rogue}}$ (15s Auto-Reset)
+};
+
+\node[card=blue, minimum width=4.5cm, minimum height=0.62cm] (host_engine) at (15.6, -0.22) {
+    \textbf{\footnotesize Behavioral Dynamics Engine ($W=10$)}\\[1pt]
+    \scriptsize Real-Time Metric Evaluation ($\mu_{\text{IKI}} < 25$\,ms $\lor$ $CV < 0.15$)
+};
+
+\node[card=blue, minimum width=4.5cm, minimum height=0.62cm] (host_raw) at (15.6, -1.02) {
+    \textbf{\footnotesize Raw Input Monitor (\texttt{WM\_INPUT})}\\[1pt]
+    \scriptsize Per-Device Hardware Attribution to Origin $h_{\text{dev}}$
+};
+
+\draw[->, line width=0.8pt, draw=blue!75!black] (host_raw) -- (host_engine);
+\draw[->, line width=0.8pt, draw=red!75!black] (host_engine) -- (host_qtab);
+\draw[->, line width=0.8pt, draw=red!75!black] (host_qtab) -- (host_gate);
+
+\begin{scope}[on background layer]
+    \node[tier_box=blue, fit=(t3_title) (host_gate) (host_qtab) (host_engine) (host_raw)] (tier3_bg) {};
+\end{scope}
+
+% ==============================================================================
+% INTER-TIER BUS CONNECTIONS
+% ==============================================================================
+% Tier 1 -> Tier 2 (Wi-Fi link)
+\draw[->, line width=0.9pt, draw=purple!80!black, dashed] (c2_wifi.east) -- (ant_hw.west)
+    node[pos=0.5, above=2pt, badge, text=purple!85!black] {\textbf{2.4 GHz SoftAP}}
+    node[pos=0.5, below=2pt, badge] {REST Commands};
+
+% Tier 2 -> Tier 3 (USB link)
+\draw[->, line width=0.9pt, draw=blue!80!black] (usb_hw.east) -- (host_raw.west)
+    node[pos=0.5, above=2pt, badge, text=blue!85!black] {\textbf{USB 2.0 Bus}}
+    node[pos=0.5, below=2pt, badge] {12 Mbps HID};
+
+\end{tikzpicture}
+\end{document}

@@ -1,19 +1,57 @@
-# ESP-IDF build artifacts
-build/
-managed_components/
-dependencies.lock
-sdkconfig.old
-
 # Python
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
 .venv/
+env/
 venv/
+ENV/
 
-# OS / editor
+# Databases & Runtime State
+*.db
+*.sqlite3
+usb_sentinel.db
+
+# Arduino & Embedded C/C++ Build Artifacts
+*.elf
+*.bin
+*.hex
+*.o
+*.d
+*.a
+badusb_firmware/build/
+
+# LaTeX Intermediate Files (preserve final PDFs and source .tex)
+*.aux
+*.log
+*.out
+*.toc
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
+# OS and Editor Artifacts
 .DS_Store
-.idea/
+Thumbs.db
+desktop.ini
 .vscode/
+.idea/
+*.swp
+*~
 
-# Environment variables
-.env
+# Paper intermediate debug scratch images
+paper/check_*.png
+paper/crop_*.png
+paper/test_*.png
+paper/debug_*.png
+paper/test_*.pdf
+paper/debug_crops/

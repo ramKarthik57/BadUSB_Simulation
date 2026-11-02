@@ -1,0 +1,34 @@
+<mxfile host="Electron" modified="2026-11-02T10:50:00.000Z" agent="PipeJack Diagram Engine" version="24.0.0">
+  <diagram id="fig2" name="Fig2_Scenario_FSM">
+    <mxGraphModel dx="760" dy="180" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="760" pageHeight="180" background="#ffffff">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="s_boot" value="STATE_BOOTING&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;Power-On &amp; USB Init&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.8;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="44" y="32" width="108" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_wait" value="STATE_USB_WAIT&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;Host Enum Δt ≥ 3.5s&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.8;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="190" y="32" width="112" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_start" value="STATE_STARTUP_PAYLOAD&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;Scenario 1 Injection&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eff6ff;strokeColor=#3b82f6;fontStyle=1;fontSize=8.0;fontColor=#1e3a8a;" vertex="1" parent="1">
+          <mxGeometry x="340" y="32" width="136" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_idle" value="STATE_IDLE&#xa;&lt;font color='#475569' style='font-size:7.2px'&gt;Quiescent / Ready&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dbeafe;strokeColor=#2563eb;fontStyle=1;fontSize=8.8;fontColor=#1e40af;" vertex="1" parent="1">
+          <mxGeometry x="504" y="32" width="96" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_run" value="STATE_RUNNING&#xa;&lt;font color='#166534' style='font-size:7.2px'&gt;Payload Active&#xa;Quantum δt = 10ms&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dcfce7;strokeColor=#16a34a;fontStyle=1;fontSize=8.8;fontColor=#14532d;" vertex="1" parent="1">
+          <mxGeometry x="664" y="32" width="88" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="s_err" value="STATE_ERROR&#xa;&lt;font color='#64748b' style='font-size:7.2px'&gt;Watchdog / Fault&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff7ed;strokeColor=#ea580c;fontStyle=1;fontSize=8.8;fontColor=#9a3412;" vertex="1" parent="1">
+          <mxGeometry x="190" y="122" width="112" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_stopd" value="STATE_STOPPED&#xa;&lt;font color='#991b1b' style='font-size:6.0px'&gt;Deassert Software Flags (State Clear)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef2f2;strokeColor=#ef4444;fontStyle=1;fontSize=8.8;fontColor=#991b1b;" vertex="1" parent="1">
+          <mxGeometry x="504" y="122" width="118" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="s_stopg" value="STATE_STOPPING&#xa;&lt;font color='#64748b' style='font-size:7.0px'&gt;Preempt Request&#xa;Mailbox φ_stop = 1&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fef2f2;strokeColor=#ef4444;fontStyle=1;fontSize=8.8;fontColor=#991b1b;" vertex="1" parent="1">
+          <mxGeometry x="664" y="122" width="88" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

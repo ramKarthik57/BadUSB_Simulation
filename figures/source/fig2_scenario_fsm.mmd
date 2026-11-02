@@ -1,0 +1,14 @@
+stateDiagram-v2
+    [*] --> STATE_BOOTING: Power-On
+    STATE_BOOTING --> STATE_USB_WAIT: Init OK
+    STATE_USB_WAIT --> STATE_STARTUP_PAYLOAD: Enum OK (Δt ≥ 3.5s)
+    STATE_USB_WAIT --> STATE_ERROR: Enum Timeout
+    STATE_ERROR --> STATE_BOOTING: WDT Reboot
+    STATE_STARTUP_PAYLOAD --> STATE_IDLE: Injection Done
+    STATE_IDLE --> STATE_RUNNING: REST Command (Authenticated)
+    STATE_RUNNING --> STATE_IDLE: Complete
+    STATE_RUNNING --> STATE_RUNNING: δt = 10ms Quantum
+    STATE_RUNNING --> STATE_USB_WAIT: USB Disconnect / Bus Drop
+    STATE_RUNNING --> STATE_STOPPING: Abort (φ_stop = 1)
+    STATE_STOPPING --> STATE_STOPPED: ≤10ms Kill
+    STATE_STOPPED --> STATE_IDLE: Deassert Software Flags (State Clear)
