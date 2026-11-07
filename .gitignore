@@ -38,6 +38,9 @@ badusb_firmware/build/
 *.synctex.gz
 *.fdb_latexmk
 *.fls
+demo_video/audio_live/
+demo_video/live_clips/
+demo_video/test_live/
 paper/PIC2026/
 paper/inspect_*
 

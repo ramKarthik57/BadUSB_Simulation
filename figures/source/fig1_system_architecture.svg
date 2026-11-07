@@ -6,127 +6,129 @@
   </defs>
 
   <!-- ================= TIER 1: MOBILE C2 CONTROLLER ================= -->
-  <rect x="12" y="8" width="146" height="204" rx="6" fill="#faf5ff" stroke="#a855f7" stroke-width="1.3"/>
-  <text x="85" y="26" font-size="10.2" font-weight="bold" fill="#6b21a8" text-anchor="middle">Tier 1: Mobile C2 Controller</text>
+  <rect x="10" y="8" width="134" height="204" rx="6" fill="#faf5ff" stroke="#a855f7" stroke-width="1.3"/>
+  <text x="77" y="26" font-size="10.0" font-weight="bold" fill="#6b21a8" text-anchor="middle">Tier 1: Mobile C2 Controller</text>
   
-  <rect x="20" y="38" width="130" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="85" y="55" font-size="9.4" font-weight="bold" fill="#1e293b" text-anchor="middle">Touch Web Console</text>
-  <text x="85" y="70" font-size="8.0" fill="#64748b" text-anchor="middle">Single-Page App (SPA)</text>
+  <rect x="18" y="38" width="118" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="77" y="55" font-size="9.2" font-weight="bold" fill="#1e293b" text-anchor="middle">Touch Web Console</text>
+  <text x="77" y="69" font-size="7.8" fill="#64748b" text-anchor="middle">Single-Page App (SPA)</text>
   
-  <rect x="20" y="94" width="130" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="85" y="111" font-size="9.4" font-weight="bold" fill="#1e293b" text-anchor="middle">REST Attack Engine</text>
-  <text x="85" y="126" font-size="7.8" fill="#64748b" text-anchor="middle">Scenarios 1-4, Cadence Jitter</text>
+  <rect x="18" y="94" width="118" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="77" y="111" font-size="9.2" font-weight="bold" fill="#1e293b" text-anchor="middle">REST Attack Engine</text>
+  <text x="77" y="125" font-size="7.6" fill="#64748b" text-anchor="middle">Scenarios 1-4, Cadence Jitter</text>
   
-  <rect x="20" y="150" width="130" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="85" y="167" font-size="9.4" font-weight="bold" fill="#1e293b" text-anchor="middle">802.11 b/g/n Station</text>
-  <text x="85" y="182" font-size="7.8" fill="#64748b" text-anchor="middle">Station Link (192.168.4.2)</text>
+  <rect x="18" y="150" width="118" height="42" rx="4" fill="#ffffff" stroke="#c084fc" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="77" y="167" font-size="9.2" font-weight="bold" fill="#1e293b" text-anchor="middle">802.11 b/g/n Station</text>
+  <text x="77" y="181" font-size="7.6" fill="#64748b" text-anchor="middle">Station Link (192.168.4.2)</text>
 
   <!-- Downward Connectors inside Tier 1 -->
-  <line x1="85" y1="80" x2="85" y2="90" stroke="#a855f7" stroke-width="1.3"/>
-  <polygon points="85,94 82.53,90.2 85,91.15 87.47,90.2" fill="#a855f7"/>
-  <line x1="85" y1="136" x2="85" y2="146" stroke="#a855f7" stroke-width="1.3"/>
-  <polygon points="85,150 82.53,146.2 85,147.15 87.47,146.2" fill="#a855f7"/>
+  <line x1="77" y1="80" x2="77" y2="89" stroke="#a855f7" stroke-width="1.3"/>
+  <polygon points="77,94 74.53,90.2 77,91.15 79.47,90.2" fill="#a855f7"/>
+  <line x1="77" y1="136" x2="77" y2="145" stroke="#a855f7" stroke-width="1.3"/>
+  <polygon points="77,150 74.53,146.2 77,147.15 79.47,146.2" fill="#a855f7"/>
 
-  <!-- INTER-TIER 1 -> 2 BUS: 2.4 GHz SoftAP RF (Enters Antenna at y=174) -->
-  <line x1="150" y1="174" x2="172" y2="174" stroke="#9333ea" stroke-width="1.5"/>
-  <rect x="172" y="161" width="42" height="26" rx="3.5" fill="#ffffff" stroke="#d8b4fe" stroke-width="0.9"/>
-  <text x="193" y="173" font-size="7.8" font-weight="bold" fill="#9333ea" text-anchor="middle">2.4 GHz</text>
-  <text x="193" y="183" font-size="6.8" fill="#a855f7" text-anchor="middle">SoftAP RF</text>
-  <line x1="214" y1="174" x2="236" y2="174" stroke="#9333ea" stroke-width="1.5"/>
-  <polygon points="240,174 236.0,171.4 237.0,174 236.0,176.6" fill="#9333ea"/>
+  <!-- INTER-TIER 1 -> 2 BUS: 2.4 GHz SoftAP RF (Spacious 80pt corridor, long arrows!) -->
+  <line x1="136" y1="174" x2="157" y2="174" stroke="#9333ea" stroke-width="1.5"/>
+  <polygon points="162,174 157.5,171.075 158.625,174 157.5,176.925" fill="#9333ea"/>
+  <rect x="162" y="161" width="44" height="26" rx="3.5" fill="#ffffff" stroke="#d8b4fe" stroke-width="0.9"/>
+  <text x="184" y="173" font-size="7.8" font-weight="bold" fill="#9333ea" text-anchor="middle">2.4 GHz</text>
+  <text x="184" y="183" font-size="6.8" fill="#a855f7" text-anchor="middle">SoftAP RF</text>
+  <line x1="206" y1="174" x2="235" y2="174" stroke="#9333ea" stroke-width="1.5"/>
+  <polygon points="240,174 235.5,171.075 236.625,174 235.5,176.925" fill="#9333ea"/>
 
   <!-- ================= TIER 2: WEAPONIZED ESP32-S3 ================= -->
-  <rect x="226" y="8" width="288" height="204" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
-  <text x="370" y="26" font-size="10.2" font-weight="bold" fill="#14532d" text-anchor="middle">Tier 2: Weaponized ESP32-S3 Hardware Implant</text>
+  <rect x="224" y="8" width="272" height="204" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.3"/>
+  <text x="360" y="26" font-size="10.0" font-weight="bold" fill="#14532d" text-anchor="middle">Tier 2: Weaponized ESP32-S3 Hardware Implant</text>
 
   <!-- Core 0: Network -->
-  <rect x="240" y="38" width="124" height="58" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="302" y="53" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">Core 0: Network</text>
-  <text x="302" y="67" font-size="7.8" fill="#15803d" text-anchor="middle">SoftAP &amp; Web Server</text>
-  <text x="302" y="79" font-size="7.6" font-weight="bold" fill="#166534" text-anchor="middle">Gateway IP: 192.168.4.1</text>
-  <text x="302" y="90" font-size="7.4" fill="#475569" text-anchor="middle">TCP/IP Stack Baseband</text>
+  <rect x="240" y="38" width="114" height="58" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="297" y="52" font-size="9.2" font-weight="bold" fill="#14532d" text-anchor="middle">Core 0: Network</text>
+  <text x="297" y="65" font-size="7.6" fill="#15803d" text-anchor="middle">SoftAP &amp; Web Server</text>
+  <text x="297" y="77" font-size="7.6" font-weight="bold" fill="#166534" text-anchor="middle">Gateway IP: 192.168.4.1</text>
+  <text x="297" y="88" font-size="7.2" fill="#475569" text-anchor="middle">TCP/IP Stack Baseband</text>
 
   <!-- Core 1: HID Engine -->
-  <rect x="376" y="38" width="124" height="58" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="438" y="53" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">Core 1: HID Engine</text>
-  <text x="438" y="69" font-size="8.0" fill="#15803d" text-anchor="middle">8-State Scenario FSM</text>
-  <text x="438" y="84" font-size="8.0" fill="#15803d" text-anchor="middle">Native TinyUSB HID</text>
+  <rect x="366" y="38" width="114" height="58" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="423" y="53" font-size="9.2" font-weight="bold" fill="#14532d" text-anchor="middle">Core 1: HID Engine</text>
+  <text x="423" y="68" font-size="7.8" fill="#15803d" text-anchor="middle">8-State Scenario FSM</text>
+  <text x="423" y="83" font-size="7.8" fill="#15803d" text-anchor="middle">Native TinyUSB HID</text>
 
   <!-- Lock-Free Atomic Ring Buffer -->
-  <rect x="240" y="106" width="260" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.1"/>
-  <text x="370" y="125" font-size="8.6" font-weight="bold" fill="#14532d" text-anchor="middle">Lock-Free Atomic Ring Buffer (Non-blocking Shared Mailbox)</text>
+  <rect x="240" y="106" width="240" height="30" rx="4" fill="#dcfce7" stroke="#16a34a" stroke-width="1.1"/>
+  <text x="360" y="125" font-size="8.4" font-weight="bold" fill="#14532d" text-anchor="middle">Lock-Free Atomic Ring Buffer (Non-blocking Shared Mailbox)</text>
 
   <!-- Mailbox Inter-Core Arrows: Core 0 writes DOWN into Buffer, Core 1 reads UP from Buffer -->
-  <line x1="302" y1="96" x2="302" y2="102" stroke="#16a34a" stroke-width="1.3"/>
-  <polygon points="302,106 299.53,102.2 302,103.15 304.47,102.2" fill="#16a34a"/>
-  <line x1="438" y1="106" x2="438" y2="100" stroke="#16a34a" stroke-width="1.3"/>
-  <polygon points="438,96 435.53,99.8 438,98.85 440.47,99.8" fill="#16a34a"/>
+  <line x1="297" y1="96" x2="297" y2="101" stroke="#16a34a" stroke-width="1.3"/>
+  <polygon points="297,106 294.53,102.2 297,103.15 299.47,102.2" fill="#16a34a"/>
+  <line x1="423" y1="106" x2="423" y2="101" stroke="#16a34a" stroke-width="1.3"/>
+  <polygon points="423,96 420.53,99.8 423,98.85 425.47,99.8" fill="#16a34a"/>
 
   <!-- 2.4 GHz Antenna -->
-  <rect x="240" y="148" width="124" height="52" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="302" y="165" font-size="9.4" font-weight="bold" fill="#14532d" text-anchor="middle">2.4 GHz Antenna</text>
-  <text x="302" y="179" font-size="7.8" fill="#15803d" text-anchor="middle">SoftAP Transceiver</text>
-  <text x="302" y="192" font-size="7.6" fill="#475569" text-anchor="middle">Station Beacon Link</text>
+  <rect x="240" y="148" width="114" height="52" rx="4" fill="#ffffff" stroke="#22c55e" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="297" y="164" font-size="9.2" font-weight="bold" fill="#14532d" text-anchor="middle">2.4 GHz Antenna</text>
+  <text x="297" y="178" font-size="7.8" fill="#15803d" text-anchor="middle">SoftAP Transceiver</text>
+  <text x="297" y="191" font-size="7.4" fill="#475569" text-anchor="middle">Station Beacon Link</text>
 
   <!-- Native USB OTG PHY -->
-  <rect x="376" y="148" width="124" height="52" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1.1" filter="url(#sh1)"/>
-  <text x="438" y="165" font-size="9.4" font-weight="bold" fill="#9a3412" text-anchor="middle">Native USB OTG PHY</text>
-  <text x="438" y="179" font-size="7.8" font-weight="bold" fill="#c2410c" text-anchor="middle">GPIO 19/20 (D+/D-)</text>
-  <text x="438" y="192" font-size="7.4" fill="#ea580c" text-anchor="middle">Hardware BOOT Latch</text>
+  <rect x="366" y="148" width="114" height="52" rx="4" fill="#fff7ed" stroke="#ea580c" stroke-width="1.1" filter="url(#sh1)"/>
+  <text x="423" y="164" font-size="9.2" font-weight="bold" fill="#9a3412" text-anchor="middle">Native USB OTG PHY</text>
+  <text x="423" y="178" font-size="7.8" font-weight="bold" fill="#c2410c" text-anchor="middle">GPIO 19/20 (D+/D-)</text>
+  <text x="423" y="191" font-size="7.4" fill="#ea580c" text-anchor="middle">Hardware BOOT Latch</text>
 
-  <!-- Left Bus: Antenna passes received RF frames UP into Core 0 Network along x=233 -->
-  <line x1="240" y1="158" x2="233" y2="158" stroke="#16a34a" stroke-width="1.2"/>
-  <line x1="233" y1="158" x2="233" y2="67" stroke="#16a34a" stroke-width="1.2"/>
-  <line x1="233" y1="67" x2="236" y2="67" stroke="#16a34a" stroke-width="1.2"/>
+  <!-- Left Bus: Antenna passes received RF frames UP into Core 0 Network along x=232 -->
+  <line x1="240" y1="158" x2="232" y2="158" stroke="#16a34a" stroke-width="1.2"/>
+  <line x1="232" y1="158" x2="232" y2="67" stroke="#16a34a" stroke-width="1.2"/>
+  <line x1="232" y1="67" x2="235" y2="67" stroke="#16a34a" stroke-width="1.2"/>
   <polygon points="240,67 236.2,64.53 237.15,67 236.2,69.47" fill="#16a34a"/>
 
-  <!-- Right Bus: Core 1 dispatches synthesized HID keystrokes DOWN to Native USB PHY along x=507 -->
-  <line x1="500" y1="67" x2="507" y2="67" stroke="#ea580c" stroke-width="1.2"/>
-  <line x1="507" y1="67" x2="507" y2="158" stroke="#ea580c" stroke-width="1.2"/>
-  <line x1="507" y1="158" x2="504" y2="158" stroke="#ea580c" stroke-width="1.2"/>
-  <polygon points="500,158 503.8,155.53 502.85,158 503.8,160.47" fill="#ea580c"/>
+  <!-- Right Bus: Core 1 dispatches synthesized HID keystrokes DOWN to Native USB PHY along x=488 -->
+  <line x1="480" y1="67" x2="488" y2="67" stroke="#ea580c" stroke-width="1.2"/>
+  <line x1="488" y1="67" x2="488" y2="158" stroke="#ea580c" stroke-width="1.2"/>
+  <line x1="488" y1="158" x2="485" y2="158" stroke="#ea580c" stroke-width="1.2"/>
+  <polygon points="480,158 483.8,155.53 482.85,158 483.8,160.47" fill="#ea580c"/>
 
-  <!-- INTER-TIER 2 -> 3 BUS: USB 2.0 Cable Line (Rightward from USB PHY to Host Raw Input) -->
-  <line x1="500" y1="184" x2="525" y2="184" stroke="#1d4ed8" stroke-width="1.5"/>
-  <rect x="525" y="171" width="46" height="26" rx="3.5" fill="#ffffff" stroke="#93c5fd" stroke-width="0.9"/>
-  <text x="548" y="183" font-size="7.8" font-weight="bold" fill="#1d4ed8" text-anchor="middle">USB 2.0</text>
-  <text x="548" y="193" font-size="6.8" fill="#2563eb" text-anchor="middle">12 Mbps HID</text>
-  <line x1="571" y1="184" x2="588" y2="184" stroke="#1d4ed8" stroke-width="1.5"/>
-  <polygon points="592,184 588.0,181.4 589.0,184 588.0,186.6" fill="#1d4ed8"/>
+  <!-- INTER-TIER 2 -> 3 BUS: USB 2.0 Cable Line (Spacious 70pt corridor, long arrows!) -->
+  <line x1="480" y1="180" x2="504" y2="180" stroke="#1d4ed8" stroke-width="1.5"/>
+  <polygon points="509,180 504.5,177.075 505.625,180 504.5,182.925" fill="#1d4ed8"/>
+  <rect x="509" y="167" width="44" height="26" rx="3.5" fill="#ffffff" stroke="#93c5fd" stroke-width="0.9"/>
+  <text x="531" y="179" font-size="7.8" font-weight="bold" fill="#1d4ed8" text-anchor="middle">USB 2.0</text>
+  <text x="531" y="189" font-size="6.8" fill="#2563eb" text-anchor="middle">12 Mbps HID</text>
+  <line x1="553" y1="180" x2="573" y2="180" stroke="#1d4ed8" stroke-width="1.5"/>
+  <polygon points="578,180 573.5,177.075 574.625,180 573.5,182.925" fill="#1d4ed8"/>
 
-  <!-- ================= TIER 3: WINDOWS HOST (WHID-GUARD) ================= -->
-  <rect x="582" y="8" width="166" height="204" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.3"/>
-  <text x="665" y="26" font-size="10.0" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Tier 3: Windows Host (WHID-Guard)</text>
+  <!-- ================= TIER 3: WINDOWS HOST (WHID-GUARD) (SPACIOUS 186pt WIDTH & 17pt BOTTOM CLEARANCE) ================= -->
+  <rect x="566" y="8" width="186" height="204" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.3"/>
+  <text x="659" y="26" font-size="9.8" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Tier 3: Windows Host (WHID-Guard)</text>
 
   <!-- Box 1: Selective Filter Hook (WH_KEYBOARD_LL) -->
-  <rect x="592" y="38" width="146" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="665" y="51" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Hook</text>
-  <text x="665" y="64" font-size="7.4" fill="#1d4ed8" text-anchor="middle">WH_KEYBOARD_LL ([PASS] / [DROP])</text>
+  <rect x="578" y="38" width="162" height="31" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="659" y="50" font-size="8.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Selective Filter Hook</text>
+  <text x="659" y="62" font-size="7.2" fill="#1d4ed8" text-anchor="middle">WH_KEYBOARD_LL ([PASS] / [DROP])</text>
 
-  <!-- Arrow 1: Upward from Box 2 to Box 1 in generous 12pt gap -->
-  <line x1="665" y1="84" x2="665" y2="76" stroke="#2563eb" stroke-width="1.3"/>
-  <polygon points="665,72 662.53,75.8 665,74.85 667.47,75.8" fill="#2563eb"/>
+  <!-- Arrow 1: Upward from Box 2 to Box 1 -->
+  <line x1="659" y1="80" x2="659" y2="74" stroke="#2563eb" stroke-width="1.3"/>
+  <polygon points="659,69 656.53,72.8 659,71.85 661.47,72.8" fill="#2563eb"/>
 
   <!-- Box 2: Quarantine Table & Policy Gate -->
-  <rect x="592" y="84" width="146" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="665" y="97" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Quarantine Table &amp; Policy Gate</text>
-  <text x="665" y="110" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Isolates Rogue h_rogue (15s Reset)</text>
+  <rect x="578" y="80" width="162" height="31" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="659" y="92" font-size="8.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Quarantine Table &amp; Policy Gate</text>
+  <text x="659" y="104" font-size="7.2" fill="#1d4ed8" text-anchor="middle">Isolates Rogue h_rogue (15s Reset)</text>
 
-  <!-- Arrow 2: Upward from Box 3 to Box 2 in generous 12pt gap -->
-  <line x1="665" y1="130" x2="665" y2="122" stroke="#2563eb" stroke-width="1.3"/>
-  <polygon points="665,118 662.53,121.8 665,120.85 667.47,121.8" fill="#2563eb"/>
+  <!-- Arrow 2: Upward from Box 3 to Box 2 -->
+  <line x1="659" y1="122" x2="659" y2="116" stroke="#2563eb" stroke-width="1.3"/>
+  <polygon points="659,111 656.53,114.8 659,113.85 661.47,114.8" fill="#2563eb"/>
 
   <!-- Box 3: Behavioral Dynamics Engine (W=5) -->
-  <rect x="592" y="130" width="146" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="665" y="143" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Behavioral Dynamics Engine (W=5)</text>
-  <text x="665" y="156" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Evaluates &#956; &lt; 25ms &#8744; CV &lt; 0.15</text>
+  <rect x="578" y="122" width="162" height="31" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="659" y="134" font-size="8.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Behavioral Dynamics Engine (W=5)</text>
+  <text x="659" y="146" font-size="7.2" fill="#1d4ed8" text-anchor="middle">Evaluates &#956; &lt; 25ms &#8744; CV &lt; 0.15</text>
 
-  <!-- Arrow 3: Upward from Box 4 to Box 3 in generous 12pt gap -->
-  <line x1="665" y1="176" x2="665" y2="168" stroke="#2563eb" stroke-width="1.3"/>
-  <polygon points="665,164 662.53,167.8 665,166.85 667.47,167.8" fill="#2563eb"/>
+  <!-- Arrow 3: Upward from Box 4 to Box 3 -->
+  <line x1="659" y1="164" x2="659" y2="158" stroke="#2563eb" stroke-width="1.3"/>
+  <polygon points="659,153 656.53,156.8 659,155.85 661.47,156.8" fill="#2563eb"/>
 
-  <!-- Box 4: Raw Input Monitor (WM_INPUT) -->
-  <rect x="592" y="176" width="146" height="34" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
-  <text x="665" y="189" font-size="8.6" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Raw Input Monitor (WM_INPUT)</text>
-  <text x="665" y="202" font-size="7.4" fill="#1d4ed8" text-anchor="middle">Pre-Hook Device Attribution (h_dev)</text>
+  <!-- Box 4: Raw Input Monitor (WM_INPUT) (Ends at y=195, leaving 17pt generous bottom room!) -->
+  <rect x="578" y="164" width="162" height="31" rx="4" fill="#ffffff" stroke="#3b82f6" stroke-width="1.0" filter="url(#sh1)"/>
+  <text x="659" y="176" font-size="8.4" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Raw Input Monitor (WM_INPUT)</text>
+  <text x="659" y="188" font-size="7.2" fill="#1d4ed8" text-anchor="middle">Pre-Hook Device Attribution (h_dev)</text>
 </svg>
