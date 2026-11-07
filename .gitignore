@@ -38,6 +38,8 @@ badusb_firmware/build/
 *.synctex.gz
 *.fdb_latexmk
 *.fls
+paper/PIC2026/
+paper/inspect_*
 
 # OS and Editor Artifacts
 .DS_Store

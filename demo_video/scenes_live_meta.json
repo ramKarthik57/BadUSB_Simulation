@@ -1,0 +1,355 @@
+{
+  "total_duration": 334.67,
+  "scenes": [
+    {
+      "id": 1,
+      "title": "Introduction & Architecture Overview",
+      "raw_duration": 34.56,
+      "final_duration": 35.76,
+      "start_time": 0.0,
+      "end_time": 35.76
+    },
+    {
+      "id": 2,
+      "title": "Live Demo 1: Auto-Run Notepad Injection",
+      "raw_duration": 42.91,
+      "final_duration": 44.1,
+      "start_time": 35.76,
+      "end_time": 79.86
+    },
+    {
+      "id": 3,
+      "title": "Live Demo 2: Phone UI & Physical Button Advancement",
+      "raw_duration": 39.55,
+      "final_duration": 40.75,
+      "start_time": 79.86,
+      "end_time": 120.61
+    },
+    {
+      "id": 4,
+      "title": "Live Demo 3: Remote Scenario Execution & Emergency Stop",
+      "raw_duration": 39.0,
+      "final_duration": 40.2,
+      "start_time": 120.61,
+      "end_time": 160.81
+    },
+    {
+      "id": 5,
+      "title": "Live Demo 4: Wireless Keyboard & Multi-Touch Trackpad Mouse",
+      "raw_duration": 34.78,
+      "final_duration": 35.98,
+      "start_time": 160.81,
+      "end_time": 196.79
+    },
+    {
+      "id": 6,
+      "title": "Live Demo 5: Adversarial Evasion & Cadence Jitter",
+      "raw_duration": 35.42,
+      "final_duration": 36.6,
+      "start_time": 196.79,
+      "end_time": 233.39
+    },
+    {
+      "id": 7,
+      "title": "Live Demo 6: WHID-Guard Host Defense in Action",
+      "raw_duration": 51.82,
+      "final_duration": 53.0,
+      "start_time": 233.39,
+      "end_time": 286.39
+    },
+    {
+      "id": 8,
+      "title": "Quantitative Empirical Benchmark Evaluation",
+      "raw_duration": 29.14,
+      "final_duration": 30.3,
+      "start_time": 286.39,
+      "end_time": 316.69
+    },
+    {
+      "id": 9,
+      "title": "Conclusion, IEEE Publication & Open-Source Release",
+      "raw_duration": 16.78,
+      "final_duration": 17.98,
+      "start_time": 316.69,
+      "end_time": 334.67
+    }
+  ],
+  "subtitles": [
+    {
+      "scene_id": 1,
+      "start": 0.1,
+      "end": 15.0971706,
+      "text": "Hello everyone, and welcome to the live demonstration of our cybersecurity project: WHID-Guard, an ESP32-S3 Phone-Controlled USB HID Keyboard and Mouse platform with BadUSB Simulation and a Defensive Keystroke Firewall."
+    },
+    {
+      "scene_id": 1,
+      "start": 15.0471706,
+      "end": 22.4646238,
+      "text": "Developed by Ram Karthik G and Harini V from the Department of Cybersecurity at Amrita Vishwa Vidyapeetham, Chennai."
+    },
+    {
+      "scene_id": 1,
+      "start": 22.4646238,
+      "end": 34.4929263,
+      "text": "In this video, we will show you the physical hardware setup, live automated keystroke injection, wireless smartphone remote control, and our real-time behavioral host firewall actively defending against the attack."
+    },
+    {
+      "scene_id": 2,
+      "start": 35.86,
+      "end": 39.1354718,
+      "text": "Let's begin with the live hardware demonstration."
+    },
+    {
+      "scene_id": 2,
+      "start": 39.0854718,
+      "end": 42.811887,
+      "text": "On the left, you see our Windows laptop desktop."
+    },
+    {
+      "scene_id": 2,
+      "start": 42.8118871,
+      "end": 56.302453799999995,
+      "text": "When the ESP32-S3 is plugged in, its native USB-OTG controller on GPIO 19 and 20 enumerates instantly as a standard USB HID composite device without requiring any third-party drivers."
+    },
+    {
+      "scene_id": 2,
+      "start": 56.3024539,
+      "end": 64.627926,
+      "text": "Watch the screen closely: after a bounded 3.5-second stabilization wait, the ESP32 triggers Scenario 1."
+    },
+    {
+      "scene_id": 2,
+      "start": 64.627926,
+      "end": 70.5241527,
+      "text": "It automatically opens the Windows Run dialog, types notepad, and launches the editor."
+    },
+    {
+      "scene_id": 2,
+      "start": 70.5241528,
+      "end": 78.61377579999998,
+      "text": "Notice how the microcontroller types our security awareness advisory character-by-character at high speed without anyone touching the laptop keyboard."
+    },
+    {
+      "scene_id": 3,
+      "start": 79.96,
+      "end": 87.50434,
+      "text": "Now look at the right pane, where our real smartphone controller is connected to the ESP32-S3 over Wi-Fi."
+    },
+    {
+      "scene_id": 3,
+      "start": 87.45434,
+      "end": 94.1406611,
+      "text": "The phone browser loads our dark-mode Single-Page Application served directly from the microcontroller's flash memory."
+    },
+    {
+      "scene_id": 3,
+      "start": 94.1406611,
+      "end": 99.5298123,
+      "text": "In the Settings tab, we enter the security PIN and authenticate against the REST API."
+    },
+    {
+      "scene_id": 3,
+      "start": 99.5298123,
+      "end": 103.397737,
+      "text": "The top telemetry immediately confirms our session token."
+    },
+    {
+      "scene_id": 3,
+      "start": 103.3977371,
+      "end": 119.3529266,
+      "text": "Next, watch what happens when I press the physical GPIO 0 BOOT button on the ESP32 board: the hardware edge-detector advances circularly through our payload sequences, cycling from Scenario 1 to 2, 3, and 4 with a 50-millisecond debounce filter."
+    },
+    {
+      "scene_id": 4,
+      "start": 120.71,
+      "end": 125.4241512,
+      "text": "From the phone's Scenarios tab, we can also launch any attack directly."
+    },
+    {
+      "scene_id": 4,
+      "start": 125.3741512,
+      "end": 128.4991513,
+      "text": "Watch as I tap Scenario 4 on the phone."
+    },
+    {
+      "scene_id": 4,
+      "start": 128.4991513,
+      "end": 139.74915190000002,
+      "text": "On the laptop, the Run dialog opens instantly, launches the Command Prompt, and runs netsh wlan show profiles, non-destructively enumerating all saved wireless networks."
+    },
+    {
+      "scene_id": 4,
+      "start": 139.74915190000002,
+      "end": 144.0887747,
+      "text": "Next, I trigger Scenario 3: simulated ransomware."
+    },
+    {
+      "scene_id": 4,
+      "start": 144.0887748,
+      "end": 150.9048129,
+      "text": "But watch this safety feature: while it is typing, I immediately tap the red Emergency Stop button on the phone!"
+    },
+    {
+      "scene_id": 4,
+      "start": 150.9048129,
+      "end": 159.5604737,
+      "text": "The firmware's non-blocking loop halts typing within 10 milliseconds and calls releaseAll on both keyboard and mouse buses, leaving zero keys stuck."
+    },
+    {
+      "scene_id": 5,
+      "start": 160.91,
+      "end": 167.4166041,
+      "text": "Beyond security payloads, the platform converts the smartphone into a complete driverless input peripheral."
+    },
+    {
+      "scene_id": 5,
+      "start": 167.3666041,
+      "end": 177.1307555,
+      "text": "In the Keyboard tab, we have a full 6-row desktop keyboard with persistent hardware modifier latches, system shortcut macros, and a live text transmitter."
+    },
+    {
+      "scene_id": 5,
+      "start": 177.1307555,
+      "end": 181.6472651,
+      "text": "On the laptop, I open a text file and type directly from the phone."
+    },
+    {
+      "scene_id": 5,
+      "start": 181.6472652,
+      "end": 186.0812277,
+      "text": "Switching to the Mouse tab gives us a 60-hertz virtual trackpad."
+    },
+    {
+      "scene_id": 5,
+      "start": 186.0812277,
+      "end": 195.5387753,
+      "text": "Moving a finger across the phone screen smoothly translates into 8-bit cursor movement on the laptop, supporting tap-to-click, drag-lock, and precision nudging."
+    },
+    {
+      "scene_id": 6,
+      "start": 196.89,
+      "end": 204.0687739,
+      "text": "Standard BadUSB tools type with robotic consistency, making them easy to catch with naive speed thresholds."
+    },
+    {
+      "scene_id": 6,
+      "start": 204.01877389999999,
+      "end": 208.7711326,
+      "text": "In this demonstration, we test our firmware's Adversarial Stealth Mode."
+    },
+    {
+      "scene_id": 6,
+      "start": 208.77113269999998,
+      "end": 212.7569819,
+      "text": "On the phone, I toggle the Adversarial Evasion switch."
+    },
+    {
+      "scene_id": 6,
+      "start": 212.7569819,
+      "end": 225.9527373,
+      "text": "Notice how the typing cadence transforms: the firmware replaces rigid 10-millisecond delays with randomized stochastic jitter, and inserts cognitive pauses of 150 to 300 milliseconds after spaces and punctuation."
+    },
+    {
+      "scene_id": 6,
+      "start": 225.9527374,
+      "end": 232.1555679,
+      "text": "This emulates authentic human thinking pauses, designed to stress-test host defensive classifiers."
+    },
+    {
+      "scene_id": 7,
+      "start": 233.48999999999998,
+      "end": 238.06264169999997,
+      "text": "Now, let's observe our defensive solution: WHID-Guard."
+    },
+    {
+      "scene_id": 7,
+      "start": 238.0126417,
+      "end": 242.0102834,
+      "text": "On the laptop, we launch our Python Keystroke Firewall."
+    },
+    {
+      "scene_id": 7,
+      "start": 242.0102834,
+      "end": 253.5433028,
+      "text": "Look at the live telemetry card: using the Windows Raw Input API, it immediately attributes the active device handle to the ESP32-S3 with Vendor ID 303A."
+    },
+    {
+      "scene_id": 7,
+      "start": 253.5433029,
+      "end": 256.2791521,
+      "text": "I click Toggle to arm the firewall."
+    },
+    {
+      "scene_id": 7,
+      "start": 256.2791521,
+      "end": 260.1824541,
+      "text": "Now, I trigger a BadUSB payload from the phone."
+    },
+    {
+      "scene_id": 7,
+      "start": 260.1824542,
+      "end": 272.246134,
+      "text": "Watch the firewall: within just 8 characters\u2014less than 85 milliseconds\u2014the keystroke dynamics engine detects the near-zero variance, trips the anomaly threshold, and locks down the device!"
+    },
+    {
+      "scene_id": 7,
+      "start": 272.2461341,
+      "end": 276.0315116,
+      "text": "As you can see, zero characters reach Notepad."
+    },
+    {
+      "scene_id": 7,
+      "start": 276.0315117,
+      "end": 281.69188929999996,
+      "text": "And most importantly, when I type on the laptop's built-in keyboard, it types perfectly!"
+    },
+    {
+      "scene_id": 7,
+      "start": 281.69188929999996,
+      "end": 285.1470781,
+      "text": "Only the malicious hardware handle is quarantined."
+    },
+    {
+      "scene_id": 8,
+      "start": 286.49,
+      "end": 291.4753776,
+      "text": "We benchmarked WHID-Guard across 1,500 keystrokes."
+    },
+    {
+      "scene_id": 8,
+      "start": 291.4253776,
+      "end": 298.9371704,
+      "text": "In human baseline testing, the system achieved a 0.0 percent False Positive Rate across 500 consecutive keystrokes."
+    },
+    {
+      "scene_id": 8,
+      "start": 298.9371704,
+      "end": 309.6211332,
+      "text": "Against unconstrained BadUSB injection, it achieved a 98.6 percent True Positive Rate, quarantining the attack within 8 characters or 85 milliseconds."
+    },
+    {
+      "scene_id": 8,
+      "start": 309.6211333,
+      "end": 315.4583977,
+      "text": "Against adversarial evasion, it flagged 25.2 percent of suspicious events."
+    },
+    {
+      "scene_id": 9,
+      "start": 316.79,
+      "end": 325.4664155,
+      "text": "In conclusion, WHID-Guard successfully demonstrates the threat of hardware implants while introducing a practical, per-device behavioral defense."
+    },
+    {
+      "scene_id": 9,
+      "start": 325.41641549999997,
+      "end": 330.6758497,
+      "text": "Our complete IEEE research paper and open-source codebase are available on GitHub."
+    },
+    {
+      "scene_id": 9,
+      "start": 330.6758498,
+      "end": 333.411699,
+      "text": "Thank you for your time and evaluation."
+    }
+  ]
+}

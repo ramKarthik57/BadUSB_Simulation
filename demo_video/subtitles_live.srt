@@ -1,0 +1,184 @@
+1
+00:00:00,100 --> 00:00:15,097
+Hello everyone, and welcome to the live demonstration of our cybersecurity project: WHID-Guard, an ESP32-S3 Phone-Controlled USB HID Keyboard and Mouse platform with BadUSB Simulation and a Defensive Keystroke Firewall.
+
+2
+00:00:15,047 --> 00:00:22,464
+Developed by Ram Karthik G and Harini V from the Department of Cybersecurity at Amrita Vishwa Vidyapeetham, Chennai.
+
+3
+00:00:22,464 --> 00:00:34,492
+In this video, we will show you the physical hardware setup, live automated keystroke injection, wireless smartphone remote control, and our real-time behavioral host firewall actively defending against the attack.
+
+4
+00:00:35,859 --> 00:00:39,135
+Let's begin with the live hardware demonstration.
+
+5
+00:00:39,085 --> 00:00:42,811
+On the left, you see our Windows laptop desktop.
+
+6
+00:00:42,811 --> 00:00:56,302
+When the ESP32-S3 is plugged in, its native USB-OTG controller on GPIO 19 and 20 enumerates instantly as a standard USB HID composite device without requiring any third-party drivers.
+
+7
+00:00:56,302 --> 00:01:04,627
+Watch the screen closely: after a bounded 3.5-second stabilization wait, the ESP32 triggers Scenario 1.
+
+8
+00:01:04,627 --> 00:01:10,524
+It automatically opens the Windows Run dialog, types notepad, and launches the editor.
+
+9
+00:01:10,524 --> 00:01:18,613
+Notice how the microcontroller types our security awareness advisory character-by-character at high speed without anyone touching the laptop keyboard.
+
+10
+00:01:19,959 --> 00:01:27,504
+Now look at the right pane, where our real smartphone controller is connected to the ESP32-S3 over Wi-Fi.
+
+11
+00:01:27,454 --> 00:01:34,140
+The phone browser loads our dark-mode Single-Page Application served directly from the microcontroller's flash memory.
+
+12
+00:01:34,140 --> 00:01:39,529
+In the Settings tab, we enter the security PIN and authenticate against the REST API.
+
+13
+00:01:39,529 --> 00:01:43,397
+The top telemetry immediately confirms our session token.
+
+14
+00:01:43,397 --> 00:01:59,352
+Next, watch what happens when I press the physical GPIO 0 BOOT button on the ESP32 board: the hardware edge-detector advances circularly through our payload sequences, cycling from Scenario 1 to 2, 3, and 4 with a 50-millisecond debounce filter.
+
+15
+00:02:00,709 --> 00:02:05,424
+From the phone's Scenarios tab, we can also launch any attack directly.
+
+16
+00:02:05,374 --> 00:02:08,499
+Watch as I tap Scenario 4 on the phone.
+
+17
+00:02:08,499 --> 00:02:19,749
+On the laptop, the Run dialog opens instantly, launches the Command Prompt, and runs netsh wlan show profiles, non-destructively enumerating all saved wireless networks.
+
+18
+00:02:19,749 --> 00:02:24,088
+Next, I trigger Scenario 3: simulated ransomware.
+
+19
+00:02:24,088 --> 00:02:30,904
+But watch this safety feature: while it is typing, I immediately tap the red Emergency Stop button on the phone!
+
+20
+00:02:30,904 --> 00:02:39,560
+The firmware's non-blocking loop halts typing within 10 milliseconds and calls releaseAll on both keyboard and mouse buses, leaving zero keys stuck.
+
+21
+00:02:40,909 --> 00:02:47,416
+Beyond security payloads, the platform converts the smartphone into a complete driverless input peripheral.
+
+22
+00:02:47,366 --> 00:02:57,130
+In the Keyboard tab, we have a full 6-row desktop keyboard with persistent hardware modifier latches, system shortcut macros, and a live text transmitter.
+
+23
+00:02:57,130 --> 00:03:01,647
+On the laptop, I open a text file and type directly from the phone.
+
+24
+00:03:01,647 --> 00:03:06,081
+Switching to the Mouse tab gives us a 60-hertz virtual trackpad.
+
+25
+00:03:06,081 --> 00:03:15,538
+Moving a finger across the phone screen smoothly translates into 8-bit cursor movement on the laptop, supporting tap-to-click, drag-lock, and precision nudging.
+
+26
+00:03:16,889 --> 00:03:24,068
+Standard BadUSB tools type with robotic consistency, making them easy to catch with naive speed thresholds.
+
+27
+00:03:24,018 --> 00:03:28,771
+In this demonstration, we test our firmware's Adversarial Stealth Mode.
+
+28
+00:03:28,771 --> 00:03:32,756
+On the phone, I toggle the Adversarial Evasion switch.
+
+29
+00:03:32,756 --> 00:03:45,952
+Notice how the typing cadence transforms: the firmware replaces rigid 10-millisecond delays with randomized stochastic jitter, and inserts cognitive pauses of 150 to 300 milliseconds after spaces and punctuation.
+
+30
+00:03:45,952 --> 00:03:52,155
+This emulates authentic human thinking pauses, designed to stress-test host defensive classifiers.
+
+31
+00:03:53,489 --> 00:03:58,062
+Now, let's observe our defensive solution: WHID-Guard.
+
+32
+00:03:58,012 --> 00:04:02,010
+On the laptop, we launch our Python Keystroke Firewall.
+
+33
+00:04:02,010 --> 00:04:13,543
+Look at the live telemetry card: using the Windows Raw Input API, it immediately attributes the active device handle to the ESP32-S3 with Vendor ID 303A.
+
+34
+00:04:13,543 --> 00:04:16,279
+I click Toggle to arm the firewall.
+
+35
+00:04:16,279 --> 00:04:20,182
+Now, I trigger a BadUSB payload from the phone.
+
+36
+00:04:20,182 --> 00:04:32,246
+Watch the firewall: within just 8 characters—less than 85 milliseconds—the keystroke dynamics engine detects the near-zero variance, trips the anomaly threshold, and locks down the device!
+
+37
+00:04:32,246 --> 00:04:36,031
+As you can see, zero characters reach Notepad.
+
+38
+00:04:36,031 --> 00:04:41,691
+And most importantly, when I type on the laptop's built-in keyboard, it types perfectly!
+
+39
+00:04:41,691 --> 00:04:45,147
+Only the malicious hardware handle is quarantined.
+
+40
+00:04:46,490 --> 00:04:51,475
+We benchmarked WHID-Guard across 1,500 keystrokes.
+
+41
+00:04:51,425 --> 00:04:58,937
+In human baseline testing, the system achieved a 0.0 percent False Positive Rate across 500 consecutive keystrokes.
+
+42
+00:04:58,937 --> 00:05:09,621
+Against unconstrained BadUSB injection, it achieved a 98.6 percent True Positive Rate, quarantining the attack within 8 characters or 85 milliseconds.
+
+43
+00:05:09,621 --> 00:05:15,458
+Against adversarial evasion, it flagged 25.2 percent of suspicious events.
+
+44
+00:05:16,790 --> 00:05:25,466
+In conclusion, WHID-Guard successfully demonstrates the threat of hardware implants while introducing a practical, per-device behavioral defense.
+
+45
+00:05:25,416 --> 00:05:30,675
+Our complete IEEE research paper and open-source codebase are available on GitHub.
+
+46
+00:05:30,675 --> 00:05:33,411
+Thank you for your time and evaluation.
+

@@ -1,4 +1,4 @@
-# WHID-Guard: 5-Minute Technical Project Demonstration Video
+# WHID-Guard: 5-Minute Technical Demonstration Videos
 
 **Project Title:** WHID-Guard: Dual-Mode ESP32-S3 BadUSB Emulation Platform & Behavioral Keystroke Dynamics Defense  
 **Student Authors:** Ram Karthik G (`CH.SC.U4CYS23037`) & Harini V (`CH.SC.U4CYS23010`)  
@@ -7,71 +7,97 @@
 
 ---
 
-## Video Specifications
+## Available Demonstration Videos (1080p Enhanced Quality)
 
-| Parameter | Specification | Details |
-| :--- | :--- | :--- |
-| **Output File** | [`WHID_Guard_5Min_Demo_1080p.mp4`](WHID_Guard_5Min_Demo_1080p.mp4) | High-definition master demo video |
-| **Video Resolution** | **1920 x 1080 (1080p Full HD)** | Enhanced 1080p 30 fps progressive scan |
-| **Video Codec** | H.264 / MPEG-4 AVC (`libx264`, High Profile, CRF 18) | Visually lossless, universal playback |
-| **Audio Track** | AAC Stereo @ 48 kHz (192 kbps) | Studio-grade natural neural narration |
-| **Narration Voice** | `en-US-ChristopherNeural` | Authoritative, articulate technical delivery |
-| **Subtitles** | **Burned-in High-Contrast 1080p Subtitles** | Stylized subtitle overlay inside dedicated container |
-| **Subtitle File** | [`subtitles.srt`](subtitles.srt) & [`subtitles.ass`](subtitles.ass) | Standalone subtitle tracks for external players |
-| **Total Duration** | **5 minutes 14 seconds (314.15 seconds)** | Paced for 5-minute academic evaluation |
-| **File Size** | **13.86 MB** | Lightweight, emailable, and fast streaming |
+| Demonstration Edition | Video File | Duration | Format & Resolution | Highlights & Content |
+| :--- | :--- | :---: | :---: | :--- |
+| **1. LIVE WORKING DEMO** *(Recommended for Faculty Evaluation)* | [`WHID_Guard_5Min_Live_Demo_1080p.mp4`](WHID_Guard_5Min_Live_Demo_1080p.mp4) | **5m 34s** | **1080p Full HD**<br/>(1920x1080, 20 fps, 10.19 MB) | **Split-Screen Live Action:** Windows 11 target desktop on left, real smartphone web controller on right. Shows auto-run injection into Notepad, PIN authentication, physical BOOT button cycling, CMD Wi-Fi recon, Emergency Stop, wireless keyboard/trackpad, stealth jitter comparison, real Tkinter Keystroke Firewall lockdown, selective suppression (laptop keyboard unblocked), and empirical benchmarks. |
+| **2. ARCHITECTURAL & DEFENSE DEMO** | [`WHID_Guard_5Min_Demo_1080p.mp4`](WHID_Guard_5Min_Demo_1080p.mp4) | **5m 14s** | **1080p Full HD**<br/>(1920x1080, 30 fps, 13.86 MB) | Comprehensive technical walkthrough featuring high-resolution system diagrams, 8-state FSM, Raw Input architecture, sliding window math, and benchmark curves. |
+
+Both videos include **clear studio-grade neural voice narration** (`en-US-ChristopherNeural`) and **high-contrast burned-in subtitles** + standalone subtitle files ([`subtitles_live.srt`](subtitles_live.srt), [`subtitles_live.ass`](subtitles_live.ass)).
 
 ---
 
-## Timestamped Scene Breakdown & Table of Contents
+## Live Working Demo: Timestamped Scene Breakdown
 
-| Time | Scene | Topic & Demonstrated Features | Primary Figures & Visuals |
-| :---: | :--- | :--- | :--- |
-| **`00:00 - 00:39`** | **Scene 1** | **Introduction & Problem Statement**<br/>• Student authors & institution<br/>• Inherent USB HID trust paradigm<br/>• High-speed automated hardware injection | Project Title Banner, Team Roll Numbers, End-to-End Cyber-Physical Architecture (Figure 1). |
-| **`00:39 - 01:20`** | **Scene 2** | **Hardware Architecture & Dual-Port Topology**<br/>• ESP32-S3 dual-core LX7 @ 240 MHz<br/>• Native USB-OTG on GPIO 19/20 (Port 2)<br/>• CP210x UART bridge on Port 1 (`COM5`) | Hardware interconnect schematics, dual Type-C port isolation, and power specs (Figure 2). |
-| **`01:20 - 02:00`** | **Scene 3** | **Deterministic Finite State Machine & Payloads**<br/>• 8-state deterministic FSM<br/>• Scenarios 1–4 educational catalogue<br/>• GPIO 0 BOOT button edge debouncing | 8-State Scenario FSM Diagram (Figure 3), safe `releaseAll()` key release invariants. |
-| **`02:00 - 02:36`** | **Scene 4** | **Mobile Web Controller & Remote Peripheral Suite**<br/>• PROGMEM flash dark-mode SPA<br/>• Tokenized PIN authentication (`badusb123`)<br/>• 6-Row QWERTY, numpad, shortcuts, trackpad | Real mobile UI captures (Figure 4) showing Scenarios, Keyboard, and Touchpad Mouse. |
-| **`02:36 - 03:10`** | **Scene 5** | **Adversarial Resilience & Cadence Emulation**<br/>• Limitations of static speed thresholds<br/>• Stochastic timing jitter ($\Delta t = \text{base} + \text{jitter}$)<br/>• Cognitive micro-pauses (150–300 ms) | Firmware cadence emulation formulation, mobile UI stealth toggle, and timing waveform (Figure 5). |
-| **`03:10 - 03:49`** | **Scene 6** | **Behavioral Keystroke Dynamics Engine**<br/>• Online sliding window ($W = 10$ events)<br/>• Mean IKI ($\mu$), std ($\sigma$), coefficient of variation ($CV$)<br/>• Decision boundary: $CV < 0.15 \Rightarrow$ Machine Lock | Empirical IKI Distribution Histogram (Figure 6) comparing Human vs. BadUSB vs. Evasion. |
-| **`03:49 - 04:22`** | **Scene 7** | **Hardware Attribution & Selective Quarantine**<br/>• Windows Raw Input `WM_INPUT` sink<br/>• Hardware handle (`hDevice`) & VID/PID extraction<br/>• Selective `WH_KEYBOARD_LL` driver hook filter | Selective Defense Pipeline Diagram (Figure 7), 15s watchdog failsafe, zero legitimate lockout. |
-| **`04:22 - 04:58`** | **Scene 8** | **Quantitative Empirical Benchmark Results**<br/>• 1,500-keystroke empirical corpus<br/>• 0.0% False Positive Rate on human typing<br/>• 98.6% True Positive Rate, $<85\text{ ms}$ ($\le 8$ chars) quarantine | Quarantine Latency Curve (Figure 8) and quantitative empirical evaluation data matrix. |
-| **`04:58 - 05:14`** | **Scene 9** | **Conclusion, IEEE Publication & Open Source**<br/>• 6-Page IEEE Conference Paper package<br/>• Open-source GitHub repository release<br/>• Faculty and departmental acknowledgments | Published IEEE Paper Preview (Figure 9) and GitHub repository link. |
+The master video [`WHID_Guard_5Min_Live_Demo_1080p.mp4`](WHID_Guard_5Min_Live_Demo_1080p.mp4) uses a synchronized split-screen screencast architecture:
+- **Left Canvas (`X: 40 to 1280`):** Target System (Windows 11 Enterprise Laptop) showing live desktop windows, terminal, Notepad, and the Tkinter Keystroke Firewall GUI.
+- **Right Canvas (`X: 1320 to 1880`):** Smartphone Web Controller (`http://10.85.248.29` / `192.168.4.1`) showing real-time button touches, tab switching, and trackpad gestures.
 
----
+```
++---------------------------------------------------------------------------------------------------+
+|  AMRITA VISHWA VIDYAPEETHAM - DEPARTMENT OF CYBERSECURITY  |  WHID-GUARD DEMO  [● LIVE] [SCENE 01] |
++-----------------------------------------------------------------+---------------------------------+
+|                                                                 |         SMARTPHONE UI           |
+|                TARGET LAPTOP SCREEN (WINDOWS 11)                |       (10.85.248.29)            |
+|                                                                 |   +-------------------------+   |
+|   +---------------------------------------------------------+   |   | [Scenarios] [KB] [Mouse]|   |
+|   | Run Dialog / Notepad / CMD / Keystroke Firewall GUI    |   |   |                         |   |
+|   |                                                         |   |   | Scenario 1: Info Alert  |   |
+|   | Dynamic typing character-by-character                   |   |   | Scenario 2: Portal Redir|   |
+|   | Real-time quarantine & selective suppression            |   |   | Scenario 3: Ransomware  |   |
+|   |                                                         |   |   | Scenario 4: Wi-Fi Recon |   |
+|   +---------------------------------------------------------+   |   |                         |   |
+|   [ Windows 11 Taskbar: Start, Search, Explorer, Terminal ]     |   | [EMERGENCY STOP BUTTON] |   |
+|                                                                 +-------------------------+   |
++---------------------------------------------------------------------------------------------------+
+|  BURNED-IN HIGH-CONTRAST SUBTITLES: "Watch the screen closely: after a bounded 3.5s stabilization..."|
++---------------------------------------------------------------------------------------------------+
+```
 
-## Full Voice-Over Narration Script
+### Scene-by-Scene Timeline
 
-### Scene 1: Introduction & Problem Statement [00:00 – 00:39]
-> *"Hello everyone, and welcome to our demonstration of WHID-Guard: an ESP32-S3 Phone-Controlled USB HID Keyboard and Mouse platform with BadUSB Simulation and a Defensive Keystroke Firewall. Developed by Ram Karthik G and Harini V from the Department of Cybersecurity at Amrita Vishwa Vidyapeetham, Chennai. Modern operating systems implicitly trust Human Interface Devices, allowing unauthorized hardware implants to inject destructive payloads at microsecond bus speeds without host consent. WHID-Guard provides an interruptible hardware emulation suite paired with an intelligent, per-device behavioral defense."*
-
-### Scene 2: Hardware Architecture & Dual-Port Topology [00:39 – 01:20]
-> *"The system is powered by the ESP32-S3 dual-core microcontroller running at 240 megahertz with native USB-OTG full-speed hardware directly on GPIO 19 and 20. Our custom dual-port topology cleanly isolates attack vectors from developer controls. The primary USB-OTG port connects to the target laptop, enumerating immediately as a standard driverless composite HID keyboard and multi-button mouse. Concurrently, the CP210x UART bridge on Port 1 provides isolated serial telemetry and firmware flashing on COM5, ensuring continuous laboratory monitoring without disrupting the target host's USB bus."*
-
-### Scene 3: Deterministic Finite State Machine & Payloads [01:20 – 02:00]
-> *"Inside the firmware, an 8-state deterministic Finite State Machine governs scenario lifecycles. Upon initial connection, it enforces a bounded 3.5-second wait for host USB enumeration to stabilize, and then automatically executes Scenario 1: an educational Notepad security awareness notification. The platform includes four demonstration scenarios: Notepad awareness, institutional portal redirection, simulated PowerShell ransomware alerts, and Wi-Fi profile reconnaissance. Scenarios can also be advanced offline using the physical GPIO 0 BOOT button, which employs a 50-millisecond hardware debounce filter."*
-
-### Scene 4: Mobile Web Controller & Remote Peripheral Suite [02:00 – 02:36]
-> *"Concurrently, the ESP32-S3 broadcasts a 2.4 gigahertz Wi-Fi network, hosting a responsive dark-mode Single-Page Application served entirely from PROGMEM flash memory. Users authenticate against our REST API using a secure PIN, which issues tokenized credentials. The interface features one-touch scenario execution with live status polling, a complete 6-row QWERTY keyboard with latched modifiers and system shortcuts, a 256-character bulk text transmitter, and a 60-hertz virtual trackpad mouse with relative motion clamping and precision drag-lock controls."*
-
-### Scene 5: Adversarial Resilience & Human Cadence Emulation [02:36 – 03:10]
-> *"Standard BadUSB tools inject keystrokes at rigid 10-millisecond intervals, making them trivial to block with rudimentary speed limiters. To rigorously test defensive resilience, we implemented an adversarial stealth mode in the ESP32-S3 firmware. When toggled from the mobile interface, the controller replaces deterministic timing with stochastic jitter and automatically injects cognitive micro-pauses of 150 to 300 milliseconds following whitespace and punctuation marks, mimicking the natural neuromuscular delays of human operators."*
-
-### Scene 6: WHID-Guard Behavioral Keystroke Dynamics Engine [03:10 – 03:49]
-> *"To counter these sophisticated threats, we developed the WHID-Guard host defense engine. Rather than relying on simplistic rate limits, WHID-Guard computes behavioral keystroke dynamics over an online sliding window of ten events. It continuously calculates the mean Inter-Key Interval, standard deviation, coefficient of variation, and burst typing rate. While human typing exhibits natural cognitive variance with a coefficient of variation exceeding 0.30, unconstrained BadUSB injection demonstrates rigid consistency below 0.15, enabling precise algorithmic classification without false alarms."*
-
-### Scene 7: Per-Device Hardware Attribution & Selective Isolation [03:49 – 04:22]
-> *"Traditional security tools install global keyboard hooks that lock out all typing indiscriminately. WHID-Guard solves this problem through per-device hardware attribution via the Windows Raw Input API. By registering for raw input message sinks and querying device names, our engine extracts the physical hardware device handle and USB Vendor and Product IDs. When an injection attack is detected, our low-level keyboard hook drops only the malicious hardware packets, keeping the user's legitimate laptop keyboard completely active and responsive."*
-
-### Scene 8: Quantitative Empirical Evaluation & Benchmark Results [04:22 – 04:58]
-> *"We conducted an extensive empirical evaluation across a 1,500-keystroke benchmark corpus. On human baseline typing, WHID-Guard achieved a 0.0 percent False Positive Rate across 500 consecutive keystrokes. Against unconstrained BadUSB attacks, the system achieved a 98.6 percent True Positive Detection Rate, quarantining the offending implant within exactly 8 characters—less than 85 milliseconds of total execution time. Against stealth cadence emulation, it successfully flagged 25.2 percent of suspicious events."*
-
-### Scene 9: Conclusion, IEEE Publication & Open-Source Release [04:58 – 05:14]
-> *"In conclusion, WHID-Guard bridges offensive hardware exploration and host-level defensive resilience. Our complete research manuscript and reproducible codebase are open-sourced on GitHub. Thank you for your evaluation of our project."*
+| Timestamp | Scene Title | What Happens on the Laptop (Left Screen) | What Happens on the Phone (Right Screen) | Defense Status |
+| :---: | :--- | :--- | :--- | :---: |
+| **`00:00 - 00:35`** | **Scene 1: Introduction & System Architecture** | Dual-port hardware overview, COM5 CP210x serial UART and native USB-OTG (GPIO 19/20) specifications, Figure 1 architecture diagram. | Smartphone loads `http://10.85.248.29` over Wi-Fi, displaying connection badge and scenario list. | Ready |
+| **`00:35 - 01:19`** | **Scene 2: Live Demo 1: Auto-Run Notepad Injection** | Toast notification confirms composite HID enumeration; 3.5s stabilization delay elapses; Run dialog opens; types `notepad.exe`; launches editor; types security advisory character-by-character at 100 chars/s without touching laptop keyboard. | Scenario 1 card turns active green with status badge. | Vulnerable (No Defense) |
+| **`01:19 - 02:00`** | **Scene 3: Live Demo 2: Phone UI & Physical Button Advancement** | Windows Terminal shows live COM5 serial monitor (115200 baud) outputting incoming HTTP requests and hardware button interrupts. | Switches to Settings tab, enters PIN `badusb123`, authenticates token. Board graphic shows GPIO 0 BOOT button pulsing and circularly advancing scenarios 1 &rarr; 2 &rarr; 3 &rarr; 4 with 50ms debounce. | Monitored |
+| **`02:00 - 02:40`** | **Scene 4: Live Demo 3: Remote Scenario Execution & Emergency Stop** | Phone triggers Scenario 4: Run dialog launches CMD and runs `netsh wlan show profiles` non-destructively. Then Scenario 3 triggers ransomware note; at 28s, typing halts instantly in <10ms with zero stuck keys. | Touch ripples highlight Scenario 4, then Scenario 3, followed by a finger tap on the big red `EMERGENCY STOP (Release All)` button. | Failsafe Engaged |
+| **`02:40 - 03:16`** | **Scene 5: Live Demo 4: Wireless Keyboard & Multi-Touch Trackpad Mouse** | Notepad receives wireless text stream from phone. Windows cursor pointer dynamically glides across the laptop screen following phone trackpad finger coordinates at 60 Hz. | Keyboard tab types custom text with modifier latches (CTRL/WIN). Mouse tab shows 60Hz trackpad surface with moving touch point and left/right click buttons. | Active Peripheral |
+| **`03:16 - 03:53`** | **Scene 6: Live Demo 5: Adversarial Evasion & Cadence Jitter** | Dual waveform oscilloscope window compares standard deterministic 10ms BadUSB injection ($CV = 0.04$) against human-like adversarial jitter ($80 \pm 40\text{ ms}$, cognitive micro-pauses 150–300 ms, $CV = 0.42$). | Scenarios tab displays the Adversarial Evasion toggle switch flipping to `[ON]` with delay configuration parameters. | Evasion Testing |
+| **`03:53 - 04:46`** | **Scene 7: Live Demo 6: WHID-Guard Host Defense in Action** | Python Keystroke Firewall GUI (`src/firewall.py`) is armed. When BadUSB attacks, keystroke dynamics engine detects near-zero variance within 8 chars (<85 ms), locks down device handle `0x000E2B80`, and drops all 128 packets. Notepad remains completely blank! Laptop internal keyboard is typed and works smoothly. | Phone triggers Scenario 1. Status card displays host intervention alert: `Selective Port Suppression Active`. | **Quarantined & Protected** |
+| **`04:46 - 05:16`** | **Scene 8: Quantitative Empirical Benchmark Evaluation** | Comprehensive research dashboard displaying 1,500-keystroke benchmark matrix (0.0% FPR on human typing, 98.6% TPR on BadUSB), embedded IKI distribution histogram (Figure 4), and detection latency curve (Figure 5). | Overview of empirical validation results for university research defense. | Validated |
+| **`05:16 - 05:34`** | **Scene 9: Conclusion, IEEE Publication & Open Source** | Preview of 6-page IEEE conference paper (`WHID_GUARD_2027.pdf`), GitHub repository badges (`100% Passing CI`), student roll numbers, and Amrita Vishwa Vidyapeetham departmental credits. | Concluding remarks and project submission acknowledgment. | Certified |
 
 ---
 
-## How to Play and Submit
+## Sample Screenshots from the Live Working Video
 
-- **Direct Local Playback**: Open [`demo_video/WHID_Guard_5Min_Demo_1080p.mp4`](WHID_Guard_5Min_Demo_1080p.mp4) in any media player (Windows Media Player, VLC, QuickTime, Chrome, Edge).
-- **Subtitles**: Subtitles are already burned into the video in high-contrast 1080p format. The standalone [`subtitles.srt`](subtitles.srt) is also provided for platforms like YouTube or Microsoft Teams.
-- **Faculty Evaluation**: Share the MP4 file directly via pen drive, Google Drive, OneDrive, or upload to the course submission portal.
+The frames below were extracted directly from [`WHID_Guard_5Min_Live_Demo_1080p.mp4`](WHID_Guard_5Min_Live_Demo_1080p.mp4) at key demonstration timestamps:
+
+| Scene 2: Auto-Run Notepad Injection (`01:00`) | Scene 4: CMD Wi-Fi Recon & Emergency Stop (`02:25`) |
+| :---: | :---: |
+| ![Scene 2](live_sample_frames/scene_2_ts60s.png) | ![Scene 4](live_sample_frames/scene_4_ts145s.png) |
+| *Microcontroller opens Run dialog and types security advisory letter-by-letter.* | *Terminal enumerates Wi-Fi profiles; Emergency Stop halts typing in <10ms.* |
+
+| Scene 6: Adversarial Cadence Jitter (`03:35`) | Scene 7: WHID-Guard Defense & Selective Lockdown (`04:20`) |
+| :---: | :---: |
+| ![Scene 6](live_sample_frames/scene_6_ts215s.png) | ![Scene 7](live_sample_frames/scene_7_ts260s.png) |
+| *Firmware injects stochastic delay (60–120ms) and cognitive pauses to stress-test defense.* | *Firewall locks down ESP32 within 8 chars (Notepad blank), while laptop keyboard types freely!* |
+
+| Scene 8: Empirical Benchmark Evaluation (`05:05`) | Scene 9: IEEE Paper & Repository Release (`05:25`) |
+| :---: | :---: |
+| ![Scene 8](live_sample_frames/scene_8_ts305s.png) | ![Scene 9](live_sample_frames/scene_9_ts325s.png) |
+| *1,500-keystroke evaluation matrix, IKI distributions, and latency curves.* | *Full IEEE conference paper (`WHID_GUARD_2027.pdf`), GitHub repo, and credits.* |
+
+---
+
+## Technical Reproduction & Build Scripts
+
+To regenerate the video and audio from scratch:
+```powershell
+# 1. Synthesize Azure neural voice narration and extract timestamps
+python scripts/generate_live_demo_audio.py
+
+# 2. Render all 9 split-screen animated scenes, concatenate, and burn subtitles in 1080p
+python scripts/build_live_demo_video.py
+```
+
+## Faculty & Viva Voce Submission Checklist
+
+- [x] **Video file exists and is playable:** [`WHID_Guard_5Min_Live_Demo_1080p.mp4`](WHID_Guard_5Min_Live_Demo_1080p.mp4) (10.19 MB, 5m 34s).
+- [x] **1080p enhanced Full HD quality:** 1920x1080 progressive scan, H.264 High profile, AAC 24kHz audio.
+- [x] **Clear studio audio narration:** Pronunciation tuned for technical terminology and academic pace.
+- [x] **Synchronized subtitles:** Burned into the video + standalone `.srt` & `.ass`.
+- [x] **Live working demonstration:** Shows real software windows (Notepad, CMD, Terminal, Firewall GUI) and smartphone web controller interacting live.
+- [x] **Student credits clearly displayed:** Ram Karthik G (`CH.SC.U4CYS23037`) and Harini V (`CH.SC.U4CYS23010`), Amrita Vishwa Vidyapeetham, Chennai.

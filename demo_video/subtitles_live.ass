@@ -1,0 +1,59 @@
+[Script Info]
+Title: WHID-Guard Live Demo Subtitles
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Segoe UI,28,&H00FFFFFF,&H000000FF,&H000B0F19,&H80000000,-1,0,0,0,100,100,0,0,1,2.5,1,2,120,120,55,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.10,0:00:15.09,Default,,0,0,0,,Hello everyone, and welcome to the live demonstration of our cybersecurity project: WHID-Guard, an ESP32-S3 Phone-Controlled USB HID Keyboard and Mouse platform with BadUSB Simulation and a Defensive Keystroke Firewall.
+Dialogue: 0,0:00:15.04,0:00:22.46,Default,,0,0,0,,Developed by Ram Karthik G and Harini V from the Department of Cybersecurity at Amrita Vishwa Vidyapeetham, Chennai.
+Dialogue: 0,0:00:22.46,0:00:34.49,Default,,0,0,0,,In this video, we will show you the physical hardware setup, live automated keystroke injection, wireless smartphone remote control, and our real-time behavioral host firewall actively defending against the attack.
+Dialogue: 0,0:00:35.85,0:00:39.13,Default,,0,0,0,,Let's begin with the live hardware demonstration.
+Dialogue: 0,0:00:39.08,0:00:42.81,Default,,0,0,0,,On the left, you see our Windows laptop desktop.
+Dialogue: 0,0:00:42.81,0:00:56.30,Default,,0,0,0,,When the ESP32-S3 is plugged in, its native USB-OTG controller on GPIO 19 and 20 enumerates instantly as a standard USB HID composite device without requiring any third-party drivers.
+Dialogue: 0,0:00:56.30,0:01:04.62,Default,,0,0,0,,Watch the screen closely: after a bounded 3.5-second stabilization wait, the ESP32 triggers Scenario 1.
+Dialogue: 0,0:01:04.62,0:01:10.52,Default,,0,0,0,,It automatically opens the Windows Run dialog, types notepad, and launches the editor.
+Dialogue: 0,0:01:10.52,0:01:18.61,Default,,0,0,0,,Notice how the microcontroller types our security awareness advisory character-by-character at high speed without anyone touching the laptop keyboard.
+Dialogue: 0,0:01:19.95,0:01:27.50,Default,,0,0,0,,Now look at the right pane, where our real smartphone controller is connected to the ESP32-S3 over Wi-Fi.
+Dialogue: 0,0:01:27.45,0:01:34.14,Default,,0,0,0,,The phone browser loads our dark-mode Single-Page Application served directly from the microcontroller's flash memory.
+Dialogue: 0,0:01:34.14,0:01:39.52,Default,,0,0,0,,In the Settings tab, we enter the security PIN and authenticate against the REST API.
+Dialogue: 0,0:01:39.52,0:01:43.39,Default,,0,0,0,,The top telemetry immediately confirms our session token.
+Dialogue: 0,0:01:43.39,0:01:59.35,Default,,0,0,0,,Next, watch what happens when I press the physical GPIO 0 BOOT button on the ESP32 board: the hardware edge-detector advances circularly through our payload sequences, cycling from Scenario 1 to 2, 3, and 4 with a 50-millisecond debounce filter.
+Dialogue: 0,0:02:00.70,0:02:05.42,Default,,0,0,0,,From the phone's Scenarios tab, we can also launch any attack directly.
+Dialogue: 0,0:02:05.37,0:02:08.49,Default,,0,0,0,,Watch as I tap Scenario 4 on the phone.
+Dialogue: 0,0:02:08.49,0:02:19.74,Default,,0,0,0,,On the laptop, the Run dialog opens instantly, launches the Command Prompt, and runs netsh wlan show profiles, non-destructively enumerating all saved wireless networks.
+Dialogue: 0,0:02:19.74,0:02:24.08,Default,,0,0,0,,Next, I trigger Scenario 3: simulated ransomware.
+Dialogue: 0,0:02:24.08,0:02:30.90,Default,,0,0,0,,But watch this safety feature: while it is typing, I immediately tap the red Emergency Stop button on the phone!
+Dialogue: 0,0:02:30.90,0:02:39.56,Default,,0,0,0,,The firmware's non-blocking loop halts typing within 10 milliseconds and calls releaseAll on both keyboard and mouse buses, leaving zero keys stuck.
+Dialogue: 0,0:02:40.90,0:02:47.41,Default,,0,0,0,,Beyond security payloads, the platform converts the smartphone into a complete driverless input peripheral.
+Dialogue: 0,0:02:47.36,0:02:57.13,Default,,0,0,0,,In the Keyboard tab, we have a full 6-row desktop keyboard with persistent hardware modifier latches, system shortcut macros, and a live text transmitter.
+Dialogue: 0,0:02:57.13,0:03:01.64,Default,,0,0,0,,On the laptop, I open a text file and type directly from the phone.
+Dialogue: 0,0:03:01.64,0:03:06.08,Default,,0,0,0,,Switching to the Mouse tab gives us a 60-hertz virtual trackpad.
+Dialogue: 0,0:03:06.08,0:03:15.53,Default,,0,0,0,,Moving a finger across the phone screen smoothly translates into 8-bit cursor movement on the laptop, supporting tap-to-click, drag-lock, and precision nudging.
+Dialogue: 0,0:03:16.88,0:03:24.06,Default,,0,0,0,,Standard BadUSB tools type with robotic consistency, making them easy to catch with naive speed thresholds.
+Dialogue: 0,0:03:24.01,0:03:28.77,Default,,0,0,0,,In this demonstration, we test our firmware's Adversarial Stealth Mode.
+Dialogue: 0,0:03:28.77,0:03:32.75,Default,,0,0,0,,On the phone, I toggle the Adversarial Evasion switch.
+Dialogue: 0,0:03:32.75,0:03:45.95,Default,,0,0,0,,Notice how the typing cadence transforms: the firmware replaces rigid 10-millisecond delays with randomized stochastic jitter, and inserts cognitive pauses of 150 to 300 milliseconds after spaces and punctuation.
+Dialogue: 0,0:03:45.95,0:03:52.15,Default,,0,0,0,,This emulates authentic human thinking pauses, designed to stress-test host defensive classifiers.
+Dialogue: 0,0:03:53.48,0:03:58.06,Default,,0,0,0,,Now, let's observe our defensive solution: WHID-Guard.
+Dialogue: 0,0:03:58.01,0:04:02.01,Default,,0,0,0,,On the laptop, we launch our Python Keystroke Firewall.
+Dialogue: 0,0:04:02.01,0:04:13.54,Default,,0,0,0,,Look at the live telemetry card: using the Windows Raw Input API, it immediately attributes the active device handle to the ESP32-S3 with Vendor ID 303A.
+Dialogue: 0,0:04:13.54,0:04:16.27,Default,,0,0,0,,I click Toggle to arm the firewall.
+Dialogue: 0,0:04:16.27,0:04:20.18,Default,,0,0,0,,Now, I trigger a BadUSB payload from the phone.
+Dialogue: 0,0:04:20.18,0:04:32.24,Default,,0,0,0,,Watch the firewall: within just 8 characters—less than 85 milliseconds—the keystroke dynamics engine detects the near-zero variance, trips the anomaly threshold, and locks down the device!
+Dialogue: 0,0:04:32.24,0:04:36.03,Default,,0,0,0,,As you can see, zero characters reach Notepad.
+Dialogue: 0,0:04:36.03,0:04:41.69,Default,,0,0,0,,And most importantly, when I type on the laptop's built-in keyboard, it types perfectly!
+Dialogue: 0,0:04:41.69,0:04:45.14,Default,,0,0,0,,Only the malicious hardware handle is quarantined.
+Dialogue: 0,0:04:46.49,0:04:51.47,Default,,0,0,0,,We benchmarked WHID-Guard across 1,500 keystrokes.
+Dialogue: 0,0:04:51.42,0:04:58.93,Default,,0,0,0,,In human baseline testing, the system achieved a 0.0 percent False Positive Rate across 500 consecutive keystrokes.
+Dialogue: 0,0:04:58.93,0:05:09.62,Default,,0,0,0,,Against unconstrained BadUSB injection, it achieved a 98.6 percent True Positive Rate, quarantining the attack within 8 characters or 85 milliseconds.
+Dialogue: 0,0:05:09.62,0:05:15.45,Default,,0,0,0,,Against adversarial evasion, it flagged 25.2 percent of suspicious events.
+Dialogue: 0,0:05:16.79,0:05:25.46,Default,,0,0,0,,In conclusion, WHID-Guard successfully demonstrates the threat of hardware implants while introducing a practical, per-device behavioral defense.
+Dialogue: 0,0:05:25.41,0:05:30.67,Default,,0,0,0,,Our complete IEEE research paper and open-source codebase are available on GitHub.
+Dialogue: 0,0:05:30.67,0:05:33.41,Default,,0,0,0,,Thank you for your time and evaluation.
