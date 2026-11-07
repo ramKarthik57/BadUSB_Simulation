@@ -5,6 +5,7 @@
 [![Firmware](https://img.shields.io/badge/Firmware-ESP32--S3%20Native%20USB--OTG-red.svg)](https://www.espressif.com/en/products/socs/esp32-s3)
 [![Tests](https://img.shields.io/badge/pytest-16%20Passed%20%7C%20100%25-brightgreen.svg)](tests/)
 [![MITRE ATT&CK](https://img.shields.io/badge/MITRE%20ATT%26CK-T1200%20%7C%20T1059-orange.svg)](docs/MITRE_ATTACK_MAPPING.md)
+[![Demo Video: 1080p](https://img.shields.io/badge/Demo%20Video-1080p%20Enhanced%20(5%20min)-red.svg)](demo_video/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![IEEE Paper Ready](https://img.shields.io/badge/IEEE%20Format-Conference%20Paper%20Ready-purple.svg)](WHID_GUARD_FINAL_SUBMISSION/)
 [![Security Policy](https://img.shields.io/badge/Security-Responsible%20Disclosure-darkgreen.svg)](SECURITY.md)
@@ -21,6 +22,27 @@ To confront this systemic vulnerability, **WHID-Guard** introduces a synchronize
 1. **Adversarial Hardware Implant (`badusb_firmware/`)**: An **ESP32-S3-WROOM-1** dual-core microcontroller that emulates composite USB HID peripherals (Keyboard and Mouse) over native full-speed USB-OTG, while concurrently hosting a minified, authenticated Single-Page Application (SPA) web controller served from flash memory (`PROGMEM`) over 2.4 GHz Wi-Fi. It incorporates an adversarial stealth engine capable of synthetic human cadence emulation (stochastic jitter and cognitive micro-pauses) to challenge defensive classifiers.
 2. **Behavioral Keystroke Dynamics Defense Engine (`src/`)**: A host-side telemetry framework for Windows that evaluates an online sliding window ($W = 10$) of Inter-Key Interval (IKI) statistics. By continuously computing the mean ($\mu_{\text{IKI}}$), standard deviation ($\sigma_{\text{IKI}}$), coefficient of variation ($CV = \frac{\sigma}{\mu}$), and typing burst rate, the detector differentiates human operators ($CV > 0.30$) from machine injection ($CV < 0.15$) with **0.0% false positives** on human baseline typing and **quarantines attacks within $\le 8$ characters (<85 ms)**.
 3. **Per-Device Hardware Attribution & Selective Isolation**: Leveraging the Windows Raw Input API (`WM_INPUT`, `RIDEV_INPUTSINK`, `GetRawInputDeviceInfoW`), the defense isolates physical hardware device handles (`hDevice`) and selectively drops malicious packets within low-level keyboard hooks (`WH_KEYBOARD_LL`), ensuring legitimate user keyboards remain completely responsive while the rogue implant is neutralized.
+
+---
+
+## 5-Minute Technical Demonstration Video
+
+A comprehensive, high-definition project demonstration video is available for faculty evaluation and academic presentation:
+- **Video File**: [`demo_video/WHID_Guard_5Min_Demo_1080p.mp4`](demo_video/WHID_Guard_5Min_Demo_1080p.mp4) (1080p Full HD, 30 fps, 14.5 MB)
+- **Subtitles**: Burned-in high-contrast overlay + standalone [`demo_video/subtitles.srt`](demo_video/subtitles.srt)
+- **Full Video Documentation & Voiceover Script**: [`demo_video/README.md`](demo_video/README.md)
+
+| Timestamp | Scene | Key Demonstrated Topics |
+| :---: | :--- | :--- |
+| **`00:00 - 00:39`** | Scene 1 | **Introduction & Problem Statement**: Authors, institution, and commodity USB HID trust vulnerabilities. |
+| **`00:39 - 01:20`** | Scene 2 | **Hardware Architecture**: ESP32-S3 dual-port layout (GPIO 19/20 Native USB-OTG vs. CP210x COM5 UART). |
+| **`01:20 - 02:00`** | Scene 3 | **Deterministic Scenario FSM**: 8-state C++ finite state machine, Scenarios 1–4, and physical BOOT button debouncing. |
+| **`02:00 - 02:36`** | Scene 4 | **Mobile Web Controller**: Flash-stored dark-mode SPA, tokenized PIN authentication, QWERTY keys, and 60Hz mouse trackpad. |
+| **`02:36 - 03:10`** | Scene 5 | **Adversarial Resilience**: Overcoming static threshold limiters with stochastic jitter ($\Delta t$) and delimiter cognitive pauses. |
+| **`03:10 - 03:49`** | Scene 6 | **Keystroke Dynamics Engine**: Online sliding window ($W=10$), IKI statistics ($\mu, \sigma, CV$), and machine injection rules. |
+| **`03:49 - 04:22`** | Scene 7 | **Selective Hardware Isolation**: Win32 Raw Input device handle attribution and selective `WH_KEYBOARD_LL` filter. |
+| **`04:22 - 04:58`** | Scene 8 | **Empirical Evaluation**: 1,500-keystroke benchmark (0.0% FPR, 98.6% TPR, and sub-85ms quarantine latency). |
+| **`04:58 - 05:14`** | Scene 9 | **Conclusion & Open Source**: IEEE paper publication package, GitHub repository, and academic acknowledgments. |
 
 ---
 

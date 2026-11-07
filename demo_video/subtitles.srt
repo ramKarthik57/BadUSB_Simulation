@@ -1,0 +1,132 @@
+1
+00:00:00,100 --> 00:00:13,001
+Hello everyone, and welcome to our demonstration of WHID-Guard: an ESP32-S3 Phone-Controlled USB HID Keyboard and Mouse platform with BadUSB Simulation and a Defensive Keystroke Firewall.
+
+2
+00:00:12,951 --> 00:00:20,231
+Developed by Ram Karthik G and Harini V from the Department of Cybersecurity at Amrita Vishwa Vidyapeetham, Chennai.
+
+3
+00:00:20,231 --> 00:00:30,740
+Modern operating systems implicitly trust Human Interface Devices, allowing unauthorized hardware implants to inject destructive payloads at microsecond bus speeds without host consent.
+
+4
+00:00:30,740 --> 00:00:38,124
+WHID-Guard provides an interruptible hardware emulation suite paired with an intelligent, per-device behavioral defense.
+
+5
+00:00:39,280 --> 00:00:51,070
+The system is powered by the ESP32-S3 dual-core microcontroller running at 240 megahertz with native USB-OTG full-speed hardware directly on GPIO 19 and 20.
+
+6
+00:00:51,020 --> 00:00:56,494
+Our custom dual-port topology cleanly isolates attack vectors from developer controls.
+
+7
+00:00:56,494 --> 00:01:06,043
+The primary USB-OTG port connects to the target laptop, enumerating immediately as a standard driverless composite HID keyboard and multi-button mouse.
+
+8
+00:01:06,043 --> 00:01:19,423
+Concurrently, the CP210x UART bridge on Port 1 provides isolated serial telemetry and firmware flashing on COM5, ensuring continuous laboratory monitoring without disrupting the target host's USB bus.
+
+9
+00:01:20,579 --> 00:01:26,872
+Inside the firmware, an 8-state deterministic Finite State Machine governs scenario lifecycles.
+
+10
+00:01:26,822 --> 00:01:39,808
+Upon initial connection, it enforces a bounded 3.5-second wait for host USB enumeration to stabilize, and then automatically executes Scenario 1: an educational Notepad security awareness notification.
+
+11
+00:01:39,808 --> 00:01:50,827
+The platform includes four demonstration scenarios: Notepad awareness, institutional portal redirection, simulated PowerShell ransomware alerts, and Wi-Fi profile reconnaissance.
+
+12
+00:01:50,827 --> 00:01:59,311
+Scenarios can also be advanced offline using the physical GPIO 0 BOOT button, which employs a 50-millisecond hardware debounce filter.
+
+13
+00:02:00,459 --> 00:02:12,180
+Concurrently, the ESP32-S3 broadcasts a 2.4 gigahertz Wi-Fi network, hosting a responsive dark-mode Single-Page Application served entirely from PROGMEM flash memory.
+
+14
+00:02:12,130 --> 00:02:18,369
+Users authenticate against our REST API using a secure PIN, which issues tokenized credentials.
+
+15
+00:02:18,369 --> 00:02:35,903
+The interface features one-touch scenario execution with live status polling, a complete 6-row QWERTY keyboard with latched modifiers and system shortcuts, a 256-character bulk text transmitter, and a 60-hertz virtual trackpad mouse with relative motion clamping and precision drag-lock controls.
+
+16
+00:02:37,049 --> 00:02:45,483
+Standard BadUSB tools inject keystrokes at rigid 10-millisecond intervals, making them trivial to block with rudimentary speed limiters.
+
+17
+00:02:45,433 --> 00:02:53,338
+To rigorously test defensive resilience, we implemented an adversarial stealth mode in the ESP32-S3 firmware.
+
+18
+00:02:53,338 --> 00:03:09,253
+When toggled from the mobile interface, the controller replaces deterministic timing with stochastic jitter and automatically injects cognitive micro-pauses of 150 to 300 milliseconds following whitespace and punctuation marks, mimicking the natural neuromuscular delays of human operators.
+
+19
+00:03:10,399 --> 00:03:16,079
+To counter these sophisticated threats, we developed the WHID-Guard host defense engine.
+
+20
+00:03:16,029 --> 00:03:24,790
+Rather than relying on simplistic rate limits, WHID-Guard computes behavioral keystroke dynamics over an online sliding window of ten events.
+
+21
+00:03:24,790 --> 00:03:32,672
+It continuously calculates the mean Inter-Key Interval, standard deviation, coefficient of variation, and burst typing rate.
+
+22
+00:03:32,672 --> 00:03:48,633
+While human typing exhibits natural cognitive variance with a coefficient of variation exceeding 0.30, unconstrained BadUSB injection demonstrates rigid consistency below 0.15, enabling precise algorithmic classification without false alarms.
+
+23
+00:03:49,799 --> 00:03:55,513
+Traditional security tools install global keyboard hooks that lock out all typing indiscriminately.
+
+24
+00:03:55,463 --> 00:04:02,037
+WHID-Guard solves this problem through per-device hardware attribution via the Windows Raw Input API.
+
+25
+00:04:02,037 --> 00:04:11,378
+By registering for raw input message sinks and querying device names, our engine extracts the physical hardware device handle and USB Vendor and Product IDs.
+
+26
+00:04:11,378 --> 00:04:21,598
+When an injection attack is detected, our low-level keyboard hook drops only the malicious hardware packets, keeping the user's legitimate laptop keyboard completely active and responsive.
+
+27
+00:04:22,769 --> 00:04:29,201
+We conducted an extensive empirical evaluation across a 1,500-keystroke benchmark corpus.
+
+28
+00:04:29,151 --> 00:04:37,010
+On human baseline typing, WHID-Guard achieved a 0.0 percent False Positive Rate across 500 consecutive keystrokes.
+
+29
+00:04:37,010 --> 00:04:50,760
+Against unconstrained BadUSB attacks, the system achieved a 98.6 percent True Positive Detection Rate, quarantining the offending implant within exactly 8 characters—less than 85 milliseconds of total execution time.
+
+30
+00:04:50,760 --> 00:04:57,230
+Against stealth cadence emulation, it successfully flagged 25.2 percent of suspicious events.
+
+31
+00:04:58,370 --> 00:05:05,067
+In conclusion, WHID-Guard bridges offensive hardware exploration and host-level defensive resilience.
+
+32
+00:05:05,017 --> 00:05:10,168
+Our complete research manuscript and reproducible codebase are open-sourced on GitHub.
+
+33
+00:05:10,168 --> 00:05:13,084
+Thank you for your evaluation of our project.
+

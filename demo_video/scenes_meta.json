@@ -1,0 +1,277 @@
+{
+  "total_duration": 314.15,
+  "scenes": [
+    {
+      "id": 1,
+      "title": "Introduction & Problem Statement",
+      "raw_duration": 38.18,
+      "final_duration": 39.18,
+      "start_time": 0.0,
+      "end_time": 39.18
+    },
+    {
+      "id": 2,
+      "title": "Hardware Architecture & Dual-Port Topology",
+      "raw_duration": 40.3,
+      "final_duration": 41.3,
+      "start_time": 39.18,
+      "end_time": 80.47999999999999
+    },
+    {
+      "id": 3,
+      "title": "Deterministic Finite State Machine & Payloads",
+      "raw_duration": 38.88,
+      "final_duration": 39.88,
+      "start_time": 80.47999999999999,
+      "end_time": 120.35999999999999
+    },
+    {
+      "id": 4,
+      "title": "Mobile Web Controller & Remote Peripheral Suite",
+      "raw_duration": 35.59,
+      "final_duration": 36.59,
+      "start_time": 120.35999999999999,
+      "end_time": 156.95
+    },
+    {
+      "id": 5,
+      "title": "Adversarial Resilience & Human Cadence Emulation",
+      "raw_duration": 32.35,
+      "final_duration": 33.35,
+      "start_time": 156.95,
+      "end_time": 190.29999999999998
+    },
+    {
+      "id": 6,
+      "title": "WHID-Guard Behavioral Keystroke Dynamics Engine",
+      "raw_duration": 38.4,
+      "final_duration": 39.4,
+      "start_time": 190.29999999999998,
+      "end_time": 229.7
+    },
+    {
+      "id": 7,
+      "title": "Per-Device Hardware Attribution & Selective Isolation",
+      "raw_duration": 31.97,
+      "final_duration": 32.97,
+      "start_time": 229.7,
+      "end_time": 262.66999999999996
+    },
+    {
+      "id": 8,
+      "title": "Quantitative Empirical Evaluation & Benchmark Results",
+      "raw_duration": 34.61,
+      "final_duration": 35.6,
+      "start_time": 262.66999999999996,
+      "end_time": 298.27
+    },
+    {
+      "id": 9,
+      "title": "Conclusion, IEEE Publication & Open-Source Release",
+      "raw_duration": 14.88,
+      "final_duration": 15.88,
+      "start_time": 298.27,
+      "end_time": 314.15
+    }
+  ],
+  "subtitles": [
+    {
+      "scene_id": 1,
+      "start": 0.1,
+      "end": 13.0013883,
+      "text": "Hello everyone, and welcome to our demonstration of WHID-Guard: an ESP32-S3 Phone-Controlled USB HID Keyboard and Mouse platform with BadUSB Simulation and a Defensive Keystroke Firewall."
+    },
+    {
+      "scene_id": 1,
+      "start": 12.9513883,
+      "end": 20.231480599999998,
+      "text": "Developed by Ram Karthik G and Harini V from the Department of Cybersecurity at Amrita Vishwa Vidyapeetham, Chennai."
+    },
+    {
+      "scene_id": 1,
+      "start": 20.2314806,
+      "end": 30.740739400000002,
+      "text": "Modern operating systems implicitly trust Human Interface Devices, allowing unauthorized hardware implants to inject destructive payloads at microsecond bus speeds without host consent."
+    },
+    {
+      "scene_id": 1,
+      "start": 30.7407395,
+      "end": 38.1249984,
+      "text": "WHID-Guard provides an interruptible hardware emulation suite paired with an intelligent, per-device behavioral defense."
+    },
+    {
+      "scene_id": 2,
+      "start": 39.28,
+      "end": 51.0702773,
+      "text": "The system is powered by the ESP32-S3 dual-core microcontroller running at 240 megahertz with native USB-OTG full-speed hardware directly on GPIO 19 and 20."
+    },
+    {
+      "scene_id": 2,
+      "start": 51.020277300000004,
+      "end": 56.4948141,
+      "text": "Our custom dual-port topology cleanly isolates attack vectors from developer controls."
+    },
+    {
+      "scene_id": 2,
+      "start": 56.4948141,
+      "end": 66.0434248,
+      "text": "The primary USB-OTG port connects to the target laptop, enumerating immediately as a standard driverless composite HID keyboard and multi-button mouse."
+    },
+    {
+      "scene_id": 2,
+      "start": 66.0434248,
+      "end": 79.42305379999999,
+      "text": "Concurrently, the CP210x UART bridge on Port 1 provides isolated serial telemetry and firmware flashing on COM5, ensuring continuous laboratory monitoring without disrupting the target host's USB bus."
+    },
+    {
+      "scene_id": 3,
+      "start": 80.57999999999998,
+      "end": 86.8725923,
+      "text": "Inside the firmware, an 8-state deterministic Finite State Machine governs scenario lifecycles."
+    },
+    {
+      "scene_id": 3,
+      "start": 86.8225923,
+      "end": 99.80870279999999,
+      "text": "Upon initial connection, it enforces a bounded 3.5-second wait for host USB enumeration to stabilize, and then automatically executes Scenario 1: an educational Notepad security awareness notification."
+    },
+    {
+      "scene_id": 3,
+      "start": 99.80870289999999,
+      "end": 110.82722089999999,
+      "text": "The platform includes four demonstration scenarios: Notepad awareness, institutional portal redirection, simulated PowerShell ransomware alerts, and Wi-Fi profile reconnaissance."
+    },
+    {
+      "scene_id": 3,
+      "start": 110.827221,
+      "end": 119.3110169,
+      "text": "Scenarios can also be advanced offline using the physical GPIO 0 BOOT button, which employs a 50-millisecond hardware debounce filter."
+    },
+    {
+      "scene_id": 4,
+      "start": 120.45999999999998,
+      "end": 132.1808328,
+      "text": "Concurrently, the ESP32-S3 broadcasts a 2.4 gigahertz Wi-Fi network, hosting a responsive dark-mode Single-Page Application served entirely from PROGMEM flash memory."
+    },
+    {
+      "scene_id": 4,
+      "start": 132.13083279999998,
+      "end": 138.36925839999998,
+      "text": "Users authenticate against our REST API using a secure PIN, which issues tokenized credentials."
+    },
+    {
+      "scene_id": 4,
+      "start": 138.3692585,
+      "end": 155.90398,
+      "text": "The interface features one-touch scenario execution with live status polling, a complete 6-row QWERTY keyboard with latched modifiers and system shortcuts, a 256-character bulk text transmitter, and a 60-hertz virtual trackpad mouse with relative motion clamping and precision drag-lock controls."
+    },
+    {
+      "scene_id": 5,
+      "start": 157.04999999999998,
+      "end": 165.4837959,
+      "text": "Standard BadUSB tools inject keystrokes at rigid 10-millisecond intervals, making them trivial to block with rudimentary speed limiters."
+    },
+    {
+      "scene_id": 5,
+      "start": 165.43379589999998,
+      "end": 173.3388881,
+      "text": "To rigorously test defensive resilience, we implemented an adversarial stealth mode in the ESP32-S3 firmware."
+    },
+    {
+      "scene_id": 5,
+      "start": 173.33888819999999,
+      "end": 189.25323939999998,
+      "text": "When toggled from the mobile interface, the controller replaces deterministic timing with stochastic jitter and automatically injects cognitive micro-pauses of 150 to 300 milliseconds following whitespace and punctuation marks, mimicking the natural neuromuscular delays of human operators."
+    },
+    {
+      "scene_id": 6,
+      "start": 190.39999999999998,
+      "end": 196.0791664,
+      "text": "To counter these sophisticated threats, we developed the WHID-Guard host defense engine."
+    },
+    {
+      "scene_id": 6,
+      "start": 196.02916639999998,
+      "end": 204.7907401,
+      "text": "Rather than relying on simplistic rate limits, WHID-Guard computes behavioral keystroke dynamics over an online sliding window of ten events."
+    },
+    {
+      "scene_id": 6,
+      "start": 204.7907401,
+      "end": 212.6726842,
+      "text": "It continuously calculates the mean Inter-Key Interval, standard deviation, coefficient of variation, and burst typing rate."
+    },
+    {
+      "scene_id": 6,
+      "start": 212.6726842,
+      "end": 228.63333169999999,
+      "text": "While human typing exhibits natural cognitive variance with a coefficient of variation exceeding 0.30, unconstrained BadUSB injection demonstrates rigid consistency below 0.15, enabling precise algorithmic classification without false alarms."
+    },
+    {
+      "scene_id": 7,
+      "start": 229.79999999999998,
+      "end": 235.5138886,
+      "text": "Traditional security tools install global keyboard hooks that lock out all typing indiscriminately."
+    },
+    {
+      "scene_id": 7,
+      "start": 235.4638886,
+      "end": 242.0379624,
+      "text": "WHID-Guard solves this problem through per-device hardware attribution via the Windows Raw Input API."
+    },
+    {
+      "scene_id": 7,
+      "start": 242.0379624,
+      "end": 251.3782398,
+      "text": "By registering for raw input message sinks and querying device names, our engine extracts the physical hardware device handle and USB Vendor and Product IDs."
+    },
+    {
+      "scene_id": 7,
+      "start": 251.3782398,
+      "end": 261.5981468,
+      "text": "When an injection attack is detected, our low-level keyboard hook drops only the malicious hardware packets, keeping the user's legitimate laptop keyboard completely active and responsive."
+    },
+    {
+      "scene_id": 8,
+      "start": 262.77,
+      "end": 269.20148119999993,
+      "text": "We conducted an extensive empirical evaluation across a 1,500-keystroke benchmark corpus."
+    },
+    {
+      "scene_id": 8,
+      "start": 269.1514812,
+      "end": 277.01027709999994,
+      "text": "On human baseline typing, WHID-Guard achieved a 0.0 percent False Positive Rate across 500 consecutive keystrokes."
+    },
+    {
+      "scene_id": 8,
+      "start": 277.01027719999996,
+      "end": 290.76027659999994,
+      "text": "Against unconstrained BadUSB attacks, the system achieved a 98.6 percent True Positive Detection Rate, quarantining the offending implant within exactly 8 characters\u2014less than 85 milliseconds of total execution time."
+    },
+    {
+      "scene_id": 8,
+      "start": 290.76027659999994,
+      "end": 297.23018369999994,
+      "text": "Against stealth cadence emulation, it successfully flagged 25.2 percent of suspicious events."
+    },
+    {
+      "scene_id": 9,
+      "start": 298.37,
+      "end": 305.06768489999996,
+      "text": "In conclusion, WHID-Guard bridges offensive hardware exploration and host-level defensive resilience."
+    },
+    {
+      "scene_id": 9,
+      "start": 305.0176849,
+      "end": 310.1681476,
+      "text": "Our complete research manuscript and reproducible codebase are open-sourced on GitHub."
+    },
+    {
+      "scene_id": 9,
+      "start": 310.1681476,
+      "end": 313.08481409999996,
+      "text": "Thank you for your evaluation of our project."
+    }
+  ]
+}
